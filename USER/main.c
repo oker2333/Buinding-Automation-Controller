@@ -56,9 +56,11 @@ int main(void)
   SysTick_Config(RCC_Clocks.HCLK_Frequency / 100);
   
   /* Add your application code here */
+	LED_Init();
 	
   while (1)		  /* Infinite loop */
   {
+
   }
 }
 

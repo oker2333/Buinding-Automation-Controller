@@ -36,3 +36,4 @@
 .\objects\stm32f4xx_it.o: .\FWLIB\inc\stm32f4xx_dcmi.h
 .\objects\stm32f4xx_it.o: .\FWLIB\inc\stm32f4xx_fsmc.h
 .\objects\stm32f4xx_it.o: USER\main.h
+.\objects\stm32f4xx_it.o: .\HARDWARE\include\led.h

@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER  STM32F40_41xxx</Define>
               <Undefine></Undefine>
-              <IncludePath>.\USER;.\CMSIS;.\FWLIB\inc;.\CMSIS\Include</IncludePath>
+              <IncludePath>.\USER;.\CMSIS;.\FWLIB\inc;.\CMSIS\Include;.\HARDWARE\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -421,6 +421,16 @@
               <FileName>startup_stm32f40_41xxx.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\CMSIS\startup\startup_stm32f40_41xxx.s</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>HARDWARE</GroupName>
+          <Files>
+            <File>
+              <FileName>led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\source\led.c</FilePath>
             </File>
           </Files>
         </Group>

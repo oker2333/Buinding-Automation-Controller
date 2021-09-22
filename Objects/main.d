@@ -35,3 +35,4 @@
 .\objects\main.o: .\FWLIB\inc\stm32f4xx_dac.h
 .\objects\main.o: .\FWLIB\inc\stm32f4xx_dcmi.h
 .\objects\main.o: .\FWLIB\inc\stm32f4xx_fsmc.h
+.\objects\main.o: .\HARDWARE\include\led.h
