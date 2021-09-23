@@ -36,3 +36,5 @@
 .\objects\main.o: .\FWLIB\inc\stm32f4xx_dcmi.h
 .\objects\main.o: .\FWLIB\inc\stm32f4xx_fsmc.h
 .\objects\main.o: .\HARDWARE\include\led.h
+.\objects\main.o: .\HARDWARE\include\rs485.h
+.\objects\main.o: .\HARDWARE\include\dma.h

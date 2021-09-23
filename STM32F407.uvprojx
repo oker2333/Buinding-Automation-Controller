@@ -403,6 +403,11 @@
           <GroupName>FWLIB</GroupName>
           <Files>
             <File>
+              <FileName>misc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FWLIB\src\misc.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32f4xx_rcc.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\FWLIB\src\stm32f4xx_rcc.c</FilePath>
@@ -411,6 +416,16 @@
               <FileName>stm32f4xx_gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\FWLIB\src\stm32f4xx_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FWLIB\src\stm32f4xx_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FWLIB\src\stm32f4xx_dma.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -431,6 +446,16 @@
               <FileName>led.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\HARDWARE\source\led.c</FilePath>
+            </File>
+            <File>
+              <FileName>rs485.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\source\rs485.c</FilePath>
+            </File>
+            <File>
+              <FileName>dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\source\dma.c</FilePath>
             </File>
           </Files>
         </Group>

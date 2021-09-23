@@ -10,6 +10,7 @@ void Usart_Tx_Config(void)		//DMA·¢ËÍ
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1,ENABLE);
 
 	DMA_DeInit(DMA1_Stream6);
+	while (DMA_GetCmdStatus(DMA1_Stream6) != DISABLE){}
 		
 	DMA_InitStructure.DMA_Channel = DMA_Channel_4;
 	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&USART2->DR;
@@ -34,7 +35,11 @@ void Usart_Tx_Config(void)		//DMA·¢ËÍ
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;
 	NVIC_Init(&NVIC_InitStructure);
 	
+	DMA_ClearITPendingBit(DMA1_Stream6, DMA_IT_TCIF6);
 	DMA_ITConfig(DMA1_Stream6,DMA_IT_TC,ENABLE);
+	
+	USART_DMACmd(USART2,USART_DMAReq_Tx,ENABLE);
+	DMA_Cmd(DMA1_Stream6, ENABLE); 
 }
 
 void DMA1_Stream6_Send(uint16_t Counter)
@@ -52,7 +57,9 @@ void DMA1_Stream6_Send(uint16_t Counter)
 void DMA1_Stream6_IRQHandler(void)
 {
 	if(DMA_GetITStatus(DMA1_Stream6,DMA_IT_TCIF6) != RESET){
+		
 		RS485_RX();
+		DMA_ClearITPendingBit(DMA1_Stream6, DMA_IT_TCIF6);
 	}
 }
 

@@ -57,10 +57,13 @@ int main(void)
   
   /* Add your application code here */
 	LED_Init();
+	RS485_Init(9600);
+	Usart_Tx_Config();
 	
   while (1)		  /* Infinite loop */
   {
-
+		Delay(100);
+		DMA1_Stream6_Send(10);
   }
 }
 
