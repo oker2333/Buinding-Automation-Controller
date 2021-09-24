@@ -53,9 +53,10 @@ void DMA1_Stream6_Send(uint16_t Counter)
 void DMA1_Stream6_IRQHandler(void)
 {
 	if(DMA_GetITStatus(DMA1_Stream6,DMA_IT_TCIF6) != RESET){
-		while(USART_GetFlagStatus(USART2,USART_FLAG_TC)==RESET);		//解决DMA发送最后两字节被截断
-		RS485_RX();
 		DMA_ClearITPendingBit(DMA1_Stream6, DMA_IT_TCIF6);
+		
+		USART_ClearFlag(USART2, USART_FLAG_TC);
+		USART_ITConfig(USART2, USART_IT_TC, ENABLE);
 	}
 }
 

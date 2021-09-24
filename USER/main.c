@@ -62,6 +62,8 @@ int main(void)
 	
   while (1)		  /* Infinite loop */
   {
+		DMA1_Stream6_Send(10);
+		Delay(27);
   }
 }
 

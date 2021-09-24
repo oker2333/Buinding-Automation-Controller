@@ -62,9 +62,11 @@ void USART2_IRQHandler(void)
 	if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
 	{
 		DataByte = USART_ReceiveData(USART2);
-		RS485_TX();
-		USART_SendData(USART2,DataByte); 
-		while(USART_GetFlagStatus(USART2,USART_FLAG_TC)==RESET);
+	}
+	
+	if(USART_GetITStatus(USART2, USART_IT_TC) != RESET)
+	{
 		RS485_RX();
+		USART_ITConfig(USART2, USART_IT_TC, DISABLE);
 	}
 }
