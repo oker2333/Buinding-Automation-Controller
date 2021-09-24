@@ -34,17 +34,13 @@ void Usart_Tx_Config(void)		//DMA发送
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 3;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;
 	NVIC_Init(&NVIC_InitStructure);
-	
-	DMA_ClearITPendingBit(DMA1_Stream6, DMA_IT_TCIF6);
 	DMA_ITConfig(DMA1_Stream6,DMA_IT_TC,ENABLE);
 	
 	USART_DMACmd(USART2,USART_DMAReq_Tx,ENABLE);
-	DMA_Cmd(DMA1_Stream6, ENABLE); 
 }
 
 void DMA1_Stream6_Send(uint16_t Counter)
 {
-	while(DMA_GetFlagStatus(DMA1_Stream6, DMA_FLAG_TCIF6) != RESET);
 	DMA_Cmd(DMA1_Stream6, DISABLE); 
 	while (DMA_GetCmdStatus(DMA1_Stream6) != DISABLE);
 	
@@ -57,7 +53,7 @@ void DMA1_Stream6_Send(uint16_t Counter)
 void DMA1_Stream6_IRQHandler(void)
 {
 	if(DMA_GetITStatus(DMA1_Stream6,DMA_IT_TCIF6) != RESET){
-		
+		while(USART_GetFlagStatus(USART2,USART_FLAG_TC)==RESET);		//解决DMA发送最后两字节被截断
 		RS485_RX();
 		DMA_ClearITPendingBit(DMA1_Stream6, DMA_IT_TCIF6);
 	}
