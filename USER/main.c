@@ -54,6 +54,8 @@ int main(void)
   /* SysTick end of count event each 10ms */
   RCC_GetClocksFreq(&RCC_Clocks);
   SysTick_Config(RCC_Clocks.HCLK_Frequency / 100);
+	
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
   
   /* Add your application code here */
 	LED_Init();
@@ -62,8 +64,7 @@ int main(void)
 	
   while (1)		  /* Infinite loop */
   {
-		DMA1_Stream6_Send(10);
-		Delay(27);
+
   }
 }
 
