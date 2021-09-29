@@ -457,6 +457,11 @@
               <FileType>1</FileType>
               <FilePath>.\HARDWARE\source\dma.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4x7_eth.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FWLIB\src\stm32f4x7_eth.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

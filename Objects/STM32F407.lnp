@@ -11,6 +11,7 @@
 ".\objects\led.o"
 ".\objects\rs485.o"
 ".\objects\dma.o"
+".\objects\stm32f4x7_eth.o"
 --strict --scatter ".\Objects\STM32F407.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
