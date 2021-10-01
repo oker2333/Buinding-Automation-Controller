@@ -35,6 +35,7 @@
 #include "led.h"
 #include "rs485.h"
 #include "dma.h"
+#include "debug.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

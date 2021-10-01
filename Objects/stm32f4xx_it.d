@@ -39,3 +39,5 @@
 .\objects\stm32f4xx_it.o: .\HARDWARE\include\led.h
 .\objects\stm32f4xx_it.o: .\HARDWARE\include\rs485.h
 .\objects\stm32f4xx_it.o: .\HARDWARE\include\dma.h
+.\objects\stm32f4xx_it.o: .\HARDWARE\include\debug.h
+.\objects\stm32f4xx_it.o: .\HARDWARE\include\dma.h

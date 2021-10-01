@@ -52,6 +52,7 @@ void RS485_Init(uint32_t BaudRate)
 	
 	RS485_RX();		//RS485接收使能
 
+	USART_DMACmd(USART2,USART_DMAReq_Tx,ENABLE);
 	USART_Cmd(USART2, ENABLE);	//USART串口使能
 }
 

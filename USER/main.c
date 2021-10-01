@@ -61,6 +61,11 @@ int main(void)
 	LED_Init();
 	RS485_Init(9600);
 	Usart_Tx_Config();
+
+#if DEBUG_ENABLE
+	debug_init(115200);
+	Debug_Tx_Config();
+#endif
 	
   while (1)		  /* Infinite loop */
   {

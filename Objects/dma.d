@@ -37,3 +37,5 @@
 .\objects\dma.o: .\FWLIB\inc\stm32f4xx_dcmi.h
 .\objects\dma.o: .\FWLIB\inc\stm32f4xx_fsmc.h
 .\objects\dma.o: .\HARDWARE\include\rs485.h
+.\objects\dma.o: .\HARDWARE\include\debug.h
+.\objects\dma.o: .\HARDWARE\include\dma.h

@@ -423,6 +423,11 @@
               <FilePath>.\FWLIB\src\stm32f4xx_usart.c</FilePath>
             </File>
             <File>
+              <FileName>stm32f4x7_eth.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FWLIB\src\stm32f4x7_eth.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32f4xx_dma.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\FWLIB\src\stm32f4xx_dma.c</FilePath>
@@ -458,9 +463,9 @@
               <FilePath>.\HARDWARE\source\dma.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4x7_eth.c</FileName>
+              <FileName>debug.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\FWLIB\src\stm32f4x7_eth.c</FilePath>
+              <FilePath>.\HARDWARE\source\debug.c</FilePath>
             </File>
           </Files>
         </Group>
