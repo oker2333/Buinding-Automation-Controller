@@ -10,9 +10,9 @@
 #if DEBUG_ENABLE
 
 #define print_info(format,...)	do{	\
-																int StringSize = \
+																uint8_t StringSize = \
 																sprintf(DebugBuffer,"[INFO]FileName:%s; Line:%d; Function:%s."	 \
-																format,__FILE__,__LINE__,__func__,##__VA_ARGS__);	\
+																format"\n",__FILE__,__LINE__,__func__,##__VA_ARGS__);	\
 																DMA2_Stream7_Send(StringSize);	\
 														}while(0)
 #else
