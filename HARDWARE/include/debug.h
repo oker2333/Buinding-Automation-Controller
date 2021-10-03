@@ -11,8 +11,8 @@
 
 #define print_info(format,...)	do{	\
 																uint8_t StringSize = \
-																sprintf(DebugBuffer,"[INFO]FileName:%s; Line:%d; Function:%s."	 \
-																format"\n",__FILE__,__LINE__,__func__,##__VA_ARGS__);	\
+																sprintf(DebugBuffer,"[INFO]FileName:%s; Line:%d; Function:%s."\
+																format"\r\n",__FILE__,__LINE__,__func__,##__VA_ARGS__);	\
 																DMA2_Stream7_Send(StringSize);	\
 														}while(0)
 #else
