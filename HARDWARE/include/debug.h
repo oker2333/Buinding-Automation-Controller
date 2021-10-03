@@ -7,6 +7,8 @@
 
 #define DEBUG_ENABLE 1
 
+#define CCMRAM  __attribute__((section("CCMRAM")))
+
 #if DEBUG_ENABLE
 
 #define print_info(format,...)	do{	\
