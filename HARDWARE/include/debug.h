@@ -64,49 +64,49 @@ ERROR | 错误：指明错误事件，但应用可能还能继续运行。
 WARN	| 警告：指明可能潜在的危险状况。 
 INFO	| 信息：指明描述信息，从粗粒度上描述了应用运行过程。 
 DEBUG	| 调试：指明细致的事件信息，对调试应用最有用。 
-TRACE	| 跟踪：指明程序运行轨迹，比DEBUG级别的粒度更细。 
+TRACE	| 跟踪：指明程序运行轨迹，比DEBUG级别的粒度更细。
 ALL		| 所有：所有日志级别，包括定制级别。
 **********************/
 #if (LOG_LEVEL >= FATAL)
 #define Log_Fatal(format,...)	do{	\
 																uint8_t StringSize = \
-																sprintf(DebugBuffer,"[FATAL]FileName:%s; Line:%d; Function:%s."\
-																format"\r\n",__FILE__,__LINE__,__func__,##__VA_ARGS__);	\
+																sprintf(DebugBuffer,"%s%s%s[FATAL]FileName:%s; Line:%d; Function:%s."\
+																format"%s\r\n",CSI_START,F_RED,S_BLINK,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																DMA2_Stream7_Send(StringSize);	\
 														}while(0)
 #if(LOG_LEVEL >= ERROR)
 #define Log_Error(format,...)	do{	\
 																uint8_t StringSize = \
-																sprintf(DebugBuffer,"[ERROR]FileName:%s; Line:%d; Function:%s."\
-																format"\r\n",__FILE__,__LINE__,__func__,##__VA_ARGS__);	\
+																sprintf(DebugBuffer,"%s%s%s[ERROR]FileName:%s; Line:%d; Function:%s."\
+																format"%s\r\n",CSI_START,F_BLUE,S_UNDERLINE,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																DMA2_Stream7_Send(StringSize);	\
 														}while(0)
 #if(LOG_LEVEL >= WARN)
 #define Log_Warn(format,...)	do{	\
 																uint8_t StringSize = \
-																sprintf(DebugBuffer,"[WARN]FileName:%s; Line:%d; Function:%s."\
-																format"\r\n",__FILE__,__LINE__,__func__,##__VA_ARGS__);	\
+																sprintf(DebugBuffer,"%s%s%s[WARN]FileName:%s; Line:%d; Function:%s."\
+																format"%s\r\n",CSI_START,F_YELLOW,S_BOLD,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																DMA2_Stream7_Send(StringSize);	\
 														}while(0)
 #if(LOG_LEVEL >= INFO)
 #define Log_Info(format,...)	do{	\
 																uint8_t StringSize = \
-																sprintf(DebugBuffer,"[INFO]FileName:%s; Line:%d; Function:%s."\
-																format"\r\n",__FILE__,__LINE__,__func__,##__VA_ARGS__);	\
+																sprintf(DebugBuffer,"%s%s%s[INFO]FileName:%s; Line:%d; Function:%s."\
+																format"%s\r\n",CSI_START,F_WHITE,S_NORMAL,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																DMA2_Stream7_Send(StringSize);	\
 														}while(0)														
 #if(LOG_LEVEL >= DEBUG)
 #define Log_Debug(format,...)	do{	\
 																uint8_t StringSize = \
-																sprintf(DebugBuffer,"[DEBUG]FileName:%s; Line:%d; Function:%s."\
-																format"\r\n",__FILE__,__LINE__,__func__,##__VA_ARGS__);	\
+																sprintf(DebugBuffer,"%s%s%s[DEBUG]FileName:%s; Line:%d; Function:%s."\
+																format"%s\r\n",CSI_START,F_WHITE,S_NORMAL,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																DMA2_Stream7_Send(StringSize);	\
 														}while(0)
 #if(LOG_LEVEL >= TRACE)
 #define Log_Trace(format,...)	do{	\
 																uint8_t StringSize = \
-																sprintf(DebugBuffer,"[TRACE]FileName:%s; Line:%d; Function:%s."\
-																format"\r\n",__FILE__,__LINE__,__func__,##__VA_ARGS__);	\
+																sprintf(DebugBuffer,"%s%s%s%s[TRACE]FileName:%s; Line:%d; Function:%s."\
+																format"%s\r\n",CSI_START,F_WHITE,S_NORMAL,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																DMA2_Stream7_Send(StringSize);	\
 														}while(0)
 
