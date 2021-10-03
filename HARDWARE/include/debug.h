@@ -78,7 +78,7 @@ ALL		| 所有：所有日志级别，包括定制级别。
 #define Log_Error(format,...)	do{	\
 																uint8_t StringSize = \
 																sprintf(DebugBuffer,"%s%s%s[ERROR]FileName:%s; Line:%d; Function:%s."\
-																format"%s\r\n",CSI_START,F_BLUE,S_UNDERLINE,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
+																format"%s\r\n",CSI_START,F_BLUE,S_BOLD,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																DMA2_Stream7_Send(StringSize);	\
 														}while(0)
 #if(LOG_LEVEL >= WARN)
@@ -105,7 +105,7 @@ ALL		| 所有：所有日志级别，包括定制级别。
 #if(LOG_LEVEL >= TRACE)
 #define Log_Trace(format,...)	do{	\
 																uint8_t StringSize = \
-																sprintf(DebugBuffer,"%s%s%s%s[TRACE]FileName:%s; Line:%d; Function:%s."\
+																sprintf(DebugBuffer,"%s%s%s[TRACE]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_WHITE,S_NORMAL,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																DMA2_Stream7_Send(StringSize);	\
 														}while(0)
