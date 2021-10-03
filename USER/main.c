@@ -62,7 +62,7 @@ int main(void)
 	RS485_Init(9600);
 	Usart_Tx_Config();
 
-#if DEBUG_ENABLE
+#if (LOG_LEVEL >= TRACE)
 	debug_init(115200);
 	Debug_Tx_Config();
 #endif

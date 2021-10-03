@@ -1,6 +1,6 @@
 Dependencies for Project 'STM32F407', Target 'STM32': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
-F (.\USER\main.c)(0x6159F919)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -W -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include-I.\RTE\_STM32-IC:\Users\孙权\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\USER\main.c)(0x615A06A2)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -W -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include-I.\RTE\_STM32-IC:\Users\孙权\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (USER\main.h)(0x6159F919)
 I (.\CMSIS\stm32f4xx.h)(0x6159F919)
 I (.\CMSIS\Include\core_cm4.h)(0x6159F919)
@@ -38,8 +38,8 @@ I (.\FWLIB\inc\stm32f4xx_dcmi.h)(0x6159F919)
 I (.\FWLIB\inc\stm32f4xx_fsmc.h)(0x6159F919)
 I (.\HARDWARE\include\led.h)(0x6159F919)
 I (.\HARDWARE\include\rs485.h)(0x6159F919)
-I (.\HARDWARE\include\dma.h)(0x6159F919)
-I (.\HARDWARE\include\debug.h)(0x6159F948)
+I (.\HARDWARE\include\dma.h)(0x6159FC9C)
+I (.\HARDWARE\include\debug.h)(0x615A064C)
 F (.\USER\stm32f4xx_it.c)(0x6159F919)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -W -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include-I.\RTE\_STM32-IC:\Users\孙权\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\stm32f4xx_it.o --omf_browse .\objects\stm32f4xx_it.crf --depend .\objects\stm32f4xx_it.d)
 I (USER\stm32f4xx_it.h)(0x6159F919)
 I (.\CMSIS\stm32f4xx.h)(0x6159F919)
@@ -79,8 +79,8 @@ I (.\FWLIB\inc\stm32f4xx_fsmc.h)(0x6159F919)
 I (USER\main.h)(0x6159F919)
 I (.\HARDWARE\include\led.h)(0x6159F919)
 I (.\HARDWARE\include\rs485.h)(0x6159F919)
-I (.\HARDWARE\include\dma.h)(0x6159F919)
-I (.\HARDWARE\include\debug.h)(0x6159F948)
+I (.\HARDWARE\include\dma.h)(0x6159FC9C)
+I (.\HARDWARE\include\debug.h)(0x615A064C)
 F (.\USER\system_stm32f4xx.c)(0x6159F919)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -W -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include-I.\RTE\_STM32-IC:\Users\孙权\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\system_stm32f4xx.o --omf_browse .\objects\system_stm32f4xx.crf --depend .\objects\system_stm32f4xx.d)
 I (.\CMSIS\stm32f4xx.h)(0x6159F919)
 I (.\CMSIS\Include\core_cm4.h)(0x6159F919)
@@ -402,8 +402,8 @@ I (.\FWLIB\inc\stm32f4xx_can.h)(0x6159F919)
 I (.\FWLIB\inc\stm32f4xx_dac.h)(0x6159F919)
 I (.\FWLIB\inc\stm32f4xx_dcmi.h)(0x6159F919)
 I (.\FWLIB\inc\stm32f4xx_fsmc.h)(0x6159F919)
-F (.\HARDWARE\source\dma.c)(0x6159F919)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -W -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include-I.\RTE\_STM32-IC:\Users\孙权\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\dma.o --omf_browse .\objects\dma.crf --depend .\objects\dma.d)
-I (.\HARDWARE\include\dma.h)(0x6159F919)
+F (.\HARDWARE\source\dma.c)(0x6159FD1A)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -W -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include-I.\RTE\_STM32-IC:\Users\孙权\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\dma.o --omf_browse .\objects\dma.crf --depend .\objects\dma.d)
+I (.\HARDWARE\include\dma.h)(0x6159FC9C)
 I (.\FWLIB\inc\stm32f4xx_dma.h)(0x6159F919)
 I (.\CMSIS\stm32f4xx.h)(0x6159F919)
 I (.\CMSIS\Include\core_cm4.h)(0x6159F919)
@@ -439,9 +439,9 @@ I (.\FWLIB\inc\stm32f4xx_dac.h)(0x6159F919)
 I (.\FWLIB\inc\stm32f4xx_dcmi.h)(0x6159F919)
 I (.\FWLIB\inc\stm32f4xx_fsmc.h)(0x6159F919)
 I (.\HARDWARE\include\rs485.h)(0x6159F919)
-I (.\HARDWARE\include\debug.h)(0x6159F948)
-F (.\HARDWARE\source\debug.c)(0x6159F919)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -W -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include-I.\RTE\_STM32-IC:\Users\孙权\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\debug.o --omf_browse .\objects\debug.crf --depend .\objects\debug.d)
-I (.\HARDWARE\include\debug.h)(0x6159F948)
+I (.\HARDWARE\include\debug.h)(0x615A064C)
+F (.\HARDWARE\source\debug.c)(0x6159FC8A)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -W -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include-I.\RTE\_STM32-IC:\Users\孙权\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\debug.o --omf_browse .\objects\debug.crf --depend .\objects\debug.d)
+I (.\HARDWARE\include\debug.h)(0x615A064C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (.\USER\stm32f4xx_conf.h)(0x6159F919)
 I (.\FWLIB\inc\stm32f4xx_adc.h)(0x6159F919)
@@ -476,5 +476,5 @@ I (.\FWLIB\inc\stm32f4xx_can.h)(0x6159F919)
 I (.\FWLIB\inc\stm32f4xx_dac.h)(0x6159F919)
 I (.\FWLIB\inc\stm32f4xx_dcmi.h)(0x6159F919)
 I (.\FWLIB\inc\stm32f4xx_fsmc.h)(0x6159F919)
-I (.\HARDWARE\include\dma.h)(0x6159F919)
+I (.\HARDWARE\include\dma.h)(0x6159FC9C)
 I (.\HARDWARE\include\rs485.h)(0x6159F919)

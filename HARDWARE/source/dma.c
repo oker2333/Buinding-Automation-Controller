@@ -62,9 +62,9 @@ void DMA1_Stream6_IRQHandler(void)
 
 /**********************************************************************/
 
-#if DEBUG_ENABLE
+#if(LOG_LEVEL >= TRACE) 
 
-char DebugBuffer[DebugBufferSize] = {9,8,7,6,5,4,3,2,1,0};
+char DebugBuffer[DebugBufferSize] = {0};
 
 void Debug_Tx_Config(void)		//DMA·¢ËÍ
 {

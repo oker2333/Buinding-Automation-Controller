@@ -1,6 +1,6 @@
 #include "debug.h"
 
-#if DEBUG_ENABLE
+#if(LOG_LEVEL >= TRACE)  
 
 void debug_init(uint32_t BaudRate)
 {

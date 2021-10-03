@@ -5,24 +5,18 @@
 #include "stm32f4xx_conf.h"
 #include "dma.h"
 
-typedef enum{
-	OFF = 7,
-	FATAL = 6,
-	Error = 5,
-	WARN = 4,
-	INFO = 3,
-	DEBUG = 2,
-	TRACE = 1,
-	ALL = 0
-}LOG_LEVEL_T;
+#define ALL 	7
+#define FATAL 6
+#define ERR 	5
+#define WARN 	4
+#define INFO 	3
+#define DEBUG 2
+#define TRACE 1
+#define OFF 	0
 
-#define DEBUG_ENABLE 1
-
-#define LOG_LEVEL ALL
+#define LOG_LEVEL OFF
 
 #define CCMRAM  __attribute__((section("CCMRAM")))
-
-#if DEBUG_ENABLE
 
 /*
  * CSI(Control Sequence Introducer/Initiator) sign
@@ -74,50 +68,64 @@ ALL		| 所有：所有日志级别，包括定制级别。
 																format"%s\r\n",CSI_START,F_RED,S_BLINK,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																DMA2_Stream7_Send(StringSize);	\
 														}while(0)
-#if(LOG_LEVEL >= ERROR)
+#else
+#define Log_Fatal(format,...)
+#endif	//FATAL
+
+#if (LOG_LEVEL >= ERR)
 #define Log_Error(format,...)	do{	\
 																uint8_t StringSize = \
 																sprintf(DebugBuffer,"%s%s%s[ERROR]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_BLUE,S_BOLD,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																DMA2_Stream7_Send(StringSize);	\
 														}while(0)
-#if(LOG_LEVEL >= WARN)
+#else
+#define Log_Error(format,...)
+#endif	//ERROR
+														
+#if (LOG_LEVEL >= WARN)
 #define Log_Warn(format,...)	do{	\
 																uint8_t StringSize = \
 																sprintf(DebugBuffer,"%s%s%s[WARN]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_YELLOW,S_BOLD,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																DMA2_Stream7_Send(StringSize);	\
 														}while(0)
-#if(LOG_LEVEL >= INFO)
+#else
+#define Log_Warn(format,...)
+#endif	//WARN
+
+#if (LOG_LEVEL >= INFO)
 #define Log_Info(format,...)	do{	\
 																uint8_t StringSize = \
 																sprintf(DebugBuffer,"%s%s%s[INFO]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_WHITE,S_NORMAL,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																DMA2_Stream7_Send(StringSize);	\
-														}while(0)														
-#if(LOG_LEVEL >= DEBUG)
+														}while(0)
+#else
+#define Log_Info(format,...)
+#endif	//INFO
+														
+#if (LOG_LEVEL >= DEBUG)
 #define Log_Debug(format,...)	do{	\
 																uint8_t StringSize = \
 																sprintf(DebugBuffer,"%s%s%s[DEBUG]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_WHITE,S_NORMAL,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																DMA2_Stream7_Send(StringSize);	\
 														}while(0)
-#if(LOG_LEVEL >= TRACE)
+#else
+#define Log_Debug(format,...)
+#endif	//DEBUG
+														
+#if (LOG_LEVEL >= TRACE)
 #define Log_Trace(format,...)	do{	\
 																uint8_t StringSize = \
 																sprintf(DebugBuffer,"%s%s%s[TRACE]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_WHITE,S_NORMAL,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																DMA2_Stream7_Send(StringSize);	\
 														}while(0)
-
-
+#else
+#define Log_Trace(format,...)
 #endif	//TRACE
-#endif	//DEBUG
-#endif	//INFO
-#endif	//WARN
-#endif	//ERROR
-#endif	//FATAL
-#endif	//DEBUG_ENABLE
 
 void debug_init(uint32_t BaudRate);
 

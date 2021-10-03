@@ -13,7 +13,7 @@
 void Usart_Tx_Config(void);
 void DMA1_Stream6_Send(uint16_t Counter);
 
-#if DEBUG_ENABLE
+#if (LOG_LEVEL >= TRACE)
 #define DebugBufferSize 512
 
 extern char DebugBuffer[DebugBufferSize];
