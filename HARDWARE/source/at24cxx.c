@@ -87,17 +87,15 @@ uint8_t I2C_Master_BufferRead(I2C_TypeDef * I2Cx, uint8_t* pBuffer, uint32_t Num
     /* 5.连续写数据 */
     while (NumByteToRead)
     {
-        if(NumByteToRead==1)
-        {
-            I2C_AcknowledgeConfig(I2Cx, DISABLE);
-            I2C_GenerateSTOP(I2Cx, ENABLE);//6.停止，非应答
-        }
-
         while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_BYTE_RECEIVED));  /* EV7 */
         *pBuffer++ = I2C_ReceiveData(I2Cx);
         NumByteToRead--;
     }
-
+		
+		//6.停止，非应答
+		I2C_AcknowledgeConfig(I2Cx, DISABLE);
+		I2C_GenerateSTOP(I2Cx, ENABLE);
+		
     I2C_AcknowledgeConfig(I2Cx, ENABLE);
     return 0;
 }   
