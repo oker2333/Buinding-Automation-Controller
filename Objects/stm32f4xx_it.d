@@ -41,3 +41,4 @@
 .\objects\stm32f4xx_it.o: .\HARDWARE\include\dma.h
 .\objects\stm32f4xx_it.o: .\HARDWARE\include\debug.h
 .\objects\stm32f4xx_it.o: .\HARDWARE\include\dma.h
+.\objects\stm32f4xx_it.o: .\HARDWARE\include\at24cxx.h

@@ -14,7 +14,7 @@
 #define TRACE 1
 #define OFF 	0
 
-#define LOG_LEVEL OFF
+#define LOG_LEVEL ALL
 
 #define CCMRAM  __attribute__((section("CCMRAM")))
 

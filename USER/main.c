@@ -58,6 +58,7 @@ int main(void)
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
   
   /* Add your application code here */
+	I2C1_Init();
 	LED_Init();
 	RS485_Init(9600);
 	Usart_Tx_Config();

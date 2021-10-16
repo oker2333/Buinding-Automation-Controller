@@ -36,6 +36,7 @@
 #include "rs485.h"
 #include "dma.h"
 #include "debug.h"
+#include "at24cxx.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
