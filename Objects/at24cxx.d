@@ -35,3 +35,10 @@
 .\objects\at24cxx.o: .\FWLIB\inc\stm32f4xx_dac.h
 .\objects\at24cxx.o: .\FWLIB\inc\stm32f4xx_dcmi.h
 .\objects\at24cxx.o: .\FWLIB\inc\stm32f4xx_fsmc.h
+.\objects\at24cxx.o: .\USER\main.h
+.\objects\at24cxx.o: .\HARDWARE\include\led.h
+.\objects\at24cxx.o: .\HARDWARE\include\rs485.h
+.\objects\at24cxx.o: .\HARDWARE\include\dma.h
+.\objects\at24cxx.o: .\HARDWARE\include\debug.h
+.\objects\at24cxx.o: .\HARDWARE\include\dma.h
+.\objects\at24cxx.o: .\HARDWARE\include\at24cxx.h

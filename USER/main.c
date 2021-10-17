@@ -40,7 +40,6 @@ static __IO uint32_t uwTimingDelay;
 RCC_ClocksTypeDef RCC_Clocks;
 
 /* Private function prototypes -----------------------------------------------*/
-static void Delay(__IO uint32_t nTime);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -49,6 +48,9 @@ static void Delay(__IO uint32_t nTime);
   * @param  None
   * @retval None
   */
+uint8_t WriteBuffer[256] = {0};
+uint8_t ReadBuffer[256] = {0};
+	
 int main(void)
 {
   /* SysTick end of count event each 10ms */

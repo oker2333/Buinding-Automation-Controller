@@ -98,24 +98,22 @@ uint8_t I2C_Master_BufferRead(I2C_TypeDef * I2Cx, uint8_t* pBuffer, uint32_t Num
     /* 5.连续写数据 */
     while (NumByteToRead)
     {
+        if(NumByteToRead==1)
+        {
+            I2C_AcknowledgeConfig(I2Cx, DISABLE);
+            I2C_GenerateSTOP(I2Cx, ENABLE);//6.停止，非应答
+        }
         while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_BYTE_RECEIVED));  /* EV7 */
         *pBuffer++ = I2C_ReceiveData(I2Cx);
         NumByteToRead--;
     }
 		
-		//6.停止，非应答
-		I2C_AcknowledgeConfig(I2Cx, DISABLE);
-		I2C_GenerateSTOP(I2Cx, ENABLE);
-		
     I2C_AcknowledgeConfig(I2Cx, ENABLE);
     return 0;
 }
-
-
-  
  
-void I2C_EE_BufferWrite(u8* pBuffer, u8 WriteAddr,
-						u8 NumByteToWrite)
+void I2C_BufferWrite(u8* pBuffer, u8 WriteAddr,
+						u32 NumByteToWrite)
 {
 	u8 NumOfPage = 0,NumOfSingle = 0,Addr = 0,count = 0,temp = 0;
 	
@@ -127,15 +125,18 @@ void I2C_EE_BufferWrite(u8* pBuffer, u8 WriteAddr,
 	if (Addr == 0){
 		if (NumOfPage == 0) {
 			I2C_Master_BufferWrite(I2C1, pBuffer, NumByteToWrite, IIC_SlaveAddress,WriteAddr);
+			Delay(1);
 		}
 		else {
 			while (NumOfPage--) {
 				I2C_Master_BufferWrite(I2C1, pBuffer, IIC_PageSize, IIC_SlaveAddress,WriteAddr);
+				Delay(1);
 				WriteAddr += IIC_PageSize;
 				pBuffer += IIC_PageSize;
 			}
 			if (NumOfSingle!=0) {
-			I2C_Master_BufferWrite(I2C1, pBuffer, NumOfSingle, IIC_SlaveAddress,WriteAddr);
+				I2C_Master_BufferWrite(I2C1, pBuffer, NumOfSingle, IIC_SlaveAddress,WriteAddr);
+				Delay(1);
 			}
 		}
 	}
@@ -144,14 +145,17 @@ void I2C_EE_BufferWrite(u8* pBuffer, u8 WriteAddr,
 				if (NumOfSingle > count) {
 					temp = NumOfSingle - count;
 					I2C_Master_BufferWrite(I2C1, pBuffer, count, IIC_SlaveAddress,WriteAddr);
+					Delay(1);
 					WriteAddr += count;
 					pBuffer += count;
 
 					I2C_Master_BufferWrite(I2C1, pBuffer, temp, IIC_SlaveAddress,WriteAddr);
+					Delay(1);
 				}
 				else {
 					I2C_Master_BufferWrite(I2C1, pBuffer, NumByteToWrite, IIC_SlaveAddress,WriteAddr);
-					}
+					Delay(1);
+				}
 		}
 		else {
 			NumByteToWrite -= count;
@@ -160,16 +164,19 @@ void I2C_EE_BufferWrite(u8* pBuffer, u8 WriteAddr,
 			
 			if (count != 0) {
 				I2C_Master_BufferWrite(I2C1, pBuffer, count, IIC_SlaveAddress,WriteAddr);
+				Delay(1);
 				WriteAddr += count;
 				pBuffer += count;
 			}
 			while (NumOfPage--) {
 				I2C_Master_BufferWrite(I2C1, pBuffer, IIC_PageSize, IIC_SlaveAddress,WriteAddr);
+				Delay(1);
 				WriteAddr += IIC_PageSize;
 				pBuffer += IIC_PageSize;
 			}
 			if (NumOfSingle != 0) {
 				I2C_Master_BufferWrite(I2C1, pBuffer, NumOfSingle, IIC_SlaveAddress,WriteAddr);
+				Delay(1);
 			}
 		}
 	}
