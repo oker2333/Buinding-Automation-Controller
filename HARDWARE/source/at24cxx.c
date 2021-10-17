@@ -1,5 +1,8 @@
 #include "at24cxx.h"
 
+#define IIC_PageSize 8
+#define IIC_SlaveAddress 0xA0
+
 void I2C1_GPIO_Configuration(void)
 {
   GPIO_InitTypeDef  GPIO_InitStructure;
@@ -37,28 +40,32 @@ void I2C1_Init(void)
     I2C1_Configuration();
 }
 
-uint8_t I2C_Master_BufferWrite(I2C_TypeDef * I2Cx, uint8_t* pBuffer, uint32_t NumByteToWrite, uint8_t SlaveAddress)
+uint8_t I2C_Master_BufferWrite(I2C_TypeDef * I2Cx, uint8_t* pBuffer, uint32_t NumByteToWrite, uint8_t SlaveAddress,uint8_t ByteAddress)
 {
     if(NumByteToWrite==0)
         return 1;
 		
     /* 1.开始*/
     I2C_GenerateSTART(I2Cx, ENABLE);
-    while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_MODE_SELECT));
+    while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_MODE_SELECT)){};
 
     /* 2.设备地址·/写 */
     I2C_Send7bitAddress(I2Cx, SlaveAddress, I2C_Direction_Transmitter);
-    while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
+    while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED)){};
 
-    /* 3.连续写数据 */
+		/* 3.字节地址*/
+		I2C_SendData(I2Cx, ByteAddress);
+		while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTED)){};
+		
+    /* 4.连续写数据 */
     while(NumByteToWrite--)
     {
       I2C_SendData(I2Cx, *pBuffer);
-      while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
+      while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTED)){};
       pBuffer++;
     }
 
-    /* 4.停止 */
+    /* 5.停止 */
     I2C_GenerateSTOP(I2Cx, ENABLE);
     while ((I2Cx->CR1&0x200) == 0x200);
     return 0;
@@ -103,6 +110,98 @@ uint8_t I2C_Master_BufferRead(I2C_TypeDef * I2Cx, uint8_t* pBuffer, uint32_t Num
     I2C_AcknowledgeConfig(I2Cx, ENABLE);
     return 0;
 }
+
+
+  
+ 
+void I2C_EE_BufferWrite(u8* pBuffer, u8 WriteAddr,
+						u8 NumByteToWrite)
+{
+	u8 NumOfPage = 0,NumOfSingle = 0,Addr = 0,count = 0,temp = 0;
+	
+	Addr = WriteAddr % IIC_PageSize;
+	count = IIC_PageSize - Addr;
+	NumOfPage = NumByteToWrite / IIC_PageSize;
+ 	NumOfSingle = NumByteToWrite % IIC_PageSize;
+	
+	if (Addr == 0){
+		if (NumOfPage == 0) {
+			I2C_Master_BufferWrite(I2C1, pBuffer, NumByteToWrite, IIC_SlaveAddress,WriteAddr);
+		}
+		else {
+			while (NumOfPage--) {
+				I2C_Master_BufferWrite(I2C1, pBuffer, IIC_PageSize, IIC_SlaveAddress,WriteAddr);
+				WriteAddr += IIC_PageSize;
+				pBuffer += IIC_PageSize;
+			}
+			if (NumOfSingle!=0) {
+			I2C_Master_BufferWrite(I2C1, pBuffer, NumOfSingle, IIC_SlaveAddress,WriteAddr);
+			}
+		}
+	}
+	else {
+		if (NumOfPage== 0) {
+				if (NumOfSingle > count) {
+					temp = NumOfSingle - count;
+					I2C_Master_BufferWrite(I2C1, pBuffer, count, IIC_SlaveAddress,WriteAddr);
+					WriteAddr += count;
+					pBuffer += count;
+
+					I2C_Master_BufferWrite(I2C1, pBuffer, temp, IIC_SlaveAddress,WriteAddr);
+				}
+				else {
+					I2C_Master_BufferWrite(I2C1, pBuffer, NumByteToWrite, IIC_SlaveAddress,WriteAddr);
+					}
+		}
+		else {
+			NumByteToWrite -= count;
+			NumOfPage = NumByteToWrite / IIC_PageSize;
+			NumOfSingle = NumByteToWrite % IIC_PageSize;
+			
+			if (count != 0) {
+				I2C_Master_BufferWrite(I2C1, pBuffer, count, IIC_SlaveAddress,WriteAddr);
+				WriteAddr += count;
+				pBuffer += count;
+			}
+			while (NumOfPage--) {
+				I2C_Master_BufferWrite(I2C1, pBuffer, IIC_PageSize, IIC_SlaveAddress,WriteAddr);
+				WriteAddr += IIC_PageSize;
+				pBuffer += IIC_PageSize;
+			}
+			if (NumOfSingle != 0) {
+				I2C_Master_BufferWrite(I2C1, pBuffer, NumOfSingle, IIC_SlaveAddress,WriteAddr);
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

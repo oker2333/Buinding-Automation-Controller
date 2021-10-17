@@ -130,6 +130,7 @@ Section Cross References
     at24cxx.o(i.I2C1_Init) refers to stm32f4xx_rcc.o(i.RCC_AHB1PeriphClockCmd) for RCC_AHB1PeriphClockCmd
     at24cxx.o(i.I2C1_Init) refers to at24cxx.o(i.I2C1_GPIO_Configuration) for I2C1_GPIO_Configuration
     at24cxx.o(i.I2C1_Init) refers to at24cxx.o(i.I2C1_Configuration) for I2C1_Configuration
+    at24cxx.o(i.I2C_EE_BufferWrite) refers to at24cxx.o(i.I2C_Master_BufferWrite) for I2C_Master_BufferWrite
     at24cxx.o(i.I2C_Master_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_GetFlagStatus) for I2C_GetFlagStatus
     at24cxx.o(i.I2C_Master_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_AcknowledgeConfig) for I2C_AcknowledgeConfig
     at24cxx.o(i.I2C_Master_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_GenerateSTART) for I2C_GenerateSTART
@@ -430,10 +431,11 @@ Removing Unused input sections from the image.
     Removing at24cxx.o(.rev16_text), (4 bytes).
     Removing at24cxx.o(.revsh_text), (4 bytes).
     Removing at24cxx.o(.rrx_text), (6 bytes).
+    Removing at24cxx.o(i.I2C_EE_BufferWrite), (352 bytes).
     Removing at24cxx.o(i.I2C_Master_BufferRead), (208 bytes).
-    Removing at24cxx.o(i.I2C_Master_BufferWrite), (136 bytes).
+    Removing at24cxx.o(i.I2C_Master_BufferWrite), (164 bytes).
 
-269 unused section(s) (total 25152 bytes) removed from the image.
+270 unused section(s) (total 25532 bytes) removed from the image.
 
 ==============================================================================
 
@@ -752,18 +754,18 @@ Memory Map of the image
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08000000   0x08000000   0x00000188   Data   RO         1862    RESET               startup_stm32f40_41xxx.o
-    0x08000188   0x08000188   0x00000000   Code   RO         2069  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x08000188   0x08000188   0x00000004   Code   RO         2072    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x0800018c   0x0800018c   0x00000004   Code   RO         2075    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x08000190   0x08000190   0x00000000   Code   RO         2077    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x08000190   0x08000190   0x00000000   Code   RO         2079    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x08000190   0x08000190   0x00000008   Code   RO         2080    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x08000198   0x08000198   0x00000000   Code   RO         2082    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
-    0x08000198   0x08000198   0x00000000   Code   RO         2084    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
-    0x08000198   0x08000198   0x00000004   Code   RO         2073    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x08000188   0x08000188   0x00000000   Code   RO         2075  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x08000188   0x08000188   0x00000004   Code   RO         2078    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x0800018c   0x0800018c   0x00000004   Code   RO         2081    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x08000190   0x08000190   0x00000000   Code   RO         2083    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x08000190   0x08000190   0x00000000   Code   RO         2085    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x08000190   0x08000190   0x00000008   Code   RO         2086    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x08000198   0x08000198   0x00000000   Code   RO         2088    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
+    0x08000198   0x08000198   0x00000000   Code   RO         2090    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
+    0x08000198   0x08000198   0x00000004   Code   RO         2079    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x0800019c   0x0800019c   0x00000024   Code   RO         1863    .text               startup_stm32f40_41xxx.o
-    0x080001c0   0x080001c0   0x00000024   Code   RO         2086    .text               mc_w.l(init.o)
-    0x080001e4   0x080001e4   0x00000056   Code   RO         2096    .text               mc_w.l(__dczerorl2.o)
+    0x080001c0   0x080001c0   0x00000024   Code   RO         2092    .text               mc_w.l(init.o)
+    0x080001e4   0x080001e4   0x00000056   Code   RO         2102    .text               mc_w.l(__dczerorl2.o)
     0x0800023a   0x0800023a   0x00000004   Code   RO          169    i.BusFault_Handler  stm32f4xx_it.o
     0x0800023e   0x0800023e   0x00000002   PAD
     0x08000240   0x08000240   0x00000038   Code   RO         1933    i.DMA1_Stream6_IRQHandler  dma.o
@@ -823,13 +825,13 @@ Memory Map of the image
     0x08000fa6   0x08000fa6   0x00000004   Code   RO          177    i.UsageFault_Handler  stm32f4xx_it.o
     0x08000faa   0x08000faa   0x00000002   PAD
     0x08000fac   0x08000fac   0x00000098   Code   RO         1938    i.Usart_Tx_Config   dma.o
-    0x08001044   0x08001044   0x0000000e   Code   RO         2090    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x08001052   0x08001052   0x00000002   Code   RO         2091    i.__scatterload_null  mc_w.l(handlers.o)
-    0x08001054   0x08001054   0x0000000e   Code   RO         2092    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x08001044   0x08001044   0x0000000e   Code   RO         2096    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x08001052   0x08001052   0x00000002   Code   RO         2097    i.__scatterload_null  mc_w.l(handlers.o)
+    0x08001054   0x08001054   0x0000000e   Code   RO         2098    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x08001062   0x08001062   0x00000002   PAD
     0x08001064   0x08001064   0x00000090   Code   RO         1995    i.debug_init        debug.o
     0x080010f4   0x080010f4   0x0000008c   Code   RO            6    i.main              main.o
-    0x08001180   0x08001180   0x00000020   Data   RO         2088    Region$$Table       anon$$obj.o
+    0x08001180   0x08001180   0x00000020   Data   RO         2094    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM2 (Exec base: 0x10000000, Load base: 0x080011b4, Size: 0x00000000, Max: 0x00010000, ABSOLUTE)
@@ -857,7 +859,7 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       168         14          0          0          0       1631   at24cxx.o
+       168         14          0          0          0       1635   at24cxx.o
        176         12          0          0          0       1233   debug.o
        416         52          0        512        512       3075   dma.o
         76          6          0          0          0        535   led.o
@@ -874,7 +876,7 @@ Image component sizes
        340         32          0          0          0       1633   system_stm32f4xx.o
 
     ----------------------------------------------------------------------
-      3914        328        424        532       1556     357472   Object Totals
+      3914        328        424        532       1556     357476   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         18          0          0          0          4          0   (incl. Padding)
 
@@ -914,8 +916,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      4088        344        424        532       1556     353124   Grand Totals
-      4088        344        424         20       1556     353124   ELF Image Totals (compressed)
+      4088        344        424        532       1556     353128   Grand Totals
+      4088        344        424         20       1556     353128   ELF Image Totals (compressed)
       4088        344        424         20          0          0   ROM Totals
 
 ==============================================================================
