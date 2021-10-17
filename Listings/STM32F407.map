@@ -135,8 +135,8 @@ Section Cross References
     at24cxx.o(i.I2C_Master_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_GenerateSTART) for I2C_GenerateSTART
     at24cxx.o(i.I2C_Master_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_CheckEvent) for I2C_CheckEvent
     at24cxx.o(i.I2C_Master_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_Send7bitAddress) for I2C_Send7bitAddress
-    at24cxx.o(i.I2C_Master_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_GenerateSTOP) for I2C_GenerateSTOP
     at24cxx.o(i.I2C_Master_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_ReceiveData) for I2C_ReceiveData
+    at24cxx.o(i.I2C_Master_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_GenerateSTOP) for I2C_GenerateSTOP
     at24cxx.o(i.I2C_Master_BufferWrite) refers to stm32f4xx_i2c.o(i.I2C_GenerateSTART) for I2C_GenerateSTART
     at24cxx.o(i.I2C_Master_BufferWrite) refers to stm32f4xx_i2c.o(i.I2C_CheckEvent) for I2C_CheckEvent
     at24cxx.o(i.I2C_Master_BufferWrite) refers to stm32f4xx_i2c.o(i.I2C_Send7bitAddress) for I2C_Send7bitAddress
@@ -430,10 +430,10 @@ Removing Unused input sections from the image.
     Removing at24cxx.o(.rev16_text), (4 bytes).
     Removing at24cxx.o(.revsh_text), (4 bytes).
     Removing at24cxx.o(.rrx_text), (6 bytes).
-    Removing at24cxx.o(i.I2C_Master_BufferRead), (212 bytes).
+    Removing at24cxx.o(i.I2C_Master_BufferRead), (208 bytes).
     Removing at24cxx.o(i.I2C_Master_BufferWrite), (136 bytes).
 
-269 unused section(s) (total 25156 bytes) removed from the image.
+269 unused section(s) (total 25152 bytes) removed from the image.
 
 ==============================================================================
 

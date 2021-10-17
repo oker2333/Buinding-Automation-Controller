@@ -24,7 +24,7 @@ void I2C1_Configuration(void)
     I2C_InitStructure.I2C_OwnAddress1 = 0XA0;//主机的地址        
     I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
     I2C_InitStructure.I2C_AcknowledgedAddress= I2C_AcknowledgedAddress_7bit;
-    I2C_InitStructure.I2C_ClockSpeed = 100000;//100KHZ
+    I2C_InitStructure.I2C_ClockSpeed = 400000;//400KHZ
     I2C_Init(I2C1, &I2C_InitStructure);
     I2C_Cmd(I2C1, ENABLE);                                             
 }
@@ -41,6 +41,7 @@ uint8_t I2C_Master_BufferWrite(I2C_TypeDef * I2Cx, uint8_t* pBuffer, uint32_t Nu
 {
     if(NumByteToWrite==0)
         return 1;
+		
     /* 1.开始*/
     I2C_GenerateSTART(I2Cx, ENABLE);
     while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_MODE_SELECT));
@@ -70,9 +71,11 @@ uint8_t I2C_Master_BufferRead(I2C_TypeDef * I2Cx, uint8_t* pBuffer, uint32_t Num
 
     while(I2C_GetFlagStatus(I2Cx, I2C_FLAG_BUSY));  
     I2C_AcknowledgeConfig(I2Cx, ENABLE);
+		
     /* 1.开始*/
     I2C_GenerateSTART(I2Cx, ENABLE);
     while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_MODE_SELECT));
+		
     /* 2.设备地址·/写 */
     I2C_Send7bitAddress(I2Cx, SlaveAddress, I2C_Direction_Transmitter);
     while (!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
@@ -80,6 +83,7 @@ uint8_t I2C_Master_BufferRead(I2C_TypeDef * I2Cx, uint8_t* pBuffer, uint32_t Num
     /* 3.开始*/
     I2C_GenerateSTART(I2Cx, ENABLE);
     while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_MODE_SELECT));
+		
     /* 4.设备地址·/读 */
     I2C_Send7bitAddress(I2Cx, SlaveAddress, I2C_Direction_Receiver);
     while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED));
@@ -98,7 +102,7 @@ uint8_t I2C_Master_BufferRead(I2C_TypeDef * I2Cx, uint8_t* pBuffer, uint32_t Num
 		
     I2C_AcknowledgeConfig(I2Cx, ENABLE);
     return 0;
-}   
+}
 
 
 
