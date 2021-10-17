@@ -2,6 +2,19 @@
 
 #define IIC_PageSize 8
 #define IIC_SlaveAddress 0xA0
+#define Delay(N) delay_us(N);
+
+/*写周期时间是指从一个写时序的有效停止信号到内部编程/擦除周期结束的这一段时间 在写周期期
+间 总线接口电路禁能 SDA 保持为高电平 器件不响应外部操作.故需要延時*/
+void delay_us(u32 us)
+{
+		u8 i = 0;
+		while(us--)
+		{
+			i = 42;
+			while(i--);
+		};
+}
 
 void I2C1_GPIO_Configuration(void)
 {
@@ -125,18 +138,18 @@ void I2C_BufferWrite(u8* pBuffer, u8 WriteAddr,
 	if (Addr == 0){
 		if (NumOfPage == 0) {
 			I2C_Master_BufferWrite(I2C1, pBuffer, NumByteToWrite, IIC_SlaveAddress,WriteAddr);
-			Delay(1);
+			Delay(1000);
 		}
 		else {
 			while (NumOfPage--) {
 				I2C_Master_BufferWrite(I2C1, pBuffer, IIC_PageSize, IIC_SlaveAddress,WriteAddr);
-				Delay(1);
+				Delay(1000);
 				WriteAddr += IIC_PageSize;
 				pBuffer += IIC_PageSize;
 			}
 			if (NumOfSingle!=0) {
 				I2C_Master_BufferWrite(I2C1, pBuffer, NumOfSingle, IIC_SlaveAddress,WriteAddr);
-				Delay(1);
+				Delay(1000);
 			}
 		}
 	}
@@ -145,16 +158,16 @@ void I2C_BufferWrite(u8* pBuffer, u8 WriteAddr,
 				if (NumOfSingle > count) {
 					temp = NumOfSingle - count;
 					I2C_Master_BufferWrite(I2C1, pBuffer, count, IIC_SlaveAddress,WriteAddr);
-					Delay(1);
+					Delay(1000);
 					WriteAddr += count;
 					pBuffer += count;
 
 					I2C_Master_BufferWrite(I2C1, pBuffer, temp, IIC_SlaveAddress,WriteAddr);
-					Delay(1);
+					Delay(1000);
 				}
 				else {
 					I2C_Master_BufferWrite(I2C1, pBuffer, NumByteToWrite, IIC_SlaveAddress,WriteAddr);
-					Delay(1);
+					Delay(1000);
 				}
 		}
 		else {
@@ -164,19 +177,19 @@ void I2C_BufferWrite(u8* pBuffer, u8 WriteAddr,
 			
 			if (count != 0) {
 				I2C_Master_BufferWrite(I2C1, pBuffer, count, IIC_SlaveAddress,WriteAddr);
-				Delay(1);
+				Delay(1000);
 				WriteAddr += count;
 				pBuffer += count;
 			}
 			while (NumOfPage--) {
 				I2C_Master_BufferWrite(I2C1, pBuffer, IIC_PageSize, IIC_SlaveAddress,WriteAddr);
-				Delay(1);
+				Delay(1000);
 				WriteAddr += IIC_PageSize;
 				pBuffer += IIC_PageSize;
 			}
 			if (NumOfSingle != 0) {
 				I2C_Master_BufferWrite(I2C1, pBuffer, NumOfSingle, IIC_SlaveAddress,WriteAddr);
-				Delay(1);
+				Delay(1000);
 			}
 		}
 	}

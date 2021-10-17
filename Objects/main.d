@@ -41,4 +41,3 @@
 .\objects\main.o: .\HARDWARE\include\debug.h
 .\objects\main.o: .\HARDWARE\include\dma.h
 .\objects\main.o: .\HARDWARE\include\at24cxx.h
-.\objects\main.o: .\USER\main.h

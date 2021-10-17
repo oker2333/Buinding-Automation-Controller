@@ -1,6 +1,6 @@
 Dependencies for Project 'STM32F407', Target 'STM32': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
-F (.\USER\main.c)(0x616C17E6)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include-I.\RTE\_STM32-IC:\Users\孙权\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\USER\main.c)(0x616C3DB2)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include-I.\RTE\_STM32-IC:\Users\孙权\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (USER\main.h)(0x616BCFE3)
 I (.\CMSIS\stm32f4xx.h)(0x616AEA76)
 I (.\CMSIS\Include\core_cm4.h)(0x616AEA76)
@@ -40,8 +40,7 @@ I (.\HARDWARE\include\led.h)(0x616AEA76)
 I (.\HARDWARE\include\rs485.h)(0x616AEA76)
 I (.\HARDWARE\include\dma.h)(0x616AEA76)
 I (.\HARDWARE\include\debug.h)(0x616AEA76)
-I (.\HARDWARE\include\at24cxx.h)(0x616BCFF1)
-I (.\USER\main.h)(0x616BCFE3)
+I (.\HARDWARE\include\at24cxx.h)(0x616C37B2)
 F (.\USER\stm32f4xx_it.c)(0x616AEA76)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include-I.\RTE\_STM32-IC:\Users\孙权\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\stm32f4xx_it.o --omf_browse .\objects\stm32f4xx_it.crf --depend .\objects\stm32f4xx_it.d)
 I (USER\stm32f4xx_it.h)(0x616AEA76)
 I (.\CMSIS\stm32f4xx.h)(0x616AEA76)
@@ -83,8 +82,7 @@ I (.\HARDWARE\include\led.h)(0x616AEA76)
 I (.\HARDWARE\include\rs485.h)(0x616AEA76)
 I (.\HARDWARE\include\dma.h)(0x616AEA76)
 I (.\HARDWARE\include\debug.h)(0x616AEA76)
-I (.\HARDWARE\include\at24cxx.h)(0x616BCFF1)
-I (.\USER\main.h)(0x616BCFE3)
+I (.\HARDWARE\include\at24cxx.h)(0x616C37B2)
 F (.\USER\system_stm32f4xx.c)(0x616AEA76)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include-I.\RTE\_STM32-IC:\Users\孙权\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\system_stm32f4xx.o --omf_browse .\objects\system_stm32f4xx.crf --depend .\objects\system_stm32f4xx.d)
 I (.\CMSIS\stm32f4xx.h)(0x616AEA76)
 I (.\CMSIS\Include\core_cm4.h)(0x616AEA76)
@@ -517,8 +515,8 @@ I (.\FWLIB\inc\stm32f4xx_dcmi.h)(0x616AEA76)
 I (.\FWLIB\inc\stm32f4xx_fsmc.h)(0x616AEA76)
 I (.\HARDWARE\include\dma.h)(0x616AEA76)
 I (.\HARDWARE\include\rs485.h)(0x616AEA76)
-F (.\HARDWARE\source\at24cxx.c)(0x616C15DB)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include-I.\RTE\_STM32-IC:\Users\孙权\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\at24cxx.o --omf_browse .\objects\at24cxx.crf --depend .\objects\at24cxx.d)
-I (.\HARDWARE\include\at24cxx.h)(0x616BCFF1)
+F (.\HARDWARE\source\at24cxx.c)(0x616C3DA4)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include-I.\RTE\_STM32-IC:\Users\孙权\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\at24cxx.o --omf_browse .\objects\at24cxx.crf --depend .\objects\at24cxx.d)
+I (.\HARDWARE\include\at24cxx.h)(0x616C37B2)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (.\USER\stm32f4xx_conf.h)(0x616AEA76)
 I (.\FWLIB\inc\stm32f4xx_adc.h)(0x616AEA76)
@@ -553,8 +551,3 @@ I (.\FWLIB\inc\stm32f4xx_can.h)(0x616AEA76)
 I (.\FWLIB\inc\stm32f4xx_dac.h)(0x616AEA76)
 I (.\FWLIB\inc\stm32f4xx_dcmi.h)(0x616AEA76)
 I (.\FWLIB\inc\stm32f4xx_fsmc.h)(0x616AEA76)
-I (.\USER\main.h)(0x616BCFE3)
-I (.\HARDWARE\include\led.h)(0x616AEA76)
-I (.\HARDWARE\include\rs485.h)(0x616AEA76)
-I (.\HARDWARE\include\dma.h)(0x616AEA76)
-I (.\HARDWARE\include\debug.h)(0x616AEA76)

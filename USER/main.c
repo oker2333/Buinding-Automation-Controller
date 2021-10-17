@@ -48,8 +48,6 @@ RCC_ClocksTypeDef RCC_Clocks;
   * @param  None
   * @retval None
   */
-uint8_t WriteBuffer[256] = {0};
-uint8_t ReadBuffer[256] = {0};
 	
 int main(void)
 {

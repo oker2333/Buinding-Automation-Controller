@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 #include "stm32f4xx_conf.h"
-#include "main.h"
 
 void I2C1_Init(void);
 uint8_t I2C_Master_BufferWrite(I2C_TypeDef * I2Cx, uint8_t* pBuffer, uint32_t NumByteToWrite, uint8_t SlaveAddress,uint8_t ByteAddress);
