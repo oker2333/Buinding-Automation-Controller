@@ -15,6 +15,7 @@
 ".\objects\dma.o"
 ".\objects\debug.o"
 ".\objects\at24cxx.o"
+".\objects\lan8720.o"
 --library_type=microlib --strict --scatter ".\Objects\STM32F407.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

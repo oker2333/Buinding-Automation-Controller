@@ -477,6 +477,11 @@
               <FileType>1</FileType>
               <FilePath>.\HARDWARE\source\at24cxx.c</FilePath>
             </File>
+            <File>
+              <FileName>lan8720.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\source\lan8720.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
