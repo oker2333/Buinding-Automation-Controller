@@ -484,6 +484,9 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>μC/OS-III</GroupName>
+        </Group>
       </Groups>
     </Target>
   </Targets>
