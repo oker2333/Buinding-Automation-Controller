@@ -35,6 +35,7 @@
 */
 
 #include  <includes.h>
+#include "main.h"
 
 /*
 *********************************************************************************************************
@@ -83,13 +84,17 @@ static  void  App_TaskEq0Fp         (void  *p_arg);             /* Floating Poin
 *********************************************************************************************************
 */
 
+
+
 int main(void)
 {
     OS_ERR  err;
-
+		
+		
 
     BSP_IntDisAll();                                            /* Disable all interrupts.                              */
-    
+    BSP_Init();
+
     CPU_Init();                                                 /* Initialize the uC/CPU Services                       */
     Mem_Init();                                                 /* Initialize Memory Management Module                  */
     Math_Init();                                                /* Initialize Mathematical Module                       */
@@ -116,7 +121,6 @@ int main(void)
 
     return (0u);
 }
-
 
 /*
 *********************************************************************************************************

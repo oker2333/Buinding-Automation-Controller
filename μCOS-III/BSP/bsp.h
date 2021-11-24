@@ -446,6 +446,8 @@ void        BSP_LED_On                        (CPU_INT08U     led);
 void        BSP_LED_Off                       (CPU_INT08U     led);
 
 void        BSP_LED_Toggle                    (CPU_INT08U     led);
+void 				Delay															(__IO uint32_t nTime);
+void 				TimingDelay_Decrement							(void);
 
 /*
 *********************************************************************************************************

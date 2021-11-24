@@ -226,6 +226,8 @@
 
 static  void  BSP_LED_Init  (void);
 
+static __IO uint32_t uwTimingDelay;
+RCC_ClocksTypeDef RCC_Clocks;
 
 /*
 *********************************************************************************************************
@@ -252,108 +254,40 @@ static  void  BSP_LED_Init  (void);
 *********************************************************************************************************
 */
 
+void Delay(__IO uint32_t nTime)
+{ 
+  uwTimingDelay = nTime;
+
+  while(uwTimingDelay != 0);
+}
+
+
+void TimingDelay_Decrement(void)
+{
+  if (uwTimingDelay != 0x00)
+  { 
+    uwTimingDelay--;
+  }
+}
+
 void  BSP_Init (void)
 {
-    CPU_INT32U reg_val;
-    CPU_INT32U hse_rdyctr;
+  /* SysTick end of count event each 10ms */
+  RCC_GetClocksFreq(&RCC_Clocks);
+  SysTick_Config(RCC_Clocks.HCLK_Frequency / 100);
+	
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+  
+  /* Add your application code here */
+	I2C1_Init();
+	LED_Init();
+	RS485_Init(9600);
+	Usart_Tx_Config();
 
-
-    BSP_IntInit();
-                                                                /* ---------- RESET CLOCK CONFIG. REGISTERS ----------- */
-
-    DEF_BIT_SET(BSP_REG32_RCC_CR,BSP_BIT_RCC_CR_HSION);         /* Set HSION bit                                        */
-
-    BSP_REG32_RCC_CFGR  = (CPU_INT32U)0u;                       /* Reset CFGR register                                  */
-
-    BSP_REG32_RCC_CR    &= 0xFEF6FFFFu;                         /* Reset HSEON, CSSON and PLLON bits                    */
-
-    BSP_REG32_RCC_PLLCFGR = BSP_MSK_RCC_PLLCFGR_RST;            /* Reset PLLCFGR register                               */
-
-    DEF_BIT_CLR(BSP_REG32_RCC_CR, BSP_BIT_RCC_CR_HSEBYP);       /* Reset HSEBYP bit                                     */
-
-                                                                /* ----------- HSE OSCILLATOR CONFIGURATION ----------- */
-                                                                /* HSE = 8MHz Ext. crystal.                             */
-    DEF_BIT_CLR(BSP_REG32_RCC_CR,BSP_MSK_HSECFG);
-
-    DEF_BIT_SET(BSP_REG32_RCC_CR,BSP_BIT_RCC_CR_HSEON);
-                                                                /* Wait for HSE to Start Up                             */
-    do {
-        hse_rdyctr++;
-    } while ((hse_rdyctr < HSE_TIMEOUT_VAL)  &&
-              DEF_BIT_IS_CLR(BSP_REG32_RCC_CR, BSP_BIT_RCC_CR_HSERDY));
-
-
-    if (hse_rdyctr == HSE_TIMEOUT_VAL) {
-        return;
-    }
-                                                                /* --------------- SET UP THE AHB PRESCALER ----------- */
-                                                                /* HCLK = AHBCLK  = PLL / AHBPRES(1) = 168MHz.          */
-    reg_val = (CPU_INT32U)0u;
-    reg_val = BSP_REG32_RCC_CFGR;
-
-    DEF_BIT_CLR(reg_val, BSP_MSK_RCC_CFGR_HPRE);                /* Clear HPRE[3:0] bits                                 */
-
-    DEF_BIT_SET(reg_val, BSP_MSK_RCC_CFGR_SYSCLKDIV1);          /* Set HPRE[3:0] bits according to RCC_SYSCLK value     */
-
-    BSP_REG32_RCC_CFGR = reg_val;                               /* Store the new value in RCC_CFGR register             */
-
-                                                                /* ---------------- CONFIGURE APB2 CLOCK -------------- */
-                                                                /*   APB2CLK = AHBCLK  / APB2DIV(2) = 84MHz.            */
-    reg_val = BSP_REG32_RCC_CFGR;
-
-    DEF_BIT_CLR(reg_val, BSP_MSK_RCC_CFGR_PPRE2);                /* Clear PPRE2[2:0] bits                                */
-
-    DEF_BIT_SET(reg_val, BSP_MSK_RCC_CFGR_HCLK_DIV2 << 3u);     /* Set PPRE2[2:0] bits according to RCC_HCLK value      */
-
-    BSP_REG32_RCC_CFGR = reg_val;                               /* Store the new value                                  */
-
-                                                                /* ---------------- CONFIGURE APB1 CLOCK -------------- */
-                                                                /* APB1CLK = AHBCLK  / APB1DIV(4) = 42MHz (max).        */
-    reg_val = BSP_REG32_RCC_CFGR;
-
-    DEF_BIT_CLR(reg_val,BSP_MSK_RCC_CFGR_PPRE1);                /* Clear PPRE1[2:0] bits                                */
-
-    DEF_BIT_SET(reg_val, BSP_MSK_RCC_CFGR_HCLK_DIV4);           /* Set PPRE1[2:0] bits according to RCC_HCLK value      */
-
-                                                                /* Store the new value in RCC_CFGR register             */
-    BSP_REG32_RCC_CFGR    =     reg_val;
-                                                                /* ------------- CONFIGURE AND ENABLE PLL ------------- */
-                                                                /* PLL_M = 8, PLL_N = 336, PLL_P = 2, PLL_Q = 7         */
-                                                                /* PLLCLK    = HSE * (PLLN / PLLM)      = 336MHz.       */
-                                                                /* SYSCLK    = PLLCLK / PLLP            = 168MHz.       */
-                                                                /* OTG_FSCLK = PLLCLK / PLLQ            =  48MHz.       */
-
-    BSP_REG32_RCC_PLLCFGR = ( BSP_BIT_RCC_PLLCFGR_PLLM       )               |
-                            ( BSP_BIT_RCC_PLLCFGR_PLLN << 6u )               |
-                            ( BSP_MSK_PLLCFGR_PLLSRC_HSE     )               |
-                            ((BSP_BIT_RCC_PLLCFGR_PLLP >> 1u ) -1u ) << 16u  |
-                            ( BSP_BIT_RCC_PLLCFGR_PLLQ << 24u);
-
-    DEF_BIT_SET( BSP_REG32_RCC_CR, BSP_BIT_RCC_CR_PLLON);
-                                                                /* Wait for PLL to lock.                                */
-    while ( DEF_BIT_IS_CLR( BSP_REG32_RCC_CR,
-                            BSP_BIT_RCC_CR_PLLRDY)) {
-        ;
-    }
-                                                                /* ------------- CONFIGURE FLASH MEMORY --------------- */
-
-    DEF_BIT_SET(BSP_REG32_FLASH_ACR, BSP_MSK_FLASHLATENCY_5WS); /* Allow 5 Flash Wait States when HCLK > 120MHz.        */
-
-                                                                /* Enable Prefetch, Instruction Cache, and Data Cache.  */
-    DEF_BIT_SET(BSP_REG32_FLASH_ACR, (BSP_BIT_FLASH_ACR_PRFTEN  |
-                                      BSP_BIT_FLASH_ACR_ICEN    |
-                                      BSP_BIT_FLASH_ACR_DCEN));
-                                                                /* -------- SELECT PLL OUTPUT AS SYSTEM CLOCK --------- */
-                                                                /* HCLK = SYSCLK = PLL = 168MHz.                        */
-    DEF_BIT_SET(BSP_REG32_RCC_CFGR, BSP_MSK_SYSCLK_SRC_PLLCLK);
-
-
-    while((BSP_REG32_RCC_CFGR & BSP_MSK_RCC_CFGR_SWS)             /* Wait until PLL is selected as system clock source    */
-                              != BSP_MSK_RCC_CFGR_SWS_PLL){
-        ;
-    }
-
-    BSP_LED_Init();                                             /* Initialize user LEDs                                 */
+#if (LOG_LEVEL >= TRACE)
+	debug_init(115200);
+	Debug_Tx_Config();
+#endif
 
 #ifdef TRACE_EN                                                 /* See project / compiler preprocessor options.         */
     BSP_CPU_REG_DBGMCU_CR |=  BSP_DBGMCU_CR_TRACE_IOEN_MASK;    /* Enable tracing (see Note #2).                        */
