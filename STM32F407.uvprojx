@@ -485,7 +485,16 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>μC/OS-III</GroupName>
+          <GroupName>μCOS/BSP</GroupName>
+        </Group>
+        <Group>
+          <GroupName>μCOS/uC-CPU</GroupName>
+        </Group>
+        <Group>
+          <GroupName>μCOS/uC-LIB</GroupName>
+        </Group>
+        <Group>
+          <GroupName>μCOS/uC-SRC</GroupName>
         </Group>
       </Groups>
     </Target>
