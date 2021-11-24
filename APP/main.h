@@ -32,11 +32,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
 #include "stm32f4xx_conf.h"
-#include "led.h"
-#include "rs485.h"
-#include "dma.h"
-#include "debug.h"
-#include "at24cxx.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

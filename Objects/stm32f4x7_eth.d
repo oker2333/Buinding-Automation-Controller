@@ -7,8 +7,8 @@
 .\objects\stm32f4x7_eth.o: .\CMSIS\Include\core_cmInstr.h
 .\objects\stm32f4x7_eth.o: .\CMSIS\Include\core_cmFunc.h
 .\objects\stm32f4x7_eth.o: .\CMSIS\Include\core_cmSimd.h
-.\objects\stm32f4x7_eth.o: .\USER\system_stm32f4xx.h
-.\objects\stm32f4x7_eth.o: .\USER\stm32f4xx_conf.h
+.\objects\stm32f4x7_eth.o: .\APP\system_stm32f4xx.h
+.\objects\stm32f4x7_eth.o: .\APP\stm32f4xx_conf.h
 .\objects\stm32f4x7_eth.o: .\FWLIB\inc\stm32f4xx_adc.h
 .\objects\stm32f4x7_eth.o: .\CMSIS\stm32f4xx.h
 .\objects\stm32f4x7_eth.o: .\FWLIB\inc\stm32f4xx_crc.h

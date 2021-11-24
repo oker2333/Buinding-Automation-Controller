@@ -67,7 +67,6 @@ static  CPU_STK      App_TaskEq0FpStk[APP_CFG_TASK_EQ_STK_SIZE];
 
 static  void  AppTaskStart          (void     *p_arg);
 static  void  AppTaskCreate         (void);
-static  void  AppObjCreate          (void);
 
 static  void  App_TaskEq0Fp         (void  *p_arg);             /* Floating Point Equation 0 task.                      */
 
@@ -83,8 +82,6 @@ static  void  App_TaskEq0Fp         (void  *p_arg);             /* Floating Poin
 * Returns     : none
 *********************************************************************************************************
 */
-
-
 
 int main(void)
 {
@@ -142,12 +139,8 @@ static  void  AppTaskStart (void *p_arg)
 {
     OS_ERR  err;
 
-
-   (void)p_arg;
-
     BSP_Init();                                                 /* Initialize BSP functions                             */
     BSP_Tick_Init();                                            /* Initialize Tick Services.                            */
-
 
 #if OS_CFG_STAT_TASK_EN > 0u
     OSStatTaskCPUUsageInit(&err);                               /* Compute CPU capacity with no task running            */
@@ -157,36 +150,11 @@ static  void  AppTaskStart (void *p_arg)
     CPU_IntDisMeasMaxCurReset();
 #endif
 
-    BSP_LED_Off(0u);                                            /* Turn Off LEDs after initialization                   */
-
-    APP_TRACE_DBG(("Creating Application Kernel Objects\n\r"));
-    AppObjCreate();                                             /* Create Applicaiton kernel objects                    */
-
-    APP_TRACE_DBG(("Creating Application Tasks\n\r"));
     AppTaskCreate();                                            /* Create Application tasks                             */
-
 
     while (DEF_TRUE) {                                          /* Task body, always written as an infinite loop.       */
 
-        BSP_LED_Toggle(1u);
-        OSTimeDlyHMSM(0u, 0u, 0u, 100u,
-                      OS_OPT_TIME_HMSM_STRICT,
-                      &err);
-
-        BSP_LED_Toggle(2u);
-        OSTimeDlyHMSM(0u, 0u, 0u, 100u,
-                      OS_OPT_TIME_HMSM_STRICT,
-                      &err);
-
-        BSP_LED_Toggle(3u);
-        OSTimeDlyHMSM(0u, 0u, 0u, 100u,
-                      OS_OPT_TIME_HMSM_STRICT,
-                      &err);
-
-        BSP_LED_Toggle(4u);
-        OSTimeDlyHMSM(0u, 0u, 0u, 100u,
-                      OS_OPT_TIME_HMSM_STRICT,
-                      &err);
+        OSTimeDlyHMSM(0u, 0u, 0u, 100u, 0, &err);
 
     }
 }
@@ -228,29 +196,6 @@ static  void  AppTaskCreate (void)
                  (OS_ERR      *)&os_err);
 }
 
-
-/*
-*********************************************************************************************************
-*                                          AppObjCreate()
-*
-* Description : Create application kernel objects tasks.
-*
-* Argument(s) : none
-*
-* Return(s)   : none
-*
-* Caller(s)   : AppTaskStart()
-*
-* Note(s)     : none.
-*********************************************************************************************************
-*/
-
-static  void  AppObjCreate (void)
-{
-
-}
-
-
 /*
 *********************************************************************************************************
 *                                             App_TaskEq0Fp()
@@ -280,26 +225,26 @@ void  App_TaskEq0Fp (void  *p_arg)
         
     
     while (DEF_TRUE) {
-        eps       = 0.00001;
-        a         = 3.0; 
-        b         = 4.0;
+        eps       = 0.00001f;
+        a         = 3.0f; 
+        b         = 4.0f;
         delta     = a - b;
         iteration = 0u;
         if (delta < 0) {
-            delta = delta * -1.0;
+            delta = delta * -1.0f;
         }
         
-        while (((2.00 * eps) < delta) || 
+        while (((2.00f * eps) < delta) || 
                (iteration    > 20u  )) {
-            c   = (a + b) / 2.00;
-            f_a = (exp((-1.0) * a) * (3.2 * sin(a) - 0.5 * cos(a)));
-            f_c = (exp((-1.0) * c) * (3.2 * sin(c) - 0.5 * cos(c)));
+            c   = (a + b) / 2.00f;
+            f_a = (exp((-1.0f) * a) * (3.2f * sin(a) - 0.5f * cos(a)));
+            f_c = (exp((-1.0f) * c) * (3.2f * sin(c) - 0.5f * cos(c)));
             
-            if (((f_a > 0.0) && (f_c < 0.0)) || 
-                ((f_a < 0.0) && (f_c > 0.0))) {
+            if (((f_a > 0.0f) && (f_c < 0.0f)) || 
+                ((f_a < 0.0f) && (f_c > 0.0f))) {
                 b = c;
-            } else if (((f_a > 0.0) && (f_c > 0.0)) || 
-                       ((f_a < 0.0) && (f_c < 0.0))) {
+            } else if (((f_a > 0.0f) && (f_c > 0.0f)) || 
+                       ((f_a < 0.0f) && (f_c < 0.0f))) {
                 a = c;           
             } else {
                 break;
@@ -307,7 +252,7 @@ void  App_TaskEq0Fp (void  *p_arg)
                 
             delta = a - b;
             if (delta < 0) {
-               delta = delta * -1.0;
+               delta = delta * -1.0f;
             }
             iteration++;
 

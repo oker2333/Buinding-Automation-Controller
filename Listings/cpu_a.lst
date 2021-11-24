@@ -463,7 +463,7 @@ interwork --depend=.\objects\cpu_a.d -o.\objects\cpu_a.o -I.\RTE\_STM32 -IC:\Us
 ers\Joker\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Devic
 e\ST\STM32F4xx\Include -IC:\Keil_v5\ARM\CMSIS\Include --predefine="__MICROLIB S
 ETA 1" --predefine="__UVISION_VERSION SETA 529" --predefine="STM32F407xx SETA 1
-" --list=.\listings\cpu_a.lst ¦ÌCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
+" --list=.\listings\cpu_a.lst UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
 
 
 
@@ -474,7 +474,7 @@ Relocatable symbols
 
 Symbol: .text
    Definitions
-      At line 61 in file 
+      At line 61 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
    Uses
       None
 Comment: .text unused
@@ -482,49 +482,49 @@ CPU_CntLeadZeros 0000001E
 
 Symbol: CPU_CntLeadZeros
    Definitions
-      At line 194 in file 
+      At line 194 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
    Uses
-      At line 52 in file 
+      At line 52 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
 Comment: CPU_CntLeadZeros used once
 CPU_CntTrailZeros 00000024
 
 Symbol: CPU_CntTrailZeros
    Definitions
-      At line 241 in file 
+      At line 241 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
    Uses
-      At line 53 in file 
+      At line 53 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
 Comment: CPU_CntTrailZeros used once
 CPU_IntDis 00000000
 
 Symbol: CPU_IntDis
    Definitions
-      At line 75 in file 
+      At line 75 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
    Uses
-      At line 42 in file 
+      At line 42 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
 Comment: CPU_IntDis used once
 CPU_IntEn 00000004
 
 Symbol: CPU_IntEn
    Definitions
-      At line 80 in file 
+      At line 80 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
    Uses
-      At line 43 in file 
+      At line 43 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
 Comment: CPU_IntEn used once
 CPU_RevBits 0000002E
 
 Symbol: CPU_RevBits
    Definitions
-      At line 276 in file 
+      At line 276 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
    Uses
-      At line 54 in file 
+      At line 54 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
 Comment: CPU_RevBits used once
 CPU_SR_Restore 00000010
 
 Symbol: CPU_SR_Restore
    Definitions
-      At line 117 in file 
+      At line 117 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
    Uses
-      At line 46 in file 
+      At line 46 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
 Comment: CPU_SR_Restore used once
 CPU_SR_Save 00000008
 
@@ -536,25 +536,25 @@ ARM Macro Assembler    Page 2 Alphabetic symbol ordering
 Relocatable symbols
 
    Definitions
-      At line 111 in file 
+      At line 111 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
    Uses
-      At line 45 in file 
+      At line 45 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
 Comment: CPU_SR_Save used once
 CPU_WaitForExcept 0000001A
 
 Symbol: CPU_WaitForExcept
    Definitions
-      At line 147 in file 
+      At line 147 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
    Uses
-      At line 49 in file 
+      At line 49 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
 Comment: CPU_WaitForExcept used once
 CPU_WaitForInt 00000016
 
 Symbol: CPU_WaitForInt
    Definitions
-      At line 132 in file 
+      At line 132 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
    Uses
-      At line 48 in file 
+      At line 48 in file UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
 Comment: CPU_WaitForInt used once
 10 symbols
 344 symbols in table

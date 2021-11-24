@@ -7,8 +7,8 @@
 .\objects\led.o: .\CMSIS\Include\core_cmInstr.h
 .\objects\led.o: .\CMSIS\Include\core_cmFunc.h
 .\objects\led.o: .\CMSIS\Include\core_cmSimd.h
-.\objects\led.o: .\USER\system_stm32f4xx.h
-.\objects\led.o: .\USER\stm32f4xx_conf.h
+.\objects\led.o: .\APP\system_stm32f4xx.h
+.\objects\led.o: .\APP\stm32f4xx_conf.h
 .\objects\led.o: .\FWLIB\inc\stm32f4xx_adc.h
 .\objects\led.o: .\CMSIS\stm32f4xx.h
 .\objects\led.o: .\FWLIB\inc\stm32f4xx_crc.h

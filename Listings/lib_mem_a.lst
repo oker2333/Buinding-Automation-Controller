@@ -448,8 +448,8 @@ interwork --depend=.\objects\lib_mem_a.d -o.\objects\lib_mem_a.o -I.\RTE\_STM32
  -IC:\Users\Joker\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMS
 IS\Device\ST\STM32F4xx\Include -IC:\Keil_v5\ARM\CMSIS\Include --predefine="__MI
 CROLIB SETA 1" --predefine="__UVISION_VERSION SETA 529" --predefine="STM32F407x
-x SETA 1" --list=.\listings\lib_mem_a.lst ¦ÌCOS-III\uC-LIB\Ports\ARM-Cortex-M4\
-RealView\lib_mem_a.asm
+x SETA 1" --list=.\listings\lib_mem_a.lst UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\R
+ealView\lib_mem_a.asm
 
 
 
@@ -460,7 +460,8 @@ Relocatable symbols
 
 Symbol: .text
    Definitions
-      At line 66 in file 
+      At line 66 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_a
+.asm
    Uses
       None
 Comment: .text unused
@@ -468,15 +469,18 @@ Chk_Align_16 00000046
 
 Symbol: Chk_Align_16
    Definitions
-      At line 153 in file 
+      At line 153 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
    Uses
-      At line 133 in file 
+      At line 133 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
 Comment: Chk_Align_16 used once
 Chk_Align_32 00000016
 
 Symbol: Chk_Align_32
    Definitions
-      At line 129 in file 
+      At line 129 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
    Uses
       None
 Comment: Chk_Align_32 unused
@@ -484,144 +488,191 @@ Copy_08_1 0000017E
 
 Symbol: Copy_08_1
    Definitions
-      At line 259 in file 
+      At line 259 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
    Uses
-      At line 158 in file 
-      At line 252 in file 
-      At line 295 in file 
+      At line 158 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+      At line 252 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+      At line 295 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
 
 Copy_08_2 00000208
 
 Symbol: Copy_08_2
    Definitions
-      At line 297 in file 
+      At line 297 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
    Uses
-      At line 261 in file 
-      At line 303 in file 
+      At line 261 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+      At line 303 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
 
 Copy_16_1 000000E2
 
 Symbol: Copy_16_1
    Definitions
-      At line 212 in file 
-   Uses
-      At line 162 in file 
-      At line 205 in file 
-      At line 248 in file 
-
-Copy_16_2 0000016C
-
-Symbol: Copy_16_2
-   Definitions
-      At line 250 in file 
-   Uses
+      At line 212 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
 
 
 
 ARM Macro Assembler    Page 2 Alphabetic symbol ordering
 Relocatable symbols
 
-      At line 214 in file 
-      At line 256 in file 
+a.asm
+   Uses
+      At line 162 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+      At line 205 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+      At line 248 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+
+Copy_16_2 0000016C
+
+Symbol: Copy_16_2
+   Definitions
+      At line 250 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+   Uses
+      At line 214 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+      At line 256 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
 
 Copy_32_1 0000006A
 
 Symbol: Copy_32_1
    Definitions
-      At line 171 in file 
+      At line 171 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
    Uses
-      At line 140 in file 
-      At line 193 in file 
+      At line 140 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+      At line 193 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
 
 Copy_32_2 000000BE
 
 Symbol: Copy_32_2
    Definitions
-      At line 195 in file 
+      At line 195 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
    Uses
-      At line 173 in file 
-      At line 201 in file 
+      At line 173 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+      At line 201 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
 
 Copy_32_3 000000D0
 
 Symbol: Copy_32_3
    Definitions
-      At line 203 in file 
+      At line 203 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
    Uses
-      At line 197 in file 
-      At line 209 in file 
+      At line 197 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+      At line 209 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
 
 Mem_Copy 00000000
 
-Symbol: Mem_Copy
-   Definitions
-      At line 109 in file 
-   Uses
-      At line 59 in file 
-Comment: Mem_Copy used once
-Mem_Copy_1 00000006
-
-Symbol: Mem_Copy_1
-   Definitions
-      At line 114 in file 
-   Uses
-      At line 111 in file 
-Comment: Mem_Copy_1 used once
-Mem_Copy_2 0000000C
-
-Symbol: Mem_Copy_2
-   Definitions
-      At line 119 in file 
-   Uses
-      At line 116 in file 
-Comment: Mem_Copy_2 used once
-Mem_Copy_3 00000012
-
-Symbol: Mem_Copy_3
-   Definitions
-      At line 124 in file 
 
 
 
 ARM Macro Assembler    Page 3 Alphabetic symbol ordering
 Relocatable symbols
 
+Symbol: Mem_Copy
+   Definitions
+      At line 109 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
    Uses
-      At line 121 in file 
+      At line 59 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_a
+.asm
+Comment: Mem_Copy used once
+Mem_Copy_1 00000006
+
+Symbol: Mem_Copy_1
+   Definitions
+      At line 114 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+   Uses
+      At line 111 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+Comment: Mem_Copy_1 used once
+Mem_Copy_2 0000000C
+
+Symbol: Mem_Copy_2
+   Definitions
+      At line 119 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+   Uses
+      At line 116 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+Comment: Mem_Copy_2 used once
+Mem_Copy_3 00000012
+
+Symbol: Mem_Copy_3
+   Definitions
+      At line 124 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+   Uses
+      At line 121 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
 Comment: Mem_Copy_3 used once
 Mem_Copy_END 0000021A
 
 Symbol: Mem_Copy_END
    Definitions
-      At line 306 in file 
+      At line 306 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
    Uses
-      At line 143 in file 
-      At line 299 in file 
+      At line 143 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+      At line 299 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
 
 Pre_Copy_1 0000002A
 
 Symbol: Pre_Copy_1
    Definitions
-      At line 138 in file 
+      At line 138 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
    Uses
-      At line 150 in file 
+      At line 150 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+
+
+
+ARM Macro Assembler    Page 4 Alphabetic symbol ordering
+Relocatable symbols
+
 Comment: Pre_Copy_1 used once
 Pre_Copy_1_Cont 00000034
 
 Symbol: Pre_Copy_1_Cont
    Definitions
-      At line 145 in file 
+      At line 145 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
    Uses
-      At line 142 in file 
+      At line 142 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
 Comment: Pre_Copy_1_Cont used once
 Pre_Copy_2 00000054
 
 Symbol: Pre_Copy_2
    Definitions
-      At line 160 in file 
+      At line 160 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
    Uses
-      At line 157 in file 
-      At line 168 in file 
+      At line 157 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
+      At line 168 in file UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_
+a.asm
 
 18 symbols
 352 symbols in table

@@ -478,8 +478,8 @@ interwork --depend=.\objects\os_cpu_a.d -o.\objects\os_cpu_a.o -I.\RTE\_STM32 -
 IC:\Users\Joker\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS
 \Device\ST\STM32F4xx\Include -IC:\Keil_v5\ARM\CMSIS\Include --predefine="__MICR
 OLIB SETA 1" --predefine="__UVISION_VERSION SETA 529" --predefine="STM32F407xx 
-SETA 1" --list=.\listings\os_cpu_a.lst ¦ÌCOS-III\uCOS-III\Ports\ARM-Cortex-M4\G
-eneric\RealView\os_cpu_a.asm
+SETA 1" --list=.\listings\os_cpu_a.lst UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Ge
+neric\RealView\os_cpu_a.asm
 
 
 
@@ -490,7 +490,8 @@ CODE 00000000
 
 Symbol: CODE
    Definitions
-      At line 68 in file 
+      At line 68 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
    Uses
       None
 Comment: CODE unused
@@ -498,63 +499,77 @@ OSCtxSw 0000009C
 
 Symbol: OSCtxSw
    Definitions
-      At line 186 in file 
+      At line 186 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
    Uses
-      At line 41 in file 
+      At line 41 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
 Comment: OSCtxSw used once
 OSIntCtxSw 000000A6
 
 Symbol: OSIntCtxSw
    Definitions
-      At line 201 in file 
+      At line 201 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
    Uses
-      At line 42 in file 
+      At line 42 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
 Comment: OSIntCtxSw used once
 OSStartHighRdy 0000002C
 
 Symbol: OSStartHighRdy
    Definitions
-      At line 143 in file 
+      At line 143 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
    Uses
-      At line 40 in file 
+      At line 40 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
 Comment: OSStartHighRdy used once
 OS_CPU_FP_Reg_Pop 0000001A
 
 Symbol: OS_CPU_FP_Reg_Pop
    Definitions
-      At line 116 in file 
+      At line 116 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
    Uses
-      At line 47 in file 
+      At line 47 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
 Comment: OS_CPU_FP_Reg_Pop used once
 OS_CPU_FP_Reg_Push 00000000
 
 Symbol: OS_CPU_FP_Reg_Push
    Definitions
-      At line 86 in file 
+      At line 86 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
    Uses
-      At line 46 in file 
+      At line 46 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
 Comment: OS_CPU_FP_Reg_Push used once
-OS_CPU_FP_nosave 00000018
-
-Symbol: OS_CPU_FP_nosave
-   Definitions
-      At line 96 in file 
-   Uses
-      At line 88 in file 
-Comment: OS_CPU_FP_nosave used once
-OS_CPU_PendSVHandler 000000B0
-
-Symbol: OS_CPU_PendSVHandler
 
 
 
 ARM Macro Assembler    Page 2 Alphabetic symbol ordering
 Relocatable symbols
 
+OS_CPU_FP_nosave 00000018
+
+Symbol: OS_CPU_FP_nosave
    Definitions
-      At line 243 in file 
+      At line 96 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
    Uses
-      At line 43 in file 
+      At line 88 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
+Comment: OS_CPU_FP_nosave used once
+OS_CPU_PendSVHandler 000000B0
+
+Symbol: OS_CPU_PendSVHandler
+   Definitions
+      At line 243 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
+   Uses
+      At line 43 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
 Comment: OS_CPU_PendSVHandler used once
 8 symbols
 
@@ -567,35 +582,45 @@ NVIC_INT_CTRL E000ED04
 
 Symbol: NVIC_INT_CTRL
    Definitions
-      At line 55 in file 
+      At line 55 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
    Uses
-      At line 187 in file 
-      At line 202 in file 
+      At line 187 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
+      At line 202 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
 
 NVIC_PENDSVSET 10000000
 
 Symbol: NVIC_PENDSVSET
    Definitions
-      At line 58 in file 
+      At line 58 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
    Uses
-      At line 188 in file 
-      At line 203 in file 
+      At line 188 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
+      At line 203 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
 
 NVIC_PENDSV_PRI 000000FF
 
 Symbol: NVIC_PENDSV_PRI
    Definitions
-      At line 57 in file 
+      At line 57 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
    Uses
-      At line 146 in file 
+      At line 146 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
 Comment: NVIC_PENDSV_PRI used once
 NVIC_SYSPRI14 E000ED22
 
 Symbol: NVIC_SYSPRI14
    Definitions
-      At line 56 in file 
+      At line 56 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
    Uses
-      At line 145 in file 
+      At line 145 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
 Comment: NVIC_SYSPRI14 used once
 4 symbols
 
@@ -608,7 +633,8 @@ OSIntExit 00000000
 
 Symbol: OSIntExit
    Definitions
-      At line 35 in file 
+      At line 35 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
    Uses
       None
 Comment: OSIntExit unused
@@ -616,25 +642,32 @@ OSPrioCur 00000000
 
 Symbol: OSPrioCur
    Definitions
-      At line 31 in file 
+      At line 31 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
    Uses
-      At line 153 in file 
-      At line 256 in file 
+      At line 153 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
+      At line 256 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
 
 OSPrioHighRdy 00000000
 
 Symbol: OSPrioHighRdy
    Definitions
-      At line 32 in file 
+      At line 32 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
    Uses
-      At line 154 in file 
-      At line 257 in file 
+      At line 154 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
+      At line 257 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
 
 OSRunning 00000000
 
 Symbol: OSRunning
    Definitions
-      At line 30 in file 
+      At line 30 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
    Uses
       None
 Comment: OSRunning unused
@@ -642,43 +675,55 @@ OSTCBCurPtr 00000000
 
 Symbol: OSTCBCurPtr
    Definitions
-      At line 33 in file 
+      At line 33 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
    Uses
-      At line 93 in file 
-      At line 158 in file 
-      At line 248 in file 
+      At line 93 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
+      At line 158 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
+      At line 248 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
 
 OSTCBHighRdyPtr 00000000
 
 Symbol: OSTCBHighRdyPtr
-   Definitions
-      At line 34 in file 
-   Uses
-      At line 120 in file 
-      At line 159 in file 
-      At line 261 in file 
-
-OSTaskSwHook 00000000
-
-Symbol: OSTaskSwHook
-   Definitions
-      At line 36 in file 
 
 
 
 ARM Macro Assembler    Page 2 Alphabetic symbol ordering
 External symbols
 
+   Definitions
+      At line 34 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
    Uses
-      At line 254 in file 
+      At line 120 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
+      At line 159 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
+      At line 261 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
+
+OSTaskSwHook 00000000
+
+Symbol: OSTaskSwHook
+   Definitions
+      At line 36 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
+   Uses
+      At line 254 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
 Comment: OSTaskSwHook used once
 OS_CPU_ExceptStkBase 00000000
 
 Symbol: OS_CPU_ExceptStkBase
    Definitions
-      At line 37 in file 
+      At line 37 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView
+\os_cpu_a.asm
    Uses
-      At line 149 in file 
+      At line 149 in file UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealVie
+w\os_cpu_a.asm
 Comment: OS_CPU_ExceptStkBase used once
 8 symbols
 356 symbols in table

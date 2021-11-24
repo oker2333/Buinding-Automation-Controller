@@ -1,1 +1,1 @@
-.\objects\lib_mem_a.o: ¦ÌCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_a.asm
+.\objects\lib_mem_a.o: UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_a.asm

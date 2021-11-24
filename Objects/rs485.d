@@ -7,8 +7,8 @@
 .\objects\rs485.o: .\CMSIS\Include\core_cmInstr.h
 .\objects\rs485.o: .\CMSIS\Include\core_cmFunc.h
 .\objects\rs485.o: .\CMSIS\Include\core_cmSimd.h
-.\objects\rs485.o: .\USER\system_stm32f4xx.h
-.\objects\rs485.o: .\USER\stm32f4xx_conf.h
+.\objects\rs485.o: .\APP\system_stm32f4xx.h
+.\objects\rs485.o: .\APP\stm32f4xx_conf.h
 .\objects\rs485.o: .\FWLIB\inc\stm32f4xx_adc.h
 .\objects\rs485.o: .\CMSIS\stm32f4xx.h
 .\objects\rs485.o: .\FWLIB\inc\stm32f4xx_crc.h

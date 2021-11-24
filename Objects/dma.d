@@ -7,8 +7,8 @@
 .\objects\dma.o: .\CMSIS\Include\core_cmInstr.h
 .\objects\dma.o: .\CMSIS\Include\core_cmFunc.h
 .\objects\dma.o: .\CMSIS\Include\core_cmSimd.h
-.\objects\dma.o: .\USER\system_stm32f4xx.h
-.\objects\dma.o: .\USER\stm32f4xx_conf.h
+.\objects\dma.o: .\APP\system_stm32f4xx.h
+.\objects\dma.o: .\APP\stm32f4xx_conf.h
 .\objects\dma.o: .\FWLIB\inc\stm32f4xx_adc.h
 .\objects\dma.o: .\CMSIS\stm32f4xx.h
 .\objects\dma.o: .\FWLIB\inc\stm32f4xx_crc.h

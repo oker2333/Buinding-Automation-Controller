@@ -321,7 +321,7 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>1</wLevel>
+            <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER  STM32F40_41xxx</Define>
               <Undefine></Undefine>
-              <IncludePath>.\USER;.\CMSIS;.\FWLIB\inc;.\CMSIS\Include;.\HARDWARE\include;.\μCOS-III\APP;.\μCOS-III\BSP;.\μCOS-III\uC-CPU;.\μCOS-III\uC-CPU\ARM-Cortex-M4\RealView;.\μCOS-III\uC-LIB;.\μCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView;.\μCOS-III\uCOS-III;.\μCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView;.\μCOS-III\uCOS-III\Source</IncludePath>
+              <IncludePath>.\USER;.\CMSIS;.\FWLIB\inc;.\CMSIS\Include;.\HARDWARE\include;.\APP;.\UCOS-III\BSP;.\UCOS-III\uC-CPU;.\UCOS-III\uC-CPU\ARM-Cortex-M4\RealView;.\UCOS-III\uC-LIB;.\UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView;.\UCOS-III\uCOS-III;.\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView;.\UCOS-III\uCOS-III\Source</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -380,62 +380,82 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>USER</GroupName>
+          <GroupName>APP</GroupName>
           <Files>
             <File>
               <FileName>app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\APP\app.c</FilePath>
+              <FilePath>.\APP\app.c</FilePath>
             </File>
             <File>
               <FileName>app_cfg.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\APP\app_cfg.h</FilePath>
+              <FilePath>.\APP\app_cfg.h</FilePath>
             </File>
             <File>
               <FileName>cpu_cfg.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\APP\cpu_cfg.h</FilePath>
+              <FilePath>.\APP\cpu_cfg.h</FilePath>
             </File>
             <File>
               <FileName>includes.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\APP\includes.h</FilePath>
+              <FilePath>.\APP\includes.h</FilePath>
             </File>
             <File>
               <FileName>lib_cfg.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\APP\lib_cfg.h</FilePath>
+              <FilePath>.\APP\lib_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>main.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\main.h</FilePath>
             </File>
             <File>
               <FileName>os_app_hooks.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\APP\os_app_hooks.c</FilePath>
+              <FilePath>.\APP\os_app_hooks.c</FilePath>
             </File>
             <File>
               <FileName>os_app_hooks.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\APP\os_app_hooks.h</FilePath>
+              <FilePath>.\APP\os_app_hooks.h</FilePath>
             </File>
             <File>
               <FileName>os_cfg.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\APP\os_cfg.h</FilePath>
+              <FilePath>.\APP\os_cfg.h</FilePath>
             </File>
             <File>
               <FileName>os_cfg_app.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\APP\os_cfg_app.h</FilePath>
+              <FilePath>.\APP\os_cfg_app.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\stm32f4xx_conf.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_it.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\USER\stm32f4xx_it.c</FilePath>
+              <FilePath>.\APP\stm32f4xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_it.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\stm32f4xx_it.h</FilePath>
             </File>
             <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\USER\system_stm32f4xx.c</FilePath>
+              <FilePath>.\APP\system_stm32f4xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f4xx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\system_stm32f4xx.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -530,22 +550,22 @@
             <File>
               <FileName>bsp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\BSP\bsp.c</FilePath>
+              <FilePath>.\UCOS-III\BSP\bsp.c</FilePath>
             </File>
             <File>
               <FileName>bsp.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\BSP\bsp.h</FilePath>
+              <FilePath>.\UCOS-III\BSP\bsp.h</FilePath>
             </File>
             <File>
               <FileName>bsp_int.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\BSP\bsp_int.c</FilePath>
+              <FilePath>.\UCOS-III\BSP\bsp_int.c</FilePath>
             </File>
             <File>
               <FileName>bsp_periph.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\BSP\bsp_periph.c</FilePath>
+              <FilePath>.\UCOS-III\BSP\bsp_periph.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -555,32 +575,32 @@
             <File>
               <FileName>cpu_core.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uC-CPU\cpu_core.c</FilePath>
+              <FilePath>.\UCOS-III\uC-CPU\cpu_core.c</FilePath>
             </File>
             <File>
               <FileName>cpu_core.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\uC-CPU\cpu_core.h</FilePath>
+              <FilePath>.\UCOS-III\uC-CPU\cpu_core.h</FilePath>
             </File>
             <File>
               <FileName>cpu_def.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\uC-CPU\cpu_def.h</FilePath>
+              <FilePath>.\UCOS-III\uC-CPU\cpu_def.h</FilePath>
             </File>
             <File>
               <FileName>cpu.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu.h</FilePath>
+              <FilePath>.\UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu.h</FilePath>
             </File>
             <File>
               <FileName>cpu_a.asm</FileName>
               <FileType>2</FileType>
-              <FilePath>.\μCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm</FilePath>
+              <FilePath>.\UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm</FilePath>
             </File>
             <File>
               <FileName>cpu_c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_c.c</FilePath>
+              <FilePath>.\UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu_c.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -588,54 +608,54 @@
           <GroupName>μCOS/uC-LIB</GroupName>
           <Files>
             <File>
+              <FileName>lib_ascii.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UCOS-III\uC-LIB\lib_ascii.c</FilePath>
+            </File>
+            <File>
               <FileName>lib_ascii.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\uC-LIB\lib_ascii.h</FilePath>
+              <FilePath>.\UCOS-III\uC-LIB\lib_ascii.h</FilePath>
             </File>
             <File>
               <FileName>lib_def.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\uC-LIB\lib_def.h</FilePath>
-            </File>
-            <File>
-              <FileName>lib_ascii.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uC-LIB\lib_ascii.c</FilePath>
+              <FilePath>.\UCOS-III\uC-LIB\lib_def.h</FilePath>
             </File>
             <File>
               <FileName>lib_math.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uC-LIB\lib_math.c</FilePath>
+              <FilePath>.\UCOS-III\uC-LIB\lib_math.c</FilePath>
             </File>
             <File>
               <FileName>lib_math.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\uC-LIB\lib_math.h</FilePath>
+              <FilePath>.\UCOS-III\uC-LIB\lib_math.h</FilePath>
             </File>
             <File>
               <FileName>lib_mem.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uC-LIB\lib_mem.c</FilePath>
+              <FilePath>.\UCOS-III\uC-LIB\lib_mem.c</FilePath>
             </File>
             <File>
               <FileName>lib_mem.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\uC-LIB\lib_mem.h</FilePath>
+              <FilePath>.\UCOS-III\uC-LIB\lib_mem.h</FilePath>
             </File>
             <File>
               <FileName>lib_str.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uC-LIB\lib_str.c</FilePath>
+              <FilePath>.\UCOS-III\uC-LIB\lib_str.c</FilePath>
             </File>
             <File>
               <FileName>lib_str.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\uC-LIB\lib_str.h</FilePath>
+              <FilePath>.\UCOS-III\uC-LIB\lib_str.h</FilePath>
             </File>
             <File>
               <FileName>lib_mem_a.asm</FileName>
               <FileType>2</FileType>
-              <FilePath>.\μCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_a.asm</FilePath>
+              <FilePath>.\UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_a.asm</FilePath>
             </File>
           </Files>
         </Group>
@@ -645,117 +665,117 @@
             <File>
               <FileName>os.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os.h</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os.h</FilePath>
             </File>
             <File>
               <FileName>os_cfg_app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_cfg_app.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_cfg_app.c</FilePath>
             </File>
             <File>
               <FileName>os_core.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_core.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_core.c</FilePath>
             </File>
             <File>
               <FileName>os_dbg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_dbg.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_dbg.c</FilePath>
             </File>
             <File>
               <FileName>os_flag.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_flag.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_flag.c</FilePath>
             </File>
             <File>
               <FileName>os_int.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_int.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_int.c</FilePath>
             </File>
             <File>
               <FileName>os_mem.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_mem.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_mem.c</FilePath>
             </File>
             <File>
               <FileName>os_msg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_msg.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_msg.c</FilePath>
             </File>
             <File>
               <FileName>os_mutex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_mutex.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_mutex.c</FilePath>
             </File>
             <File>
               <FileName>os_pend_multi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_pend_multi.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_pend_multi.c</FilePath>
             </File>
             <File>
               <FileName>os_prio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_prio.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_prio.c</FilePath>
             </File>
             <File>
               <FileName>os_q.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_q.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_q.c</FilePath>
             </File>
             <File>
               <FileName>os_sem.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_sem.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_sem.c</FilePath>
             </File>
             <File>
               <FileName>os_stat.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_stat.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_stat.c</FilePath>
             </File>
             <File>
               <FileName>os_task.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_task.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_task.c</FilePath>
             </File>
             <File>
               <FileName>os_tick.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_tick.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_tick.c</FilePath>
             </File>
             <File>
               <FileName>os_time.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_time.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_time.c</FilePath>
             </File>
             <File>
               <FileName>os_tmr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_tmr.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_tmr.c</FilePath>
             </File>
             <File>
               <FileName>os_type.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_type.h</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_type.h</FilePath>
             </File>
             <File>
               <FileName>os_var.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Source\os_var.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Source\os_var.c</FilePath>
             </File>
             <File>
               <FileName>os_cpu.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu.h</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu.h</FilePath>
             </File>
             <File>
               <FileName>os_cpu_a.asm</FileName>
               <FileType>2</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu_a.asm</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu_a.asm</FilePath>
             </File>
             <File>
               <FileName>os_cpu_c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\μCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu_c.c</FilePath>
+              <FilePath>.\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu_c.c</FilePath>
             </File>
           </Files>
         </Group>
