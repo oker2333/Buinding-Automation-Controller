@@ -87,11 +87,10 @@ int main(void)
 {
     OS_ERR  err;
 		
-		
-
     BSP_IntDisAll();                                            /* Disable all interrupts.                              */
     BSP_Init();
-
+		BSP_Tick_Init();                                            /* Initialize Tick Services.                            */
+	
     CPU_Init();                                                 /* Initialize the uC/CPU Services                       */
     Mem_Init();                                                 /* Initialize Memory Management Module                  */
     Math_Init();                                                /* Initialize Mathematical Module                       */
@@ -139,9 +138,6 @@ static  void  AppTaskStart (void *p_arg)
 {
     OS_ERR  err;
 
-    BSP_Init();                                                 /* Initialize BSP functions                             */
-    BSP_Tick_Init();                                            /* Initialize Tick Services.                            */
-
 #if OS_CFG_STAT_TASK_EN > 0u
     OSStatTaskCPUUsageInit(&err);                               /* Compute CPU capacity with no task running            */
 #endif
@@ -153,8 +149,10 @@ static  void  AppTaskStart (void *p_arg)
     AppTaskCreate();                                            /* Create Application tasks                             */
 
     while (DEF_TRUE) {                                          /* Task body, always written as an infinite loop.       */
-
-        OSTimeDlyHMSM(0u, 0u, 0u, 100u, 0, &err);
+				LED_Invert(GPIO_Pin_9);
+        OSTimeDlyHMSM(0u, 0u, 0u, 500u, 0u, &err);
+				LED_Invert(GPIO_Pin_10);
+				OSTimeDlyHMSM(0u, 0u, 0u, 500u, 0u, &err);
 
     }
 }

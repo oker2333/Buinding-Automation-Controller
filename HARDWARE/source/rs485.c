@@ -70,4 +70,5 @@ void USART2_IRQHandler(void)
 		RS485_RX();
 		USART_ITConfig(USART2, USART_IT_TC, DISABLE);
 	}
+	(void)&DataByte;
 }

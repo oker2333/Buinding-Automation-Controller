@@ -47,3 +47,9 @@
 .\objects\bsp_periph.o: .\FWLIB\inc\stm32f4xx_dac.h
 .\objects\bsp_periph.o: .\FWLIB\inc\stm32f4xx_dcmi.h
 .\objects\bsp_periph.o: .\FWLIB\inc\stm32f4xx_fsmc.h
+.\objects\bsp_periph.o: .\HARDWARE\include\led.h
+.\objects\bsp_periph.o: .\HARDWARE\include\rs485.h
+.\objects\bsp_periph.o: .\HARDWARE\include\dma.h
+.\objects\bsp_periph.o: .\HARDWARE\include\debug.h
+.\objects\bsp_periph.o: .\HARDWARE\include\dma.h
+.\objects\bsp_periph.o: .\HARDWARE\include\at24cxx.h

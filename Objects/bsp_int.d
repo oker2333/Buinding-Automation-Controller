@@ -58,3 +58,9 @@
 .\objects\bsp_int.o: .\FWLIB\inc\stm32f4xx_dac.h
 .\objects\bsp_int.o: .\FWLIB\inc\stm32f4xx_dcmi.h
 .\objects\bsp_int.o: .\FWLIB\inc\stm32f4xx_fsmc.h
+.\objects\bsp_int.o: .\HARDWARE\include\led.h
+.\objects\bsp_int.o: .\HARDWARE\include\rs485.h
+.\objects\bsp_int.o: .\HARDWARE\include\dma.h
+.\objects\bsp_int.o: .\HARDWARE\include\debug.h
+.\objects\bsp_int.o: .\HARDWARE\include\dma.h
+.\objects\bsp_int.o: .\HARDWARE\include\at24cxx.h

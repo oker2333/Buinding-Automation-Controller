@@ -47,13 +47,13 @@
 .\objects\bsp.o: .\FWLIB\inc\stm32f4xx_dac.h
 .\objects\bsp.o: .\FWLIB\inc\stm32f4xx_dcmi.h
 .\objects\bsp.o: .\FWLIB\inc\stm32f4xx_fsmc.h
-.\objects\bsp.o: .\UCOS-III\uCOS-III\Source\os.h
-.\objects\bsp.o: .\APP\os_cfg.h
-.\objects\bsp.o: .\UCOS-III\uCOS-III\Source\os_type.h
-.\objects\bsp.o: .\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu.h
 .\objects\bsp.o: .\HARDWARE\include\led.h
 .\objects\bsp.o: .\HARDWARE\include\rs485.h
 .\objects\bsp.o: .\HARDWARE\include\dma.h
 .\objects\bsp.o: .\HARDWARE\include\debug.h
 .\objects\bsp.o: .\HARDWARE\include\dma.h
 .\objects\bsp.o: .\HARDWARE\include\at24cxx.h
+.\objects\bsp.o: .\UCOS-III\uCOS-III\Source\os.h
+.\objects\bsp.o: .\APP\os_cfg.h
+.\objects\bsp.o: .\UCOS-III\uCOS-III\Source\os_type.h
+.\objects\bsp.o: .\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu.h

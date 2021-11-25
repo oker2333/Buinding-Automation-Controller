@@ -39,12 +39,6 @@
 #include  <bsp.h>
 #include  <os.h>
 
-#include "led.h"
-#include "rs485.h"
-#include "dma.h"
-#include "debug.h"
-#include "at24cxx.h"
-
 /*
 *********************************************************************************************************
 *                                            LOCAL DEFINES
@@ -229,8 +223,6 @@
 *********************************************************************************************************
 */
 
-static __IO uint32_t uwTimingDelay;
-RCC_ClocksTypeDef RCC_Clocks;
 
 /*
 *********************************************************************************************************
@@ -257,28 +249,9 @@ RCC_ClocksTypeDef RCC_Clocks;
 *********************************************************************************************************
 */
 
-void Delay(__IO uint32_t nTime)
-{ 
-  uwTimingDelay = nTime;
-
-  while(uwTimingDelay != 0);
-}
-
-
-void TimingDelay_Decrement(void)
-{
-  if (uwTimingDelay != 0x00)
-  { 
-    uwTimingDelay--;
-  }
-}
-
 void  BSP_Init (void)
 {
   /* SysTick end of count event each 10ms */
-  RCC_GetClocksFreq(&RCC_Clocks);
-  SysTick_Config(RCC_Clocks.HCLK_Frequency / 100);
-	
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
   
   /* Add your application code here */
