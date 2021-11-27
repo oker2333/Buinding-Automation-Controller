@@ -1,6 +1,7 @@
 #include "lan8720.h"
 #include "stm32f4xx_conf.h"
 #include "stm32f4x7_eth.h"
+#include  "lib_mem.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -104,7 +105,7 @@ uint8_t* ETH_Frame_Received(void)
 	if(ptr == NULL)
 		return NULL;
 
-	memcpy(ptr,(uint8_t*)frame.buffer,frame.length);
+	Mem_Copy(ptr,(uint8_t*)frame.buffer,frame.length);
 	
 	frame.descriptor->Status = ETH_DMARxDesc_OWN;
 	if((ETH->DMASR&ETH_DMASR_RBUS) != (uint32_t)RESET)
