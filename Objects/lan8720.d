@@ -37,3 +37,5 @@
 .\objects\lan8720.o: .\FWLIB\inc\stm32f4xx_fsmc.h
 .\objects\lan8720.o: .\FWLIB\inc\stm32f4x7_eth.h
 .\objects\lan8720.o: .\FWLIB\inc\stm32f4x7_eth_conf_template.h
+.\objects\lan8720.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\lan8720.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

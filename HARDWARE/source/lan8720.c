@@ -1,6 +1,8 @@
 #include "lan8720.h"
 #include "stm32f4xx_conf.h"
 #include "stm32f4x7_eth.h"
+#include <stdlib.h>
+#include <string.h>
 
 #define PHY_ADDR 0
 
@@ -88,20 +90,42 @@ void ETH_MAC_Init(void)
 	
 	int ret = ETH_Init(&ETH_InitStructure,PHY_ADDR);
 	if(ret == ETH_SUCCESS){
-		ETH_DMAITConfig(ETH_DMA_IT_NIS|ETH_DMA_IT_R,ENABLE);
 		ETH_DMADescsChainInit();
+		ETH_DMAITConfig(ETH_DMA_IT_NIS|ETH_DMA_IT_R,ENABLE);
 	}
+}
+uint8_t* ETH_Frame_Received(void)
+{  
+	uint8_t *ptr = NULL;;
+	
+	FrameTypeDef frame = ETH_Get_Received_Frame();
+
+	ptr = malloc(frame.length * sizeof(uint8_t));
+	if(ptr == NULL)
+		return NULL;
+
+	memcpy(ptr,(uint8_t*)frame.buffer,frame.length);
+	
+	frame.descriptor->Status = ETH_DMARxDesc_OWN;
+	if((ETH->DMASR&ETH_DMASR_RBUS) != (uint32_t)RESET)
+	{
+		ETH->DMASR=ETH_DMASR_RBUS;
+		ETH->DMARPDR=0;
+	}
+	return ptr;
 }
 
 void ETH_IRQHandler(void)
 {
-	FrameTypeDef Frame;
-	while(ETH_CheckFrameReceived())
+	uint8_t* FrameBuffer = NULL;
+	while(ETH_GetRxPktSize(DMARxDescToGet)!=0)
 	{
-		Frame = ETH_Get_Received_Frame();
+		FrameBuffer = ETH_Frame_Received();
+		if(FrameBuffer != NULL){
+			free(FrameBuffer);
+			FrameBuffer = NULL;
+		}
 	}
-	(void)&Frame.buffer;
-	(void)&Frame.length;
 	
 	ETH_DMAClearITPendingBit(ETH_DMA_IT_R);
 	ETH_DMAClearITPendingBit(ETH_DMA_IT_NIS);

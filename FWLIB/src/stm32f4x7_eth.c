@@ -1620,7 +1620,7 @@ void ETH_SetDMARxDescOwnBit(ETH_DMADESCTypeDef *DMARxDesc)
   * @param  DMARxDesc: pointer on a DMA Rx descriptor                     
   * @retval The Rx descriptor received frame length.
   */
-uint32_t ETH_GetDMARxDescFrameLength(ETH_DMADESCTypeDef *DMARxDesc)
+uint32_t ETH_GetDMARxDescFrameLength(__IO ETH_DMADESCTypeDef *DMARxDesc)
 {
   /* Return the Receive descriptor frame length */
   return ((DMARxDesc->Status & ETH_DMARxDesc_FL) >> ETH_DMARXDESC_FRAME_LENGTHSHIFT);
@@ -1683,7 +1683,7 @@ uint32_t ETH_GetDMARxDescBufferSize(ETH_DMADESCTypeDef *DMARxDesc, uint32_t DMAR
   * @param  None
   * @retval framelength: received packet size 
   */
-uint32_t ETH_GetRxPktSize(ETH_DMADESCTypeDef *DMARxDesc)
+uint32_t ETH_GetRxPktSize(__IO ETH_DMADESCTypeDef *DMARxDesc)
 {
   uint32_t frameLength = 0;
   if(((DMARxDesc->Status & ETH_DMARxDesc_OWN) == (uint32_t)RESET) &&

@@ -1757,7 +1757,7 @@ void ETH_StructInit(ETH_InitTypeDef* ETH_InitStruct);
 void ETH_SoftwareReset(void);
 FlagStatus ETH_GetSoftwareResetStatus(void);
 void  ETH_Start(void);
-uint32_t ETH_GetRxPktSize(ETH_DMADESCTypeDef *DMARxDesc);
+uint32_t ETH_GetRxPktSize(__IO ETH_DMADESCTypeDef *DMARxDesc);
 
 
 #ifdef USE_ENHANCED_DMA_DESCRIPTORS
@@ -1811,7 +1811,7 @@ FlagStatus ETH_GetDMARxDescFlagStatus(ETH_DMADESCTypeDef *DMARxDesc, uint32_t ET
  FlagStatus ETH_GetDMAPTPRxDescExtendedFlagStatus(ETH_DMADESCTypeDef *DMAPTPRxDesc, uint32_t ETH_DMAPTPRxDescExtendedFlag);
 #endif /* USE_ENHANCED_DMA_DESCRIPTORS */
 void ETH_SetDMARxDescOwnBit(ETH_DMADESCTypeDef *DMARxDesc);
-uint32_t ETH_GetDMARxDescFrameLength(ETH_DMADESCTypeDef *DMARxDesc);
+uint32_t ETH_GetDMARxDescFrameLength(__IO ETH_DMADESCTypeDef *DMARxDesc);
 void ETH_DMARxDescReceiveITConfig(ETH_DMADESCTypeDef *DMARxDesc, FunctionalState NewState);
 void ETH_DMARxDescSecondAddressChainedCmd(ETH_DMADESCTypeDef *DMARxDesc, FunctionalState NewState);
 uint32_t ETH_GetDMARxDescBufferSize(ETH_DMADESCTypeDef *DMARxDesc, uint32_t DMARxDesc_Buffer);
@@ -1865,6 +1865,9 @@ void ETH_MMCCountersReset(void);
 void ETH_MMCITConfig(uint32_t ETH_MMC_IT, FunctionalState NewState);
 ITStatus ETH_GetMMCITStatus(uint32_t ETH_MMC_IT);
 uint32_t ETH_GetMMCRegister(uint32_t ETH_MMCReg);
+
+extern __IO ETH_DMADESCTypeDef  *DMATxDescToSet;
+extern __IO ETH_DMADESCTypeDef  *DMARxDescToGet;
 
 /** 
   * @brief  Extral  
