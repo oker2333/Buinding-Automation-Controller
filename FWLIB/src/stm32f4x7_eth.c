@@ -195,23 +195,23 @@ void ETH_StructInit(ETH_InitTypeDef* ETH_InitStruct)
   /* Full-Duplex mode selected */
   ETH_InitStruct->ETH_Mode = ETH_Mode_FullDuplex;   											//使用全双工模式                   
   /* IPv4 and TCP/UDP/ICMP frame Checksum Offload disabled */
-  ETH_InitStruct->ETH_ChecksumOffload = ETH_ChecksumOffload_Disable;   		//关闭ipv4和TCP/UDP/ICMP的帧校验和卸载                                                          
+  ETH_InitStruct->ETH_ChecksumOffload = ETH_ChecksumOffload_Enable;   		//开启ipv4和TCP/UDP/ICMP的帧校验和卸载                                                          
   /* Retry Transmission enabled for half-duplex mode */ 
   ETH_InitStruct->ETH_RetryTransmission = ETH_RetryTransmission_Enable;   //开启半双工模式下的重试传输功能                                                                              
   /* Automatic PAD/CRC strip disabled*/
-  ETH_InitStruct->ETH_AutomaticPadCRCStrip = ETH_AutomaticPadCRCStrip_Disable;  //关闭自动去除PDA/CRC功能                                                        
+  ETH_InitStruct->ETH_AutomaticPadCRCStrip = ETH_AutomaticPadCRCStrip_Enable;  //开启自动去除PDA/CRC功能                                                        
   /* half-duplex mode retransmission Backoff time_limit = 10 slot times*/ 
   ETH_InitStruct->ETH_BackOffLimit = ETH_BackOffLimit_10;     						//设置半双工模式下的最大重传回退事件10 slot times
   /* half-duplex mode Deferral check disabled */
   ETH_InitStruct->ETH_DeferralCheck = ETH_DeferralCheck_Disable;          //关闭半双工模式下的延时检查功能                                                                                                      
   /* Receive all frames disabled */ 
-  ETH_InitStruct->ETH_ReceiveAll = ETH_ReceiveAll_Disable;								//禁止接收所有帧
+  ETH_InitStruct->ETH_ReceiveAll = ETH_ReceiveAll_Enable;								//允许接收所有帧
   /* Source address filtering (on the optional MAC addresses) disabled */
   ETH_InitStruct->ETH_SourceAddrFilter = ETH_SourceAddrFilter_Disable;   	//关闭MAC地址的源地址过滤功能
   /* Do not forward control frames that do not pass the address filtering */
   ETH_InitStruct->ETH_PassControlFrames = ETH_PassControlFrames_BlockAll; //
   /* Disable reception of Broadcast frames */
-  ETH_InitStruct->ETH_BroadcastFramesReception = ETH_BroadcastFramesReception_Disable;//禁止接收所有的广播帧
+  ETH_InitStruct->ETH_BroadcastFramesReception = ETH_BroadcastFramesReception_Enable;//允许接收所有的广播帧
   /* Normal Destination address filtering (not reverse addressing) */
   ETH_InitStruct->ETH_DestinationAddrFilter = ETH_DestinationAddrFilter_Normal;			//正常的远端地址过滤
   /* Promiscuous address filtering mode disabled */
@@ -237,7 +237,7 @@ void ETH_StructInit(ETH_InitTypeDef* ETH_InitStruct)
   /*---------------------- DMA Configuration   -------------------------------*/
 
   /* Drops frames with with TCP/IP checksum errors */
-  ETH_InitStruct->ETH_DropTCPIPChecksumErrorFrame = ETH_DropTCPIPChecksumErrorFrame_Disable; //关闭丢弃TCP/IP错误帧
+  ETH_InitStruct->ETH_DropTCPIPChecksumErrorFrame = ETH_DropTCPIPChecksumErrorFrame_Enable; //开启丢弃TCP/IP错误帧
   /* Store and forward mode enabled for receive */
   ETH_InitStruct->ETH_ReceiveStoreForward = ETH_ReceiveStoreForward_Enable;       //开启接收数据的存储转发功能
   /* Flush received frame that created FIFO overflow */
