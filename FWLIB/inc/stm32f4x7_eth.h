@@ -1870,6 +1870,7 @@ uint32_t ETH_GetMMCRegister(uint32_t ETH_MMCReg);
   * @brief  Extral  
   */ 
 void ETH_Delay(__IO uint32_t nCount);
+void ETH_DMADescsChainInit(void);
 
 #ifdef __cplusplus
 }

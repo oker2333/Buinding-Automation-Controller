@@ -138,6 +138,16 @@ void ETH_Delay(__IO uint32_t nCount)
 }
 #endif /* USE_Delay*/
 
+#define MAC_ADDR_BYTES 6
+uint8_t HardAddress[MAC_ADDR_BYTES] = {0x00,0x01,0x02,0x03,0x04,0x05};
+
+void ETH_DMADescsChainInit(void)
+{
+	ETH_MACAddressConfig(ETH_MAC_Address0, HardAddress);
+	ETH_DMATxDescChainInit(DMATxDscrTab, &Tx_Buff[0][0], ETH_TXBUFNB);
+	ETH_DMARxDescChainInit(DMARxDscrTab, &Rx_Buff[0][0], ETH_RXBUFNB);	
+	ETH_Start();
+}
 
 
 /******************************************************************************/                             

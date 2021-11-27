@@ -31,7 +31,7 @@ void ETH_PHY_Init(void)
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
 
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA|RCC_AHB1Periph_GPIOC|RCC_AHB1Periph_GPIOD|RCC_AHB1Periph_GPIOG,ENABLE);
-	RCC_AHB1PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
 	SYSCFG_ETH_MediaInterfaceConfig(SYSCFG_ETH_MediaInterface_RMII);
 	
 	/*PA1¡¢PA2¡¢PA7*/
@@ -85,9 +85,11 @@ void ETH_MAC_Init(void)
 	
 	ETH_InitTypeDef ETH_InitStructure; 
 	ETH_StructInit(&ETH_InitStructure);
+	
 	int ret = ETH_Init(&ETH_InitStructure,PHY_ADDR);
 	if(ret == ETH_SUCCESS){
 		ETH_DMAITConfig(ETH_DMA_IT_NIS|ETH_DMA_IT_R,ENABLE);
+		ETH_DMADescsChainInit();
 	}
 }
 
