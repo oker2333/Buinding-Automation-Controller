@@ -1866,6 +1866,11 @@ void ETH_MMCITConfig(uint32_t ETH_MMC_IT, FunctionalState NewState);
 ITStatus ETH_GetMMCITStatus(uint32_t ETH_MMC_IT);
 uint32_t ETH_GetMMCRegister(uint32_t ETH_MMCReg);
 
+/** 
+  * @brief  Extral  
+  */ 
+void ETH_Delay(__IO uint32_t nCount);
+
 #ifdef __cplusplus
 }
 #endif

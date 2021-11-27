@@ -64,4 +64,5 @@
 .\objects\app.o: .\HARDWARE\include\debug.h
 .\objects\app.o: .\HARDWARE\include\dma.h
 .\objects\app.o: .\HARDWARE\include\at24cxx.h
+.\objects\app.o: .\HARDWARE\include\lan8720.h
 .\objects\app.o: APP\main.h

@@ -53,6 +53,7 @@
 .\objects\bsp.o: .\HARDWARE\include\debug.h
 .\objects\bsp.o: .\HARDWARE\include\dma.h
 .\objects\bsp.o: .\HARDWARE\include\at24cxx.h
+.\objects\bsp.o: .\HARDWARE\include\lan8720.h
 .\objects\bsp.o: .\UCOS-III\uCOS-III\Source\os.h
 .\objects\bsp.o: .\APP\os_cfg.h
 .\objects\bsp.o: .\UCOS-III\uCOS-III\Source\os_type.h

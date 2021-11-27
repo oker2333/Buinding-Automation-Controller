@@ -53,3 +53,4 @@
 .\objects\bsp_periph.o: .\HARDWARE\include\debug.h
 .\objects\bsp_periph.o: .\HARDWARE\include\dma.h
 .\objects\bsp_periph.o: .\HARDWARE\include\at24cxx.h
+.\objects\bsp_periph.o: .\HARDWARE\include\lan8720.h

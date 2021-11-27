@@ -64,3 +64,4 @@
 .\objects\bsp_int.o: .\HARDWARE\include\debug.h
 .\objects\bsp_int.o: .\HARDWARE\include\dma.h
 .\objects\bsp_int.o: .\HARDWARE\include\at24cxx.h
+.\objects\bsp_int.o: .\HARDWARE\include\lan8720.h
