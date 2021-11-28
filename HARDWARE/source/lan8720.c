@@ -116,6 +116,54 @@ uint8_t* ETH_Frame_Received(void)
 	return ptr;
 }
 
+
+uint32_t ETH_Frame_Send(uint8_t *Buffer_Load,uint32_t framelength)
+{
+  uint32_t errval;	
+  uint32_t bufferoffset = 0;
+	uint32_t byteslefttocopy = framelength;
+	
+  uint8_t *DMA_Buffer =  (uint8_t *)(DMATxDescToSet->Buffer1Addr);
+  __IO ETH_DMADESCTypeDef *DmaTxDesc = DMATxDescToSet;
+	
+	while(byteslefttocopy > 0){
+		if((DmaTxDesc->Status & ETH_DMATxDesc_OWN) != (u32)RESET)
+		{
+			errval = 0;
+			goto error;
+		}
+		
+		if(byteslefttocopy > ETH_TX_BUF_SIZE){
+			Mem_Copy(DMA_Buffer,&Buffer_Load[bufferoffset],ETH_TX_BUF_SIZE);
+			
+			byteslefttocopy = byteslefttocopy - ETH_TX_BUF_SIZE;
+			bufferoffset = bufferoffset + ETH_TX_BUF_SIZE;
+			
+			DmaTxDesc = (ETH_DMADESCTypeDef *)(DmaTxDesc->Buffer2NextDescAddr);
+			DMA_Buffer =  (uint8_t *)(DMATxDescToSet->Buffer1Addr);
+			
+		}else{
+			Mem_Copy(DMA_Buffer,&Buffer_Load[bufferoffset],byteslefttocopy);
+			byteslefttocopy = 0;
+		}
+	
+	}
+
+  ETH_Prepare_Transmit_Descriptors(framelength);
+
+  errval = 1;
+
+error:
+  
+  if ((ETH->DMASR & ETH_DMASR_TUS) != (uint32_t)RESET)
+  {
+    ETH->DMASR = ETH_DMASR_TUS;
+    ETH->DMATPDR = 0;
+  }
+  return errval;
+}
+
+
 void ETH_IRQHandler(void)
 {
 	uint8_t* FrameBuffer = NULL;

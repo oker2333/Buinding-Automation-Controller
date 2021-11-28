@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\STM32F407.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\STM32F407.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Nov 28 00:24:59 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Nov 28 16:34:30 2021
 <BR><P>
 <H3>Maximum Stack Usage =        328 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1301,8 +1301,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CPU_SR_Save
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CPU_SR_Restore
-<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendListInit
 <LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MutexDbgListAdd
+<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendListInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TmrInit
 </UL>
@@ -1462,7 +1462,6 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CPU_SR_Save
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CPU_SR_Restore
-<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendListRemove
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSched
 <LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskDelHook
 <LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskInitTCB
@@ -1473,6 +1472,7 @@ Global Symbols
 <LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MsgQFreeAll
 <LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TickListRemove
 <LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_RdyListRemove
+<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendListRemove
 </UL>
 <BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskReturn
 </UL>
@@ -1708,10 +1708,10 @@ Global Symbols
 <P><STRONG><a name="[f1]"></a>OS_Pend</STRONG> (Thumb, 100 bytes, Stack size 24 bytes, os_core.o(i.OS_Pend))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = OS_Pend &rArr; OS_TaskBlock &rArr; OS_RdyListRemove &rArr; OS_PrioRemove
 </UL>
-<BR>[Calls]<UL><LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendListInsertPrio
-<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendDbgNameAdd
+<BR>[Calls]<UL><LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendDbgNameAdd
 <LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendDataInit
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskBlock
+<LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendListInsertPrio
 </UL>
 <BR>[Called By]<UL><LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskSemPend
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSMutexPend
@@ -1751,8 +1751,8 @@ Global Symbols
 <P><STRONG><a name="[122]"></a>OS_PendListInsertPrio</STRONG> (Thumb, 102 bytes, Stack size 20 bytes, os_core.o(i.OS_PendListInsertPrio))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = OS_PendListInsertPrio
 </UL>
-<BR>[Called By]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendListChangePrio
-<LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Pend
+<BR>[Called By]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Pend
+<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendListChangePrio
 </UL>
 
 <P><STRONG><a name="[10f]"></a>OS_PendListRemove</STRONG> (Thumb, 52 bytes, Stack size 24 bytes, os_core.o(i.OS_PendListRemove))
@@ -1775,11 +1775,11 @@ Global Symbols
 <P><STRONG><a name="[fa]"></a>OS_Post</STRONG> (Thumb, 214 bytes, Stack size 32 bytes, os_core.o(i.OS_Post))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = OS_Post &rArr; OS_PendListRemove &rArr; OS_PendListRemove1
 </UL>
-<BR>[Calls]<UL><LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendListRemove
-<LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendDbgNameRemove
+<BR>[Calls]<UL><LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendDbgNameRemove
 <LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TickListRemove
 <LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_RdyListInsert
 <LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Post1
+<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendListRemove
 </UL>
 <BR>[Called By]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskSemPost
 <LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MutexGrpPostAll
@@ -1928,12 +1928,12 @@ Global Symbols
 <P><STRONG><a name="[f0]"></a>OS_TaskChangePrio</STRONG> (Thumb, 232 bytes, Stack size 24 bytes, os_task.o(i.OS_TaskChangePrio))
 <BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = OS_TaskChangePrio &rArr; OS_PendListChangePrio &rArr; OS_PendListInsertPrio
 </UL>
-<BR>[Calls]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendListChangePrio
-<LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MutexGrpPrioFindHighest
+<BR>[Calls]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MutexGrpPrioFindHighest
 <LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PrioInsert
 <LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_RdyListRemove
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_RdyListInsertTail
 <LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_RdyListInsertHead
+<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendListChangePrio
 </UL>
 <BR>[Called By]<UL><LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TickListUpdateTimeout
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskDel
@@ -2525,10 +2525,10 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CPU_SR_Save
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CPU_SR_Restore
 <LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CPU_TS_TmrRd
-<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendListRemove
 <LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskChangePrio
 <LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MutexGrpPrioFindHighest
 <LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_RdyListInsert
+<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendListRemove
 </UL>
 <BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TickTask
 </UL>
