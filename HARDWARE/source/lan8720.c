@@ -117,9 +117,8 @@ uint8_t* ETH_Frame_Received(void)
 }
 
 
-uint32_t ETH_Frame_Send(uint8_t *Buffer_Load,uint32_t framelength)
+void ETH_Frame_Send(uint8_t *Buffer_Load,uint32_t framelength)
 {
-  uint32_t errval;	
   uint32_t bufferoffset = 0;
 	uint32_t byteslefttocopy = framelength;
 	
@@ -149,8 +148,6 @@ uint32_t ETH_Frame_Send(uint8_t *Buffer_Load,uint32_t framelength)
 	}
 
   ETH_Prepare_Transmit_Descriptors(framelength);
-	
-  return errval;
 }
 
 
