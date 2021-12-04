@@ -1129,16 +1129,16 @@ uint32_t ETH_Prepare_Transmit_Descriptors(u16 FrameLength)
   {
     for (i=0; i< buf_count; i++)
     {
+			DMATxNextDesc->Status &= ~(ETH_DMATxDesc_LS|ETH_DMATxDesc_FS);
+			
+      /* Program size */
+      DMATxNextDesc->ControlBufferSize = (ETH_TX_BUF_SIZE & ETH_DMATxDesc_TBS1);
+			
       if (i==0) 
       {
         /* Setting the first segment bit */
         DMATxDescToSet->Status |= ETH_DMATxDesc_FS;  
-      }
-      
-      /* Program size */
-      DMATxNextDesc->ControlBufferSize = (ETH_TX_BUF_SIZE & ETH_DMATxDesc_TBS1);
-       
-      if (i== (buf_count-1))
+      }else if (i== (buf_count-1))
       {
         /* Setting the last segment bit */
         DMATxNextDesc->Status |= ETH_DMATxDesc_LS;

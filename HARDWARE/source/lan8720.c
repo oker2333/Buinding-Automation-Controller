@@ -8,7 +8,7 @@
 #define PHY_ADDR 0
 
 /*
-RMII½Ó¿Ú
+RMIIï¿½Ó¿ï¿½
 PA1				RMII_REF_CLK
 PA2				ETH_MDIO
 PA7				RMII_CRS_DV
@@ -37,7 +37,7 @@ void ETH_PHY_Init(void)
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
 	SYSCFG_ETH_MediaInterfaceConfig(SYSCFG_ETH_MediaInterface_RMII);
 	
-	/*PA1¡¢PA2¡¢PA7*/
+	/*PA1ï¿½ï¿½PA2ï¿½ï¿½PA7*/
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_7;
 	GPIO_Init(GPIOA,&GPIO_InitStructure);
 	
@@ -45,7 +45,7 @@ void ETH_PHY_Init(void)
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_ETH);
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource7, GPIO_AF_ETH);
 
-	/*PC1¡¢PC4¡¢PC5*/
+	/*PC1ï¿½ï¿½PC4ï¿½ï¿½PC5*/
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_4 | GPIO_Pin_5;
 	GPIO_Init(GPIOC,&GPIO_InitStructure);
 	
@@ -53,7 +53,7 @@ void ETH_PHY_Init(void)
 	GPIO_PinAFConfig(GPIOC, GPIO_PinSource4, GPIO_AF_ETH);
 	GPIO_PinAFConfig(GPIOC, GPIO_PinSource5, GPIO_AF_ETH);
 	
-	/*PG11¡¢PG13¡¢PG14*/
+	/*PG11ï¿½ï¿½PG13ï¿½ï¿½PG14*/
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11 | GPIO_Pin_13 | GPIO_Pin_14;
 	GPIO_Init(GPIOG,&GPIO_InitStructure);
 	
@@ -126,40 +126,30 @@ uint32_t ETH_Frame_Send(uint8_t *Buffer_Load,uint32_t framelength)
   uint8_t *DMA_Buffer =  (uint8_t *)(DMATxDescToSet->Buffer1Addr);
   __IO ETH_DMADESCTypeDef *DmaTxDesc = DMATxDescToSet;
 	
-	while(byteslefttocopy > 0){
-		if((DmaTxDesc->Status & ETH_DMATxDesc_OWN) != (u32)RESET)
-		{
-			errval = 0;
-			goto error;
-		}
-		
-		if(byteslefttocopy > ETH_TX_BUF_SIZE){
+	if ((ETH->DMASR & ETH_DMASR_TUS) != (uint32_t)RESET)
+	{
+		ETH->DMASR = ETH_DMASR_TUS;
+		ETH->DMATPDR = 0;
+	}	
+	
+	while(byteslefttocopy > 0){	
+		if(byteslefttocopy >= ETH_TX_BUF_SIZE){
 			Mem_Copy(DMA_Buffer,&Buffer_Load[bufferoffset],ETH_TX_BUF_SIZE);
 			
 			byteslefttocopy = byteslefttocopy - ETH_TX_BUF_SIZE;
 			bufferoffset = bufferoffset + ETH_TX_BUF_SIZE;
 			
 			DmaTxDesc = (ETH_DMADESCTypeDef *)(DmaTxDesc->Buffer2NextDescAddr);
-			DMA_Buffer =  (uint8_t *)(DMATxDescToSet->Buffer1Addr);
+			DMA_Buffer =  (uint8_t *)(DmaTxDesc->Buffer1Addr);
 			
 		}else{
 			Mem_Copy(DMA_Buffer,&Buffer_Load[bufferoffset],byteslefttocopy);
 			byteslefttocopy = 0;
 		}
-	
 	}
 
   ETH_Prepare_Transmit_Descriptors(framelength);
-
-  errval = 1;
-
-error:
-  
-  if ((ETH->DMASR & ETH_DMASR_TUS) != (uint32_t)RESET)
-  {
-    ETH->DMASR = ETH_DMASR_TUS;
-    ETH->DMATPDR = 0;
-  }
+	
   return errval;
 }
 
