@@ -99,7 +99,7 @@ uint8_t* ETH_Frame_Received(void)
 {  
 	uint8_t *ptr = NULL;;
 	
-	FrameTypeDef frame = ETH_Get_Received_Frame();
+	FrameTypeDef frame = ETH_Get_Received_Frame_interrupt();
 
 	ptr = malloc(frame.length * sizeof(uint8_t));
 	if(ptr == NULL)
@@ -151,7 +151,7 @@ void ETH_Frame_Send(uint8_t *Buffer_Load,uint32_t framelength)
 void ETH_IRQHandler(void)
 {
 	uint8_t* FrameBuffer = NULL;
-	while(ETH_GetRxPktSize(DMARxDescToGet)!=0)
+	while(ETH_CheckFrameReceived() != 0)
 	{
 		FrameBuffer = ETH_Frame_Received();
 		if(FrameBuffer != NULL){

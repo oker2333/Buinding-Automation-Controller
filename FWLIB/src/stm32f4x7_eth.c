@@ -24,6 +24,7 @@
 #include "stm32f4x7_eth.h"
 #include "stm32f4xx_rcc.h"
 #include <string.h>
+#include  "lib_mem.h"
 
 /** @addtogroup STM32F4x7_ETH_Driver
   * @brief ETH driver modules
@@ -1019,73 +1020,48 @@ FrameTypeDef ETH_Get_Received_Frame(void)
   * @param  None
   * @retval Structure of type FrameTypeDef
   */
+#define MAX_REV_SIZE 1524
+
 FrameTypeDef ETH_Get_Received_Frame_interrupt(void)
 { 
-  FrameTypeDef frame={0,0,0};
-  __IO uint32_t descriptor_scan_counter = 0; 
-  
-  /* scan descriptors owned by CPU */
-  while (((DMARxDescToGet->Status & ETH_DMARxDesc_OWN) == (uint32_t)RESET)&&
-        (descriptor_scan_counter<ETH_RXBUFNB))
-  {
-    
-    /* Just by security */
-    descriptor_scan_counter++;
-    
-    /* check if first segment in frame */
-    if(((DMARxDescToGet->Status & ETH_DMARxDesc_FS) != (uint32_t)RESET)&&
-      ((DMARxDescToGet->Status & ETH_DMARxDesc_LS) == (uint32_t)RESET))
-    {
-      DMA_RX_FRAME_infos->FS_Rx_Desc = DMARxDescToGet;
-      DMA_RX_FRAME_infos->Seg_Count = 1;   
-      DMARxDescToGet = (ETH_DMADESCTypeDef*) (DMARxDescToGet->Buffer2NextDescAddr);
-    }
-    
-    /* check if intermediate segment */
-    else if (((DMARxDescToGet->Status & ETH_DMARxDesc_LS) == (uint32_t)RESET)&&
-            ((DMARxDescToGet->Status & ETH_DMARxDesc_FS) == (uint32_t)RESET))
-    {
-      (DMA_RX_FRAME_infos->Seg_Count) ++;
-      DMARxDescToGet = (ETH_DMADESCTypeDef*) (DMARxDescToGet->Buffer2NextDescAddr);
-    }
+	FrameTypeDef frame={0,0,0};
+	static uint8_t RevBuffer[MAX_REV_SIZE];
+	
+	if(DMA_RX_FRAME_infos->Seg_Count)
+	{
+		if((DMA_RX_FRAME_infos->FS_Rx_Desc != NULL) &&  (DMA_RX_FRAME_infos->LS_Rx_Desc != NULL)){
+			uint32_t BytesOffsetCopied = 0;
+			
+			for(int i = 0;i < DMA_RX_FRAME_infos->Seg_Count;i++)
+			{
+				if(BytesOffsetCopied < MAX_REV_SIZE)
+				{
+					uint32_t framelength = ((DMARxDescToGet->Status & ETH_DMARxDesc_FL) >> ETH_DMARxDesc_FrameLengthShift) - 4;
+					Mem_Copy(&RevBuffer[BytesOffsetCopied],(void*)DMARxDescToGet->Buffer1Addr,framelength);
+					BytesOffsetCopied += framelength;
+				}
+				DMARxDescToGet->Status |= ETH_DMARxDesc_OWN;
+				DMARxDescToGet = (ETH_DMADESCTypeDef*) (DMARxDescToGet->Buffer2NextDescAddr);				
+			}
+			
+			frame.buffer = (uint32_t)RevBuffer;
+			frame.length = BytesOffsetCopied;
+			
+		}else{
+			for(int index = 0;index < DMA_RX_FRAME_infos->Seg_Count;index++)
+			{
+				DMARxDescToGet->Status |= ETH_DMARxDesc_OWN;
+				DMARxDescToGet = (ETH_DMADESCTypeDef*) (DMARxDescToGet->Buffer2NextDescAddr);
+			}			
+		}
 
-    /* should be last segment */
-    else
-    { 
-      /* last segment */
-      DMA_RX_FRAME_infos->LS_Rx_Desc = DMARxDescToGet;
-      
-      (DMA_RX_FRAME_infos->Seg_Count)++;
-        
-      /* first segment is last segment */
-      if ((DMA_RX_FRAME_infos->Seg_Count)==1)
-        DMA_RX_FRAME_infos->FS_Rx_Desc = DMARxDescToGet;
-      
-      /* Get the Frame Length of the received packet: substruct 4 bytes of the CRC */
-      frame.length = ((DMARxDescToGet->Status & ETH_DMARxDesc_FL) >> ETH_DMARxDesc_FrameLengthShift) - 4;
-
-  
-      /* Get the address of the buffer start address */ 
-      /* Check if more than one segment in the frame */
-      if (DMA_RX_FRAME_infos->Seg_Count >1)
-      {
-        frame.buffer =(DMA_RX_FRAME_infos->FS_Rx_Desc)->Buffer1Addr;
-      }
-      else 
-      {
-        frame.buffer = DMARxDescToGet->Buffer1Addr;
-      }
-      
-      frame.descriptor = DMARxDescToGet;
-  
-      /* Update the ETHERNET DMA global Rx descriptor with next Rx descriptor */      
-      DMARxDescToGet = (ETH_DMADESCTypeDef*) (DMARxDescToGet->Buffer2NextDescAddr);
-     
-      /* Return Frame */
-      return (frame);  
-    }
-  }
-  return (frame); 
+	}
+	
+	DMA_RX_FRAME_infos->Seg_Count = 0;
+	DMA_RX_FRAME_infos->FS_Rx_Desc = NULL;
+	DMA_RX_FRAME_infos->LS_Rx_Desc = NULL;
+	
+	return (frame);
 }
       
           
@@ -1222,36 +1198,51 @@ void ETH_DMARxDescChainInit(ETH_DMADESCTypeDef *DMARxDescTab, uint8_t *RxBuff, u
   * @param  None
   * @retval Returns 1 when a frame is received, 0 if none.
   */
+/*接收帧数据，直到描述符own位置1*/
 uint32_t ETH_CheckFrameReceived(void)
-{ 
-  /* check if last segment */
-  if(((DMARxDescToGet->Status & ETH_DMARxDesc_OWN) == (uint32_t)RESET) &&
-     ((DMARxDescToGet->Status & ETH_DMARxDesc_LS) != (uint32_t)RESET)) 
-    {   
-      DMA_RX_FRAME_infos->LS_Rx_Desc = DMARxDescToGet;
-      DMA_RX_FRAME_infos->Seg_Count++;
-      return 1;
-    }
-  
-    /* check if first segment */
-    else if(((DMARxDescToGet->Status & ETH_DMARxDesc_OWN) == (uint32_t)RESET) &&
-     ((DMARxDescToGet->Status & ETH_DMARxDesc_FS) != (uint32_t)RESET)&&
-     ((DMARxDescToGet->Status & ETH_DMARxDesc_LS) == (uint32_t)RESET))      
-    {
-      DMA_RX_FRAME_infos->FS_Rx_Desc = DMARxDescToGet;
-      DMA_RX_FRAME_infos->LS_Rx_Desc = NULL;
-      DMA_RX_FRAME_infos->Seg_Count = 1;   
-      DMARxDescToGet = (ETH_DMADESCTypeDef*) (DMARxDescToGet->Buffer2NextDescAddr);
-    }
-    
-    /* check if intermediate segment */ 
-    else if(((DMARxDescToGet->Status & ETH_DMARxDesc_OWN) == (uint32_t)RESET) &&
-     ((DMARxDescToGet->Status & ETH_DMARxDesc_FS) == (uint32_t)RESET)&&
-     ((DMARxDescToGet->Status & ETH_DMARxDesc_LS) == (uint32_t)RESET))
-    {
-      (DMA_RX_FRAME_infos->Seg_Count) ++;
-      DMARxDescToGet = (ETH_DMADESCTypeDef*) (DMARxDescToGet->Buffer2NextDescAddr);
-    } 
+{
+		__IO ETH_DMADESCTypeDef *DMARxNextDesc = DMARxDescToGet;
+	
+		while((DMARxNextDesc->Status & ETH_DMARxDesc_OWN) == (uint32_t)RESET)
+		{
+				/*check if only one segment*/
+				if(((DMARxNextDesc->Status & ETH_DMARxDesc_FS) != (uint32_t)RESET)
+					&&(DMARxNextDesc->Status & ETH_DMARxDesc_LS) != (uint32_t)RESET)
+				{
+					DMA_RX_FRAME_infos->FS_Rx_Desc = DMARxNextDesc;
+					DMA_RX_FRAME_infos->LS_Rx_Desc = DMA_RX_FRAME_infos->FS_Rx_Desc;
+					DMA_RX_FRAME_infos->Seg_Count = 1;
+					return 1;
+				}
+		
+				/* check if first segment */
+				else if(((DMARxNextDesc->Status & ETH_DMARxDesc_FS) != (uint32_t)RESET)&&
+				 ((DMARxNextDesc->Status & ETH_DMARxDesc_LS) == (uint32_t)RESET))      
+				{
+					DMA_RX_FRAME_infos->FS_Rx_Desc = DMARxNextDesc;
+					DMA_RX_FRAME_infos->LS_Rx_Desc = NULL;
+					DMA_RX_FRAME_infos->Seg_Count = 1;   
+					DMARxNextDesc = (ETH_DMADESCTypeDef*) (DMARxNextDesc->Buffer2NextDescAddr);
+				}
+				
+				/* check if intermediate segment */ 
+				else if(((DMARxNextDesc->Status & ETH_DMARxDesc_FS) == (uint32_t)RESET)&&
+				 ((DMARxNextDesc->Status & ETH_DMARxDesc_LS) == (uint32_t)RESET))
+				{
+					(DMA_RX_FRAME_infos->Seg_Count) ++;
+					DMARxNextDesc = (ETH_DMADESCTypeDef*) (DMARxNextDesc->Buffer2NextDescAddr);
+				}
+				
+				/* check if last segment */
+				else if((DMARxNextDesc->Status & ETH_DMARxDesc_LS) != (uint32_t)RESET)
+				{
+					DMA_RX_FRAME_infos->LS_Rx_Desc = DMARxNextDesc;
+					DMA_RX_FRAME_infos->Seg_Count++;
+					DMARxNextDesc = (ETH_DMADESCTypeDef*) (DMARxNextDesc->Buffer2NextDescAddr);
+					return 1;
+				}		
+		}
+				
     return 0;
 }
 
