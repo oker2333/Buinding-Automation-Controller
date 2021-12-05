@@ -1026,7 +1026,7 @@ FrameTypeDef ETH_Get_Received_Frame_interrupt(void)
 { 
 	FrameTypeDef frame={0,0,0};
 	static uint8_t RevBuffer[MAX_REV_SIZE];
-	
+
 	if(DMA_RX_FRAME_infos->Seg_Count)
 	{
 		if((DMA_RX_FRAME_infos->FS_Rx_Desc != NULL) &&  (DMA_RX_FRAME_infos->LS_Rx_Desc != NULL)){
@@ -1040,7 +1040,7 @@ FrameTypeDef ETH_Get_Received_Frame_interrupt(void)
 					Mem_Copy(&RevBuffer[BytesOffsetCopied],(void*)DMARxDescToGet->Buffer1Addr,framelength);
 					BytesOffsetCopied += framelength;
 				}
-				DMARxDescToGet->Status |= ETH_DMARxDesc_OWN;
+				DMARxDescToGet->Status = ETH_DMARxDesc_OWN;
 				DMARxDescToGet = (ETH_DMADESCTypeDef*) (DMARxDescToGet->Buffer2NextDescAddr);				
 			}
 			
@@ -1050,7 +1050,7 @@ FrameTypeDef ETH_Get_Received_Frame_interrupt(void)
 		}else{
 			for(int index = 0;index < DMA_RX_FRAME_infos->Seg_Count;index++)
 			{
-				DMARxDescToGet->Status |= ETH_DMARxDesc_OWN;
+				DMARxDescToGet->Status = ETH_DMARxDesc_OWN;
 				DMARxDescToGet = (ETH_DMADESCTypeDef*) (DMARxDescToGet->Buffer2NextDescAddr);
 			}			
 		}
