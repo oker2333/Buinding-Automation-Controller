@@ -1054,7 +1054,6 @@ FrameTypeDef ETH_Get_Received_Frame_interrupt(void)
 				DMARxDescToGet = (ETH_DMADESCTypeDef*) (DMARxDescToGet->Buffer2NextDescAddr);
 			}			
 		}
-
 	}
 	
 	DMA_RX_FRAME_infos->Seg_Count = 0;
@@ -1242,8 +1241,8 @@ uint32_t ETH_CheckFrameReceived(void)
 					return 1;
 				}		
 		}
-				
-    return 0;
+
+    return DMA_RX_FRAME_infos->Seg_Count;
 }
 
 
