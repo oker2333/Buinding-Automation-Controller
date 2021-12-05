@@ -107,7 +107,6 @@ uint8_t* ETH_Frame_Received(void)
 
 	Mem_Copy(ptr,(uint8_t*)frame.buffer,frame.length);
 	
-	frame.descriptor->Status = ETH_DMARxDesc_OWN;
 	if((ETH->DMASR&ETH_DMASR_RBUS) != (uint32_t)RESET)
 	{
 		ETH->DMASR=ETH_DMASR_RBUS;
