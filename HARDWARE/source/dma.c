@@ -1,6 +1,6 @@
 #include "dma.h"
 
-uint8_t OutputBuffer[OutputBufferSize] = {0,1,2,3,4,5,6,7,8,9};
+uint8_t OutputBuffer[OutputBufferSize];
 
 void Usart_Tx_Config(void)		//DMA·¢ËÍ
 {
@@ -64,7 +64,7 @@ void DMA1_Stream6_IRQHandler(void)
 
 #if(LOG_LEVEL >= TRACE) 
 
-char DebugBuffer[DebugBufferSize] = {0};
+uint8_t LogBuffer[LogBufferSize];
 
 void Debug_Tx_Config(void)		//DMA·¢ËÍ
 {
@@ -78,9 +78,9 @@ void Debug_Tx_Config(void)		//DMA·¢ËÍ
 		
 	DMA_InitStructure.DMA_Channel = DMA_Channel_4;
 	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&USART1->DR;
-	DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)&DebugBuffer[0];
+	DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)&LogBuffer[0];
 	DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToPeripheral;
-	DMA_InitStructure.DMA_BufferSize = DebugBufferSize;
+	DMA_InitStructure.DMA_BufferSize = LogBufferSize;
 	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
 	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;

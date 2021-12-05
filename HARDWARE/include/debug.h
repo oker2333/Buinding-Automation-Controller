@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include "stm32f4xx_conf.h"
 #include "dma.h"
+#include "os.h"
+#include <stdlib.h>
 
 #define ALL 	7
 #define FATAL 6
@@ -51,22 +53,26 @@
 #define S_NORMAL                       "22m"
 
 /*********************
-ÈÕÖ¾¼¶±ð 	| ÃèÊö 		---|--- 
-OFF		| ¹Ø±Õ£º×î¸ß¼¶±ð£¬²»´òÓ¡ÈÕÖ¾¡£
-FATAL	| ÖÂÃü£ºÖ¸Ã÷·Ç³£ÑÏÖØµÄ¿ÉÄÜ»áµ¼ÖÂÓ¦ÓÃÖÕÖ¹Ö´ÐÐ´íÎóÊÂ¼þ¡£ 
-ERROR | ´íÎó£ºÖ¸Ã÷´íÎóÊÂ¼þ£¬µ«Ó¦ÓÃ¿ÉÄÜ»¹ÄÜ¼ÌÐøÔËÐÐ¡£ 
-WARN	| ¾¯¸æ£ºÖ¸Ã÷¿ÉÄÜÇ±ÔÚµÄÎ£ÏÕ×´¿ö¡£ 
-INFO	| ÐÅÏ¢£ºÖ¸Ã÷ÃèÊöÐÅÏ¢£¬´Ó´ÖÁ£¶ÈÉÏÃèÊöÁËÓ¦ÓÃÔËÐÐ¹ý³Ì¡£ 
-DEBUG	| µ÷ÊÔ£ºÖ¸Ã÷Ï¸ÖÂµÄÊÂ¼þÐÅÏ¢£¬¶Ôµ÷ÊÔÓ¦ÓÃ×îÓÐÓÃ¡£ 
-TRACE	| ¸ú×Ù£ºÖ¸Ã÷³ÌÐòÔËÐÐ¹ì¼££¬±ÈDEBUG¼¶±ðµÄÁ£¶È¸üÏ¸¡£
-ALL		| ËùÓÐ£ºËùÓÐÈÕÖ¾¼¶±ð£¬°üÀ¨¶¨ÖÆ¼¶±ð¡£
+ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ 	| ï¿½ï¿½ï¿½ï¿½ 		---|--- 
+OFF		| ï¿½Ø±Õ£ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ð£¬²ï¿½ï¿½ï¿½Ó¡ï¿½ï¿½Ö¾ï¿½ï¿½
+FATAL	| ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Ç³ï¿½ï¿½ï¿½ï¿½ØµÄ¿ï¿½ï¿½Ü»áµ¼ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Ö¹Ö´ï¿½Ð´ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ 
+ERROR | ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ã¿ï¿½ï¿½Ü»ï¿½ï¿½Ü¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ 
+WARN	| ï¿½ï¿½ï¿½æ£ºÖ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç±ï¿½Úµï¿½Î£ï¿½ï¿½×´ï¿½ï¿½ï¿½ï¿½ 
+INFO	| ï¿½ï¿½Ï¢ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ó´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½Ì¡ï¿½ 
+DEBUG	| ï¿½ï¿½ï¿½Ô£ï¿½Ö¸ï¿½ï¿½Ï¸ï¿½Âµï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¡ï¿½ 
+TRACE	| ï¿½ï¿½ï¿½Ù£ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ì¼£ï¿½ï¿½ï¿½ï¿½DEBUGï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¸ï¿½Ï¸ï¿½ï¿½
+ALL		| ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ð£¬°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½
 **********************/
+
+#define LOG_BYTES_MAX LogBufferSize			//ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½Ú´æ²»ï¿½ï¿½
+
 #if (LOG_LEVEL >= FATAL)
 #define Log_Fatal(format,...)	do{	\
-																uint8_t StringSize = \
-																sprintf(DebugBuffer,"%s%s%s[FATAL]FileName:%s; Line:%d; Function:%s."\
+																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\
+																if(StringBuffer == NULL)break;\
+																uint8_t StringSize = sprintf(StringBuffer,"%s%s%s[FATAL]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_RED,S_BLINK,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
-																DMA2_Stream7_Send(StringSize);	\
+																log_Q_post(StringBuffer,StringSize);	\
 														}while(0)
 #else
 #define Log_Fatal(format,...)
@@ -74,54 +80,59 @@ ALL		| ËùÓÐ£ºËùÓÐÈÕÖ¾¼¶±ð£¬°üÀ¨¶¨ÖÆ¼¶±ð¡£
 
 #if (LOG_LEVEL >= ERR)
 #define Log_Error(format,...)	do{	\
-																uint8_t StringSize = \
-																sprintf(DebugBuffer,"%s%s%s[ERROR]FileName:%s; Line:%d; Function:%s."\
+																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\
+																if(StringBuffer == NULL)break;\
+																uint8_t StringSize = sprintf(StringBuffer,"%s%s%s[ERROR]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_BLUE,S_BOLD,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
-																DMA2_Stream7_Send(StringSize);	\
-														}while(0)
+																log_Q_post(StringBuffer,StringSize);	\
+															}while(0)
 #else
 #define Log_Error(format,...)
 #endif	//ERROR
 														
 #if (LOG_LEVEL >= WARN)
 #define Log_Warn(format,...)	do{	\
-																uint8_t StringSize = \
-																sprintf(DebugBuffer,"%s%s%s[WARN]FileName:%s; Line:%d; Function:%s."\
+																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\
+																if(StringBuffer == NULL)break;\
+																uint8_t StringSize = sprintf(StringBuffer,"%s%s%s[WARN]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_YELLOW,S_BOLD,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
-																DMA2_Stream7_Send(StringSize);	\
-														}while(0)
+																log_Q_post(StringBuffer,StringSize);	\
+															}while(0)
 #else
 #define Log_Warn(format,...)
 #endif	//WARN
 
 #if (LOG_LEVEL >= INFO)
 #define Log_Info(format,...)	do{	\
-																uint8_t StringSize = \
-																sprintf(DebugBuffer,"%s%s%s[INFO]FileName:%s; Line:%d; Function:%s."\
+																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\
+																if(StringBuffer == NULL)break;\
+																uint8_t StringSize = sprintf(StringBuffer,"%s%s%s[INFO]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_WHITE,S_NORMAL,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
-																DMA2_Stream7_Send(StringSize);	\
-														}while(0)
+																log_Q_post(StringBuffer,StringSize);	\
+															}while(0)
 #else
 #define Log_Info(format,...)
 #endif	//INFO
 														
 #if (LOG_LEVEL >= DEBUG)
 #define Log_Debug(format,...)	do{	\
-																uint8_t StringSize = \
-																sprintf(DebugBuffer,"%s%s%s[DEBUG]FileName:%s; Line:%d; Function:%s."\
+																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\
+																if(StringBuffer == NULL)break;\
+																uint8_t StringSize = sprintf(StringBuffer,"%s%s%s[DEBUG]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_WHITE,S_NORMAL,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
-																DMA2_Stream7_Send(StringSize);	\
-														}while(0)
+																log_Q_post(StringBuffer,StringSize);	\
+															}while(0)
 #else
 #define Log_Debug(format,...)
 #endif	//DEBUG
 														
 #if (LOG_LEVEL >= TRACE)
 #define Log_Trace(format,...)	do{	\
-																uint8_t StringSize = \
-																sprintf(DebugBuffer,"%s%s%s[TRACE]FileName:%s; Line:%d; Function:%s."\
+																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\
+																if(StringBuffer == NULL)break;\
+																uint8_t StringSize = sprintf(StringBuffer,"%s%s%s[TRACE]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_WHITE,S_NORMAL,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
-																DMA2_Stream7_Send(StringSize);	\
+																log_Q_post(StringBuffer,StringSize);	\
 														}while(0)
 #else
 #define Log_Trace(format,...)

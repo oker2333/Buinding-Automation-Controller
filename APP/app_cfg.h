@@ -55,7 +55,8 @@
 */
 
 #define  APP_CFG_TASK_START_PRIO                           2u
-#define  APP_CFG_TASK_EQ_PRIO                              4u
+#define  APP_CFG_TASK_EQ_PRIO                              3u
+#define  APP_CFG_TASK_LOG_PRIO                             4u
 
 /*
 *********************************************************************************************************
@@ -64,8 +65,8 @@
 */
 
 #define  APP_CFG_TASK_START_STK_SIZE                     128u
-#define  APP_CFG_TASK_BLINKY_STK_SIZE                    128u
 #define  APP_CFG_TASK_EQ_STK_SIZE                        512u
+#define APP_CFG_TASK_LOG_STK_SIZE												 512u
 
 
 /*
@@ -73,11 +74,6 @@
 *                                            TASK STACK SIZES LIMIT
 *********************************************************************************************************
 */
-
-#define  APP_CFG_TASK_START_STK_SIZE_PCT_FULL             90u
-#define  APP_CFG_TASK_START_STK_SIZE_LIMIT       (APP_CFG_TASK_START_STK_SIZE     * (100u - APP_CFG_TASK_START_STK_SIZE_PCT_FULL))    / 100u
-#define  APP_CFG_TASK_BLINKY_STK_SIZE_LIMIT      (APP_CFG_TASK_BLINKY_STK_SIZE    * (100u - APP_CFG_TASK_START_STK_SIZE_PCT_FULL))    / 100u
-
 
 /*
 *********************************************************************************************************

@@ -44,6 +44,7 @@
 */
 
 #define  APP_TASK_EQ_0_ITERATION_NBR              16u
+#define DEBUG_LOG_MSG_MAX                         7u
 
 
 /*
@@ -59,6 +60,9 @@ static  CPU_STK  AppTaskStartStk[APP_CFG_TASK_START_STK_SIZE];
 static  OS_TCB       App_TaskEq0FpTCB;
 static  CPU_STK      App_TaskEq0FpStk[APP_CFG_TASK_EQ_STK_SIZE];
 
+static  OS_TCB       App_TaskLogTCB;
+static  CPU_STK      App_TaskLogStk[APP_CFG_TASK_LOG_STK_SIZE];
+
 /*
 *********************************************************************************************************
 *                                         FUNCTION PROTOTYPES
@@ -69,7 +73,7 @@ static  void  AppTaskStart          (void     *p_arg);
 static  void  AppTaskCreate         (void);
 
 static  void  App_TaskEq0Fp         (void  *p_arg);             /* Floating Point Equation 0 task.                      */
-
+static  void  App_TaskLogPrint      (void  *p_arg);
 /*
 *********************************************************************************************************
 *                                                main()
@@ -180,7 +184,7 @@ static  void  AppTaskCreate (void)
     
                                                                 /* ------------- CREATE FLOATING POINT TASK ----------- */
     OSTaskCreate((OS_TCB      *)&App_TaskEq0FpTCB,
-                 (CPU_CHAR    *)"FP  Equation 1",
+                 (CPU_CHAR    *)"FP Equation",
                  (OS_TASK_PTR  ) App_TaskEq0Fp, 
                  (void        *) 0,
                  (OS_PRIO      ) APP_CFG_TASK_EQ_PRIO,
@@ -192,6 +196,20 @@ static  void  AppTaskCreate (void)
                  (void        *) 0,
                  (OS_OPT       )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR | OS_OPT_TASK_SAVE_FP),
                  (OS_ERR      *)&os_err);
+
+    OSTaskCreate((OS_TCB      *) &App_TaskLogTCB,
+                 (CPU_CHAR    *) "Log Print",
+                 (OS_TASK_PTR  ) App_TaskLogPrint, 
+                 (void        *) 0,
+                 (OS_PRIO      ) APP_CFG_TASK_LOG_PRIO,
+                 (CPU_STK     *) &App_TaskLogStk[0],
+                 (CPU_STK_SIZE ) App_TaskLogStk[APP_CFG_TASK_LOG_STK_SIZE / 10u],
+                 (CPU_STK_SIZE ) APP_CFG_TASK_LOG_STK_SIZE,
+                 (OS_MSG_QTY   ) DEBUG_LOG_MSG_MAX,
+                 (OS_TICK      ) 0u,
+                 (void        *) 0,
+                 (OS_OPT       ) OS_OPT_TASK_NONE,
+                 (OS_ERR      *) &os_err);								 
 }
 
 /*
@@ -273,4 +291,43 @@ void  App_TaskEq0Fp (void  *p_arg)
             APP_TRACE_INFO(("Root = %f; f(c) = %f; #iterations : %d\n", c, f_c, iteration));
         }
     }
+}
+
+static  void  App_TaskLogPrint(void *p_arg)
+{
+		OS_ERR err;
+		OS_MSG_SIZE msg_size;
+		uint8_t* pbuf = NULL;
+
+		while(DEF_TRUE){
+				pbuf =  OSTaskQPend ((OS_TICK)       0,
+									(OS_OPT)        OS_OPT_PEND_BLOCKING,
+									(OS_MSG_SIZE*)  &msg_size,
+									(CPU_TS*)       0,
+									(OS_ERR*)       &err);
+			
+				if(err == OS_ERR_NONE){
+					Mem_Copy(LogBuffer,pbuf,msg_size);
+					DMA2_Stream7_Send(msg_size);
+				}
+				
+				if(pbuf != NULL){
+					free(pbuf);
+					pbuf = NULL;
+				}		
+				OSTimeDlyHMSM(0u, 0u, 0u, 10u, 0u, &err);
+		}
+}
+
+void log_Q_post(uint8_t* pbuf,uint32_t len){
+		OS_ERR err;
+		OSTaskQPost ((OS_TCB*)       &App_TaskLogTCB,
+				 (void*)				 pbuf,
+				 (OS_MSG_SIZE)   len,
+				 (OS_OPT)        (OS_OPT_POST_FIFO | OS_OPT_POST_NO_SCHED),
+				 (OS_ERR*)       &err);
+		if(err != OS_ERR_NONE){
+			free(pbuf);
+			pbuf = NULL;
+		}
 }

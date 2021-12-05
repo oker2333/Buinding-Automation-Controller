@@ -14,9 +14,11 @@ void Usart_Tx_Config(void);
 void DMA1_Stream6_Send(uint16_t Counter);
 
 #if (LOG_LEVEL >= TRACE)
-#define DebugBufferSize 512
 
-extern char DebugBuffer[DebugBufferSize];
+#define LogBufferSize 128
+extern uint8_t LogBuffer[LogBufferSize];
+
+extern void log_Q_post(uint8_t* pbuf,uint32_t len);
 
 void Debug_Tx_Config(void);
 void DMA2_Stream7_Send(uint16_t Counter);
