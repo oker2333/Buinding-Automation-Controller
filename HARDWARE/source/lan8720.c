@@ -125,10 +125,11 @@ void ETH_Frame_Send(uint8_t *Buffer_Load,uint32_t framelength)
   uint8_t *DMA_Buffer =  (uint8_t *)(DMATxDescToSet->Buffer1Addr);
   __IO ETH_DMADESCTypeDef *DmaTxDesc = DMATxDescToSet;
 	
-	if((DMATxDescToSet->Status & ETH_DMATxDesc_OWN) != (uint32_t)RESET)
-		return;
-	
 	while(byteslefttocopy > 0){	
+		if((DmaTxDesc->Status & ETH_DMATxDesc_OWN) != (u32)RESET)
+		{
+			goto error;
+		}
 		if(byteslefttocopy >= ETH_TX_BUF_SIZE){
 			Mem_Copy(DMA_Buffer,&Buffer_Load[bufferoffset],ETH_TX_BUF_SIZE);
 			
@@ -143,8 +144,14 @@ void ETH_Frame_Send(uint8_t *Buffer_Load,uint32_t framelength)
 			byteslefttocopy = 0;
 		}
 	}
-
   ETH_Prepare_Transmit_Descriptors(framelength);
+
+error:
+  if ((ETH->DMASR & ETH_DMASR_TUS) != (uint32_t)RESET)
+  {
+    ETH->DMASR = ETH_DMASR_TUS;
+    ETH->DMATPDR = 0;
+  }
 }
 
 

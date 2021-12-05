@@ -1074,21 +1074,16 @@ uint32_t ETH_Prepare_Transmit_Descriptors(u16 FrameLength)
   uint32_t buf_count =0, size=0,i=0;
   __IO ETH_DMADESCTypeDef *DMATxNextDesc;
   
-  /* Check if the descriptor is owned by the ETHERNET DMA (when set) or CPU (when reset) */
-  if((DMATxDescToSet->Status & ETH_DMATxDesc_OWN) != (u32)RESET)
-  {  
-    /* Return ERROR: OWN bit set */
-    return ETH_ERROR;
-  }
-  
   DMATxNextDesc = DMATxDescToSet;
   
   if (FrameLength > ETH_TX_BUF_SIZE)
   {
     buf_count = FrameLength/ETH_TX_BUF_SIZE;
-    if (FrameLength%ETH_TX_BUF_SIZE) buf_count++;
+    if (FrameLength%ETH_TX_BUF_SIZE) 
+			buf_count++;
   }
-  else buf_count =1;
+  else 
+		buf_count =1;
   
   if (buf_count ==1)
   {
