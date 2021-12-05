@@ -1214,8 +1214,7 @@ uint32_t ETH_CheckFrameReceived(void)
 				 ((DMARxNextDesc->Status & ETH_DMARxDesc_LS) == (uint32_t)RESET))      
 				{
 					DMA_RX_FRAME_infos->FS_Rx_Desc = DMARxNextDesc;
-					DMA_RX_FRAME_infos->LS_Rx_Desc = NULL;
-					DMA_RX_FRAME_infos->Seg_Count = 1;   
+					DMA_RX_FRAME_infos->Seg_Count = 1;
 					DMARxNextDesc = (ETH_DMADESCTypeDef*) (DMARxNextDesc->Buffer2NextDescAddr);
 				}
 				
