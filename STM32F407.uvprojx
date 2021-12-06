@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER  STM32F40_41xxx</Define>
               <Undefine></Undefine>
-              <IncludePath>.\USER;.\CMSIS;.\FWLIB\inc;.\CMSIS\Include;.\HARDWARE\include;.\APP;.\UCOS-III\BSP;.\UCOS-III\uC-CPU;.\UCOS-III\uC-CPU\ARM-Cortex-M4\RealView;.\UCOS-III\uC-LIB;.\UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView;.\UCOS-III\uCOS-III;.\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView;.\UCOS-III\uCOS-III\Source</IncludePath>
+              <IncludePath>.\USER;.\CMSIS;.\FWLIB\inc;.\CMSIS\Include;.\HARDWARE\include;.\APP;.\UCOS-III\BSP;.\UCOS-III\uC-CPU;.\UCOS-III\uC-CPU\ARM-Cortex-M4\RealView;.\UCOS-III\uC-LIB;.\UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView;.\UCOS-III\uCOS-III;.\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView;.\UCOS-III\uCOS-III\Source;.\BACnet\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -785,16 +785,29 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>BACnet MS/TP</GroupName>
-        </Group>
-        <Group>
-          <GroupName>BACnet/IP</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Modbus RTU</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Modbus/TCP</GroupName>
+          <GroupName>BACnet</GroupName>
+          <Files>
+            <File>
+              <FileName>mstp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BACnet\src\mstp.c</FilePath>
+            </File>
+            <File>
+              <FileName>mstptext.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BACnet\src\mstptext.c</FilePath>
+            </File>
+            <File>
+              <FileName>crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BACnet\src\crc.c</FilePath>
+            </File>
+            <File>
+              <FileName>indtext.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BACnet\src\indtext.c</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>

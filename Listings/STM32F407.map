@@ -924,6 +924,27 @@ Section Cross References
     os_cpu_c.o(i.OS_CPU_SysTickHandler) refers to os_time.o(i.OSTimeTick) for OSTimeTick
     os_cpu_c.o(i.OS_CPU_SysTickHandler) refers to os_core.o(i.OSIntExit) for OSIntExit
     os_cpu_c.o(i.OS_CPU_SysTickHandler) refers to os_var.o(.data) for OSIntNestingCtr
+    mstp.o(i.MSTP_Create_And_Send_Frame) refers to mstp.o(i.MSTP_Create_Frame) for MSTP_Create_Frame
+    mstp.o(i.MSTP_Create_Frame) refers to crc.o(i.CRC_Calc_Header) for CRC_Calc_Header
+    mstp.o(i.MSTP_Create_Frame) refers to crc.o(i.CRC_Calc_Data) for CRC_Calc_Data
+    mstp.o(i.MSTP_Master_Node_FSM) refers to mstp.o(i.MSTP_Create_And_Send_Frame) for MSTP_Create_And_Send_Frame
+    mstp.o(i.MSTP_Receive_Frame_FSM) refers to crc.o(i.CRC_Calc_Header) for CRC_Calc_Header
+    mstp.o(i.MSTP_Receive_Frame_FSM) refers to crc.o(i.CRC_Calc_Data) for CRC_Calc_Data
+    mstp.o(i.MSTP_Slave_Node_FSM) refers to mstp.o(i.MSTP_Create_And_Send_Frame) for MSTP_Create_And_Send_Frame
+    mstptext.o(i.mstptext_frame_type) refers to indtext.o(i.indtext_by_index_split_default) for indtext_by_index_split_default
+    mstptext.o(i.mstptext_frame_type) refers to mstptext.o(.constdata) for mstp_frame_type_text
+    mstptext.o(i.mstptext_master_state) refers to indtext.o(i.indtext_by_index_default) for indtext_by_index_default
+    mstptext.o(i.mstptext_master_state) refers to mstptext.o(.constdata) for mstp_master_state_text
+    mstptext.o(i.mstptext_receive_state) refers to indtext.o(i.indtext_by_index_default) for indtext_by_index_default
+    mstptext.o(i.mstptext_receive_state) refers to mstptext.o(.constdata) for mstp_receive_state_text
+    mstptext.o(.constdata) refers to mstptext.o(.conststring) for .conststring
+    indtext.o(i.indtext_by_index) refers to indtext.o(i.indtext_by_index_default) for indtext_by_index_default
+    indtext.o(i.indtext_by_index_split_default) refers to indtext.o(i.indtext_by_index_default) for indtext_by_index_default
+    indtext.o(i.indtext_by_istring) refers to indtext.o(i.stricmp) for stricmp
+    indtext.o(i.indtext_by_istring_default) refers to indtext.o(i.indtext_by_istring) for indtext_by_istring
+    indtext.o(i.indtext_by_string) refers to strcmp.o(.text) for strcmp
+    indtext.o(i.indtext_by_string_default) refers to indtext.o(i.indtext_by_string) for indtext_by_string
+    indtext.o(i.stricmp) refers to tolower.o(.text) for tolower
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry10a.o(.ARM.Collect$$$$0000000D) for __rt_final_cpp
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry11a.o(.ARM.Collect$$$$0000000F) for __rt_final_exit
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry7b.o(.ARM.Collect$$$$00000008) for _main_clock
@@ -1518,8 +1539,32 @@ Removing Unused input sections from the image.
     Removing os_tmr.o(i.OS_TmrClr), (48 bytes).
     Removing os_tmr.o(i.OS_TmrDbgListAdd), (40 bytes).
     Removing os_tmr.o(i.OS_TmrDbgListRemove), (48 bytes).
+    Removing mstp.o(i.MSTP_Create_And_Send_Frame), (42 bytes).
+    Removing mstp.o(i.MSTP_Create_Frame), (208 bytes).
+    Removing mstp.o(i.MSTP_Fill_BACnet_Address), (66 bytes).
+    Removing mstp.o(i.MSTP_Init), (114 bytes).
+    Removing mstp.o(i.MSTP_Line_Active), (16 bytes).
+    Removing mstp.o(i.MSTP_Master_Node_FSM), (1438 bytes).
+    Removing mstp.o(i.MSTP_Receive_Frame_FSM), (958 bytes).
+    Removing mstp.o(i.MSTP_Slave_Node_FSM), (160 bytes).
+    Removing mstptext.o(i.mstptext_frame_type), (48 bytes).
+    Removing mstptext.o(i.mstptext_master_state), (28 bytes).
+    Removing mstptext.o(i.mstptext_receive_state), (28 bytes).
+    Removing mstptext.o(.constdata), (192 bytes).
+    Removing mstptext.o(.conststring), (296 bytes).
+    Removing crc.o(i.CRC_Calc_Data), (48 bytes).
+    Removing crc.o(i.CRC_Calc_Header), (52 bytes).
+    Removing indtext.o(i.indtext_by_index), (18 bytes).
+    Removing indtext.o(i.indtext_by_index_default), (40 bytes).
+    Removing indtext.o(i.indtext_by_index_split_default), (46 bytes).
+    Removing indtext.o(i.indtext_by_istring), (62 bytes).
+    Removing indtext.o(i.indtext_by_istring_default), (30 bytes).
+    Removing indtext.o(i.indtext_by_string), (62 bytes).
+    Removing indtext.o(i.indtext_by_string_default), (30 bytes).
+    Removing indtext.o(i.indtext_count), (20 bytes).
+    Removing indtext.o(i.stricmp), (48 bytes).
 
-539 unused section(s) (total 30240 bytes) removed from the image.
+563 unused section(s) (total 34290 bytes) removed from the image.
 
 ==============================================================================
 
@@ -1529,29 +1574,31 @@ Image Symbol Table
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
+    ../clib/microlib/ctype/tolower.c         0x00000000   Number         0  tolower.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
-    ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  mallocr.o ABSOLUTE
     ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  malloc.o ABSOLUTE
+    ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  mallocr.o ABSOLUTE
     ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  malloca.o ABSOLUTE
     ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  mallocra.o ABSOLUTE
     ../clib/microlib/malloc/mvars.c          0x00000000   Number         0  mvars.o ABSOLUTE
-    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
     ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
+    ../clib/microlib/string/strcmp.c         0x00000000   Number         0  strcmp.o ABSOLUTE
     APP\\app.c                               0x00000000   Number         0  app.o ABSOLUTE
     APP\\stm32f4xx_it.c                      0x00000000   Number         0  stm32f4xx_it.o ABSOLUTE
     APP\\system_stm32f4xx.c                  0x00000000   Number         0  system_stm32f4xx.o ABSOLUTE
@@ -1559,6 +1606,10 @@ Image Symbol Table
     APP\os_app_hooks.c                       0x00000000   Number         0  os_app_hooks.o ABSOLUTE
     APP\stm32f4xx_it.c                       0x00000000   Number         0  stm32f4xx_it.o ABSOLUTE
     APP\system_stm32f4xx.c                   0x00000000   Number         0  system_stm32f4xx.o ABSOLUTE
+    BACnet\src\crc.c                         0x00000000   Number         0  crc.o ABSOLUTE
+    BACnet\src\indtext.c                     0x00000000   Number         0  indtext.o ABSOLUTE
+    BACnet\src\mstp.c                        0x00000000   Number         0  mstp.o ABSOLUTE
+    BACnet\src\mstptext.c                    0x00000000   Number         0  mstptext.o ABSOLUTE
     CMSIS\startup\startup_stm32f40_41xxx.s   0x00000000   Number         0  startup_stm32f40_41xxx.o ABSOLUTE
     FWLIB\\src\\misc.c                       0x00000000   Number         0  misc.o ABSOLUTE
     FWLIB\\src\\stm32f4x7_eth.c              0x00000000   Number         0  stm32f4x7_eth.o ABSOLUTE
@@ -2425,19 +2476,19 @@ Memory Map of the image
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08000000   0x08000000   0x00000188   Data   RO         2105    RESET               startup_stm32f40_41xxx.o
-    0x08000188   0x08000188   0x00000000   Code   RO         4927  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x08000188   0x08000188   0x00000004   Code   RO         4960    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x0800018c   0x0800018c   0x00000004   Code   RO         4963    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x08000190   0x08000190   0x00000000   Code   RO         4965    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x08000190   0x08000190   0x00000000   Code   RO         4967    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x08000190   0x08000190   0x00000008   Code   RO         4968    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x08000198   0x08000198   0x00000000   Code   RO         4970    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
-    0x08000198   0x08000198   0x00000000   Code   RO         4972    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
-    0x08000198   0x08000198   0x00000004   Code   RO         4961    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x08000188   0x08000188   0x00000000   Code   RO         5123  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x08000188   0x08000188   0x00000004   Code   RO         5160    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x0800018c   0x0800018c   0x00000004   Code   RO         5163    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x08000190   0x08000190   0x00000000   Code   RO         5165    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x08000190   0x08000190   0x00000000   Code   RO         5167    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x08000190   0x08000190   0x00000008   Code   RO         5168    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x08000198   0x08000198   0x00000000   Code   RO         5170    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
+    0x08000198   0x08000198   0x00000000   Code   RO         5172    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
+    0x08000198   0x08000198   0x00000004   Code   RO         5161    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x0800019c   0x0800019c   0x0000004c   Code   RO         2106    .text               startup_stm32f40_41xxx.o
     0x080001e8   0x080001e8   0x00000034   Code   RO         3218    .text               cpu_a.o
     0x0800021c   0x0800021c   0x00000220   Code   RO         3742    .text               lib_mem_a.o
-    0x0800043c   0x0800043c   0x00000024   Code   RO         4984    .text               mc_w.l(init.o)
+    0x0800043c   0x0800043c   0x00000024   Code   RO         5184    .text               mc_w.l(init.o)
     0x08000460   0x08000460   0x0000010c   Code   RO         4839    CODE                os_cpu_a.o
     0x0800056c   0x0800056c   0x000000a0   Code   RO            4    i.AppTaskCreate     app.o
     0x0800060c   0x0800060c   0x00000048   Code   RO            5    i.AppTaskStart      app.o
@@ -2660,17 +2711,17 @@ Memory Map of the image
     0x080054f6   0x080054f6   0x00000004   Code   RO          336    i.UsageFault_Handler  stm32f4xx_it.o
     0x080054fa   0x080054fa   0x00000002   PAD
     0x080054fc   0x080054fc   0x00000098   Code   RO         2181    i.Usart_Tx_Config   dma.o
-    0x08005594   0x08005594   0x0000000e   Code   RO         4988    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x080055a2   0x080055a2   0x00000002   Code   RO         4989    i.__scatterload_null  mc_w.l(handlers.o)
-    0x080055a4   0x080055a4   0x0000000e   Code   RO         4990    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x08005594   0x08005594   0x0000000e   Code   RO         5188    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x080055a2   0x080055a2   0x00000002   Code   RO         5189    i.__scatterload_null  mc_w.l(handlers.o)
+    0x080055a4   0x080055a4   0x0000000e   Code   RO         5190    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x080055b2   0x080055b2   0x00000002   PAD
     0x080055b4   0x080055b4   0x00000090   Code   RO         2240    i.debug_init        debug.o
-    0x08005644   0x08005644   0x00000050   Code   RO         4932    i.free              mc_w.l(malloc.o)
+    0x08005644   0x08005644   0x00000050   Code   RO         5132    i.free              mc_w.l(malloc.o)
     0x08005694   0x08005694   0x0000007c   Code   RO            9    i.main              app.o
-    0x08005710   0x08005710   0x0000006c   Code   RO         4933    i.malloc            mc_w.l(malloc.o)
+    0x08005710   0x08005710   0x0000006c   Code   RO         5133    i.malloc            mc_w.l(malloc.o)
     0x0800577c   0x0800577c   0x00000094   Data   RO         3747    .constdata          os_cfg_app.o
     0x08005810   0x08005810   0x0000016c   Data   RO         3992    .constdata          os_dbg.o
-    0x0800597c   0x0800597c   0x00000020   Data   RO         4986    Region$$Table       anon$$obj.o
+    0x0800597c   0x0800597c   0x00000020   Data   RO         5186    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM2 (Exec base: 0x10000000, Load base: 0x08005aa8, Size: 0x00000000, Max: 0x00010000, ABSOLUTE)
@@ -2691,8 +2742,8 @@ Memory Map of the image
     0x20000034   0x080059d0   0x00000008   Data   RW         4262    .data               os_prio.o
     0x2000003c   0x080059d8   0x000000c4   Data   RW         4826    .data               os_var.o
     0x20000100   0x08005a9c   0x00000004   Data   RW         4853    .data               os_cpu_c.o
-    0x20000104   0x08005aa0   0x00000004   Data   RW         4982    .data               mc_w.l(mvars.o)
-    0x20000108   0x08005aa4   0x00000004   Data   RW         4983    .data               mc_w.l(mvars.o)
+    0x20000104   0x08005aa0   0x00000004   Data   RW         5182    .data               mc_w.l(mvars.o)
+    0x20000108   0x08005aa4   0x00000004   Data   RW         5183    .data               mc_w.l(mvars.o)
     0x2000010c        -       0x00001440   Zero   RW           10    .bss                app.o
     0x2000154c        -       0x000042c8   Zero   RW         1230    .bss                stm32f4x7_eth.o
     0x20005814        -       0x00000280   Zero   RW         2182    .bss                dma.o

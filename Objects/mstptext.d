@@ -1,0 +1,13 @@
+.\objects\mstptext.o: BACnet\src\mstptext.c
+.\objects\mstptext.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\mstptext.o: .\BACnet\include\mstp.h
+.\objects\mstptext.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\mstptext.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\mstptext.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\mstptext.o: .\BACnet\include\mstpdef.h
+.\objects\mstptext.o: .\BACnet\include\bacdef.h
+.\objects\mstptext.o: .\BACnet\include\bacenum.h
+.\objects\mstptext.o: .\BACnet\include\config.h
+.\objects\mstptext.o: .\BACnet\include\indtext.h
+.\objects\mstptext.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\mstptext.o: .\BACnet\include\mstptext.h
