@@ -54,11 +54,11 @@
 */
 
                                                                 /* ----------------- APPLICATION GLOBALS -------------- */
-static  OS_TCB   AppTaskStartTCB;
-static  CPU_STK  AppTaskStartStk[APP_CFG_TASK_START_STK_SIZE];
+static  OS_TCB       AppTaskStartTCB;
+static  CPU_STK      AppTaskStartStk[APP_CFG_TASK_START_STK_SIZE];
                                                                 /* ------------ FLOATING POINT TEST TASK -------------- */
-static  OS_TCB       App_TaskEq0FpTCB;
-static  CPU_STK      App_TaskEq0FpStk[APP_CFG_TASK_EQ_STK_SIZE];
+static  OS_TCB       BACnet_MSTP_TCB;
+static  CPU_STK      BACnet_MSTP_Stk[APP_CFG_TASK_MSTP_STK_SIZE];
 
 static  OS_TCB       App_TaskLogTCB;
 static  CPU_STK      App_TaskLogStk[APP_CFG_TASK_LOG_STK_SIZE];
@@ -69,10 +69,10 @@ static  CPU_STK      App_TaskLogStk[APP_CFG_TASK_LOG_STK_SIZE];
 *********************************************************************************************************
 */
 
-static  void  AppTaskStart          (void     *p_arg);
+static  void  AppTaskStart          (void  *p_arg);
 static  void  AppTaskCreate         (void);
 
-static  void  App_TaskEq0Fp         (void  *p_arg);             /* Floating Point Equation 0 task.                      */
+static  void  BACnet_MSTP_Task      (void  *p_arg);             /* Floating Point Equation 0 task.                      */
 static  void  App_TaskLogPrint      (void  *p_arg);
 /*
 *********************************************************************************************************
@@ -183,19 +183,19 @@ static  void  AppTaskCreate (void)
     OS_ERR  os_err;
     
                                                                 /* ------------- CREATE FLOATING POINT TASK ----------- */
-    OSTaskCreate((OS_TCB      *)&App_TaskEq0FpTCB,
-                 (CPU_CHAR    *)"FP Equation",
-                 (OS_TASK_PTR  ) App_TaskEq0Fp, 
+    OSTaskCreate((OS_TCB      *) &BACnet_MSTP_TCB,
+                 (CPU_CHAR    *) "BACnet MS/TP",
+                 (OS_TASK_PTR  ) BACnet_MSTP_Task, 
                  (void        *) 0,
-                 (OS_PRIO      ) APP_CFG_TASK_EQ_PRIO,
-                 (CPU_STK     *)&App_TaskEq0FpStk[0],
-                 (CPU_STK_SIZE ) App_TaskEq0FpStk[APP_CFG_TASK_EQ_STK_SIZE / 10u],
-                 (CPU_STK_SIZE ) APP_CFG_TASK_EQ_STK_SIZE,
+                 (OS_PRIO      ) APP_CFG_TASK_MSTP_PRIO,
+                 (CPU_STK     *) &BACnet_MSTP_Stk[0],
+                 (CPU_STK_SIZE ) BACnet_MSTP_Stk[APP_CFG_TASK_MSTP_STK_SIZE / 10u],
+                 (CPU_STK_SIZE ) APP_CFG_TASK_MSTP_STK_SIZE,
                  (OS_MSG_QTY   ) 0u,
                  (OS_TICK      ) 0u,
                  (void        *) 0,
-                 (OS_OPT       )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR | OS_OPT_TASK_SAVE_FP),
-                 (OS_ERR      *)&os_err);
+                 (OS_OPT       ) OS_OPT_TASK_NONE,
+                 (OS_ERR      *) &os_err);
 
     OSTaskCreate((OS_TCB      *) &App_TaskLogTCB,
                  (CPU_CHAR    *) "Log Print",
@@ -227,73 +227,17 @@ static  void  AppTaskCreate (void)
 *********************************************************************************************************
 */
 
-void  App_TaskEq0Fp (void  *p_arg)
+void BACnet_MSTP_Task (void *p_arg)
 {
-    CPU_FP32    a;
-    CPU_FP32    b;
-    CPU_FP32    c;
-    CPU_FP32    eps;
-    CPU_FP32    f_a;
-    CPU_FP32    f_c;
-    CPU_FP32    delta;
-    CPU_INT08U  iteration;
-    RAND_NBR    wait_cycles;
-        
-    
-    while (DEF_TRUE) {
-        eps       = 0.00001f;
-        a         = 3.0f; 
-        b         = 4.0f;
-        delta     = a - b;
-        iteration = 0u;
-        if (delta < 0) {
-            delta = delta * -1.0f;
-        }
-        
-        while (((2.00f * eps) < delta) || 
-               (iteration    > 20u  )) {
-            c   = (a + b) / 2.00f;
-            f_a = (exp((-1.0f) * a) * (3.2f * sin(a) - 0.5f * cos(a)));
-            f_c = (exp((-1.0f) * c) * (3.2f * sin(c) - 0.5f * cos(c)));
-            
-            if (((f_a > 0.0f) && (f_c < 0.0f)) || 
-                ((f_a < 0.0f) && (f_c > 0.0f))) {
-                b = c;
-            } else if (((f_a > 0.0f) && (f_c > 0.0f)) || 
-                       ((f_a < 0.0f) && (f_c < 0.0f))) {
-                a = c;           
-            } else {
-                break;
-            }
-                
-            delta = a - b;
-            if (delta < 0) {
-               delta = delta * -1.0f;
-            }
-            iteration++;
-
-            wait_cycles = Math_Rand();
-            wait_cycles = wait_cycles % 1000;
-
-            while (wait_cycles > 0u) {
-                wait_cycles--;
-            }
-
-            if (iteration > APP_TASK_EQ_0_ITERATION_NBR) {
-                APP_TRACE_INFO(("App_TaskEq0Fp() max # iteration reached\n"));
-                break;
-            }            
-        }
-
-        APP_TRACE_INFO(("Eq0 Task Running ....\n"));
-        
-        if (iteration == APP_TASK_EQ_0_ITERATION_NBR) {
-            APP_TRACE_INFO(("Root = %f; f(c) = %f; #iterations : %d\n", c, f_c, iteration));
-        }
+		OS_ERR err;
+		
+		while (DEF_TRUE) {
+			
+			OSTimeDlyHMSM(0u, 0u, 1u, 0u, 0u, &err);
     }
 }
 
-static  void  App_TaskLogPrint(void *p_arg)
+static void App_TaskLogPrint(void *p_arg)
 {
 		OS_ERR err;
 		OS_MSG_SIZE msg_size;

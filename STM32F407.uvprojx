@@ -784,6 +784,18 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>BACnet MS/TP</GroupName>
+        </Group>
+        <Group>
+          <GroupName>BACnet/IP</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Modbus RTU</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Modbus/TCP</GroupName>
+        </Group>
       </Groups>
     </Target>
   </Targets>
