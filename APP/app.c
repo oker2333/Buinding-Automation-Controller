@@ -298,6 +298,7 @@ static  void  App_TaskLogPrint(void *p_arg)
 		OS_ERR err;
 		OS_MSG_SIZE msg_size;
 		uint8_t* pbuf = NULL;
+		uint32_t Transmit_Time = 0;
 
 		while(DEF_TRUE){
 				pbuf =  OSTaskQPend ((OS_TICK)       0,
@@ -314,8 +315,9 @@ static  void  App_TaskLogPrint(void *p_arg)
 				if(pbuf != NULL){
 					free(pbuf);
 					pbuf = NULL;
-				}		
-				OSTimeDlyHMSM(0u, 0u, 0u, 10u, 0u, &err);
+				}
+				Transmit_Time = 1 + 1000*msg_size*10/115200;
+				OSTimeDlyHMSM(0u, 0u, 0u, Transmit_Time, 0u, &err);
 		}
 }
 

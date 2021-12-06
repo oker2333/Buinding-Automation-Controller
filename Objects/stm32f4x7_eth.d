@@ -37,3 +37,13 @@
 .\objects\stm32f4x7_eth.o: .\FWLIB\inc\stm32f4xx_dcmi.h
 .\objects\stm32f4x7_eth.o: .\FWLIB\inc\stm32f4xx_fsmc.h
 .\objects\stm32f4x7_eth.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\stm32f4x7_eth.o: .\UCOS-III\uC-LIB\lib_mem.h
+.\objects\stm32f4x7_eth.o: .\UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu.h
+.\objects\stm32f4x7_eth.o: .\UCOS-III\uC-CPU\cpu_def.h
+.\objects\stm32f4x7_eth.o: .\APP\cpu_cfg.h
+.\objects\stm32f4x7_eth.o: .\UCOS-III\uC-CPU\cpu_core.h
+.\objects\stm32f4x7_eth.o: .\UCOS-III\uC-LIB\lib_def.h
+.\objects\stm32f4x7_eth.o: .\UCOS-III\uC-LIB\lib_mem.h
+.\objects\stm32f4x7_eth.o: .\UCOS-III\uC-LIB\lib_str.h
+.\objects\stm32f4x7_eth.o: .\UCOS-III\uC-LIB\lib_ascii.h
+.\objects\stm32f4x7_eth.o: .\APP\lib_cfg.h
