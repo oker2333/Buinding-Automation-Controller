@@ -807,6 +807,11 @@
               <FileType>1</FileType>
               <FilePath>.\BACnet\src\indtext.c</FilePath>
             </File>
+            <File>
+              <FileName>fifo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BACnet\src\fifo.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
