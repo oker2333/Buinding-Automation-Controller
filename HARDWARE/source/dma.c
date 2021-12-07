@@ -1,6 +1,6 @@
 #include "dma.h"
 
-uint8_t OutputBuffer[OutputBufferSize];
+extern uint8_t OutputBuffer[OUTPUT_BUFFER_SIZE];
 
 void Usart_Tx_Config(void)		//DMA·¢ËÍ
 {
@@ -16,7 +16,7 @@ void Usart_Tx_Config(void)		//DMA·¢ËÍ
 	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&USART2->DR;
 	DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)&OutputBuffer[0];
 	DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToPeripheral;
-	DMA_InitStructure.DMA_BufferSize = OutputBufferSize;
+	DMA_InitStructure.DMA_BufferSize = OUTPUT_BUFFER_SIZE;
 	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
 	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;

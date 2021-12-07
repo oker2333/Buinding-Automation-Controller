@@ -1,6 +1,6 @@
 #include "rs485.h"
 
-uint8_t InputBuffer[InputBufferSize] = {0};
+extern uint8_t InputBuffer[INPUT_BUFFER_SIZE];
 
 void RS485_Init(uint32_t BaudRate)
 {
@@ -58,11 +58,10 @@ void RS485_Init(uint32_t BaudRate)
 
 void USART2_IRQHandler(void)
 {
-	uint8_t DataByte;
-
 	if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
 	{
-		DataByte = USART_ReceiveData(USART2);
+		mstp_port->DataRegister = USART_ReceiveData(USART2);
+		MSTP_Receive_Frame_FSM(mstp_port);
 	}
 	
 	if(USART_GetITStatus(USART2, USART_IT_TC) != RESET)
@@ -70,5 +69,4 @@ void USART2_IRQHandler(void)
 		RS485_RX();
 		USART_ITConfig(USART2, USART_IT_TC, DISABLE);
 	}
-	(void)&DataByte;
 }

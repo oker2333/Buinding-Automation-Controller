@@ -33,6 +33,7 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_conf.h"
 #include "bsp.h"
+#include "mstp.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

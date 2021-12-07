@@ -66,6 +66,9 @@ ALL		| ���У�������־���𣬰������Ƽ��
 
 #define LOG_BYTES_MAX LogBufferSize			//�����ڴ���Ƭ�����յ����ڴ治��
 
+void log_Q_post(uint8_t* pbuf,uint32_t len);
+
+
 #if (LOG_LEVEL >= FATAL)
 #define Log_Fatal(format,...)	do{	\
 																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\

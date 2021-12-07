@@ -2,6 +2,8 @@
 
 #if(LOG_LEVEL >= TRACE)  
 
+extern OS_TCB App_TaskLogTCB;
+
 void debug_init(uint32_t BaudRate)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
@@ -38,6 +40,19 @@ void USART1_IRQHandler(void)		//Critical Section
 	{
 		USART_ITConfig(USART1, USART_IT_TC, DISABLE);
 	}
+}
+
+void log_Q_post(uint8_t* pbuf,uint32_t len){
+		OS_ERR err;
+		OSTaskQPost ((OS_TCB*)       &App_TaskLogTCB,
+				 (void*)				 pbuf,
+				 (OS_MSG_SIZE)   len,
+				 (OS_OPT)        (OS_OPT_POST_FIFO | OS_OPT_POST_NO_SCHED),
+				 (OS_ERR*)       &err);
+		if(err != OS_ERR_NONE){
+			free(pbuf);
+			pbuf = NULL;
+		}
 }
 
 #endif

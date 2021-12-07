@@ -53,14 +53,15 @@
 *********************************************************************************************************
 */
 
+OS_SEM	SYNC_MSTP;
                                                                 /* ----------------- APPLICATION GLOBALS -------------- */
-static  OS_TCB       AppTaskStartTCB;
+OS_TCB       AppTaskStartTCB;
 static  CPU_STK      AppTaskStartStk[APP_CFG_TASK_START_STK_SIZE];
                                                                 /* ------------ FLOATING POINT TEST TASK -------------- */
-static  OS_TCB       BACnet_MSTP_TCB;
+OS_TCB       BACnet_MSTP_TCB;
 static  CPU_STK      BACnet_MSTP_Stk[APP_CFG_TASK_MSTP_STK_SIZE];
 
-static  OS_TCB       App_TaskLogTCB;
+OS_TCB       App_TaskLogTCB;
 static  CPU_STK      App_TaskLogStk[APP_CFG_TASK_LOG_STK_SIZE];
 
 /*
@@ -98,7 +99,9 @@ int main(void)
     CPU_Init();                                                 /* Initialize the uC/CPU Services                       */
     Mem_Init();                                                 /* Initialize Memory Management Module                  */
     Math_Init();                                                /* Initialize Mathematical Module                       */
-
+		
+		MSTP_Init();
+		
     OSInit(&err);                                               /* Init uC/OS-III.                                      */
 
     OSTaskCreate((OS_TCB       *)&AppTaskStartTCB,              /* Create the start task                                */
@@ -181,7 +184,11 @@ static  void  AppTaskStart (void *p_arg)
 static  void  AppTaskCreate (void)
 {
     OS_ERR  os_err;
-    
+	
+		OSSemCreate((OS_SEM			*) &SYNC_MSTP,
+                 (CPU_CHAR		*) "SYNC_MSTP",
+                 (OS_SEM_CTR   ) 0,		
+                 (OS_ERR			*) &os_err);    
                                                                 /* ------------- CREATE FLOATING POINT TASK ----------- */
     OSTaskCreate((OS_TCB      *) &BACnet_MSTP_TCB,
                  (CPU_CHAR    *) "BACnet MS/TP",
@@ -232,8 +239,9 @@ void BACnet_MSTP_Task (void *p_arg)
 		OS_ERR err;
 		
 		while (DEF_TRUE) {
+			OSSemPend(&SYNC_MSTP,0,OS_OPT_PEND_BLOCKING,0,&err);
 			
-			OSTimeDlyHMSM(0u, 0u, 1u, 0u, 0u, &err);
+			MSTP_Master_Node_FSM(mstp_port);
     }
 }
 
@@ -265,15 +273,4 @@ static void App_TaskLogPrint(void *p_arg)
 		}
 }
 
-void log_Q_post(uint8_t* pbuf,uint32_t len){
-		OS_ERR err;
-		OSTaskQPost ((OS_TCB*)       &App_TaskLogTCB,
-				 (void*)				 pbuf,
-				 (OS_MSG_SIZE)   len,
-				 (OS_OPT)        (OS_OPT_POST_FIFO | OS_OPT_POST_NO_SCHED),
-				 (OS_ERR*)       &err);
-		if(err != OS_ERR_NONE){
-			free(pbuf);
-			pbuf = NULL;
-		}
-}
+

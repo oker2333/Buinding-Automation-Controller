@@ -29,6 +29,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "mstpdef.h"
+#include "dma.h"
+#include "rs485.h"
+#include "os.h"
 
 struct mstp_port_struct_t {
     MSTP_RECEIVE_STATE receive_state;
@@ -172,9 +175,14 @@ struct mstp_port_struct_t {
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
+		extern volatile struct mstp_port_struct_t *mstp_port;
+		extern OS_SEM	SYNC_MSTP;
 
-    void MSTP_Init(
-        volatile struct mstp_port_struct_t *mstp_port);
+    void MSTP_Init(void);
+		void RS485_Send_Frame(
+				volatile struct mstp_port_struct_t *mstp_port, 
+					void* Buffer, uint32_t len);
+		void MSTP_Post_Master(void);
     void MSTP_Receive_Frame_FSM(
         volatile struct mstp_port_struct_t
         *mstp_port);

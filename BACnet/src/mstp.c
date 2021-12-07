@@ -209,7 +209,7 @@ void MSTP_Create_And_Send_Frame(
         mstp_port->OutputBufferSize, frame_type, destination, source, data,
         data_len);
 
-    /*RS485_Send_Frame(mstp_port, (uint8_t *) & mstp_port->OutputBuffer[0], len);*/
+    RS485_Send_Frame(mstp_port, (uint8_t *) & mstp_port->OutputBuffer[0], len);
     /* FIXME: be sure to reset SilenceTimer() after each octet is sent! */
 }
 
@@ -359,6 +359,7 @@ void MSTP_Receive_Frame_FSM(
                                 || (mstp_port->DestinationAddress ==
                                     MSTP_BROADCAST_ADDRESS)) {
                                 /* ForUs */
+																MSTP_Post_Master();
                                 /* indicate that a frame with no data has been received */
                                 mstp_port->ReceivedValidFrame = true;
                             } else {
@@ -457,6 +458,7 @@ void MSTP_Receive_Frame_FSM(
                         if (mstp_port->receive_state ==
                             MSTP_RECEIVE_STATE_DATA) {
                             /* ForUs */
+														MSTP_Post_Master();
                             mstp_port->ReceivedValidFrame = true;
                         } else {
                             /* NotForUs */
@@ -568,12 +570,12 @@ bool MSTP_Master_Node_FSM(
                             break;
                         case FRAME_TYPE_BACNET_DATA_NOT_EXPECTING_REPLY:
                             /* indicate successful reception to the higher layers */
-                            /*(void) MSTP_Put_Receive(mstp_port);*/
+                            (void) MSTP_Put_Receive(mstp_port);
                             break;
                         case FRAME_TYPE_BACNET_DATA_EXPECTING_REPLY:
                             /*mstp_port->ReplyPostponedTimer = 0; */
                             /* indicate successful reception to the higher layers  */
-                            /*(void) MSTP_Put_Receive(mstp_port);*/
+                            (void) MSTP_Put_Receive(mstp_port);
                             /* broadcast DER just remains IDLE */
                             if (mstp_port->DestinationAddress !=
                                 MSTP_BROADCAST_ADDRESS) {
@@ -615,9 +617,9 @@ bool MSTP_Master_Node_FSM(
             } else {
                 uint8_t frame_type = mstp_port->OutputBuffer[2];
                 uint8_t destination = mstp_port->OutputBuffer[3];
-                /*RS485_Send_Frame(mstp_port,
+                RS485_Send_Frame(mstp_port,
                     (uint8_t *) & mstp_port->OutputBuffer[0],
-                    (uint16_t) length);*/
+                    (uint16_t) length);
                 mstp_port->FrameCount++;
                 switch (frame_type) {
                     case FRAME_TYPE_BACNET_DATA_EXPECTING_REPLY:
@@ -684,7 +686,7 @@ bool MSTP_Master_Node_FSM(
                                 /* ReceivedReply */
                                 /* or a proprietary type that indicates a reply */
                                 /* indicate successful reception to the higher layers */
-                                /*(void) MSTP_Put_Receive(mstp_port);*/
+                                (void) MSTP_Put_Receive(mstp_port);
                                 mstp_port->master_state =
                                     MSTP_MASTER_STATE_DONE_WITH_TOKEN;
                                 break;
@@ -983,9 +985,9 @@ bool MSTP_Master_Node_FSM(
                 /* then call MSTP_Create_And_Send_Frame to transmit the reply frame  */
                 /* and enter the IDLE state to wait for the next frame. */
 							
-                /*RS485_Send_Frame(mstp_port,
+                RS485_Send_Frame(mstp_port,
                     (uint8_t *) & mstp_port->OutputBuffer[0],
-                    (uint16_t) length);*/
+                    (uint16_t) length);
 							
                 mstp_port->master_state = MSTP_MASTER_STATE_IDLE;
                 /* clear our flag we were holding for comparison */
@@ -1048,9 +1050,9 @@ void MSTP_Slave_Node_FSM(
                         /* (the mechanism used to determine this is a local matter), */
                         /* then call MSTP_Create_And_Send_Frame to transmit the reply frame  */
                         /* and enter the IDLE state to wait for the next frame. */
-                        /*RS485_Send_Frame(mstp_port,
+                        RS485_Send_Frame(mstp_port,
                             (uint8_t *) & mstp_port->OutputBuffer[0],
-                            (uint16_t) length);*/
+                            (uint16_t) length);
                         /* clear our flag we were holding for comparison */
                         mstp_port->ReceivedValidFrame = false;
                     } else if (mstp_port->SilenceTimer((void *) mstp_port) >
@@ -1089,11 +1091,21 @@ void MSTP_Slave_Node_FSM(
 /* note: InputBuffer and InputBufferSize assumed to be set */
 /* note: OutputBuffer and OutputBufferSize assumed to be set */
 /* note: SilenceTimer and SilenceTimerReset assumed to be set */
-void MSTP_Init(
-    volatile struct mstp_port_struct_t *mstp_port)
+
+uint8_t OutputBuffer[OUTPUT_BUFFER_SIZE];
+uint8_t InputBuffer[INPUT_BUFFER_SIZE];
+
+volatile struct mstp_port_struct_t *mstp_port;
+volatile struct mstp_port_struct_t g_mstp_port;
+
+extern OS_TCB BACnet_MSTP_TCB;
+
+void MSTP_Init(void)
 {
+		mstp_port = &g_mstp_port;
+	
     if (mstp_port) {
-#if 0
+
         /* FIXME: you must point these buffers to actual byte buckets
            in the dlmstp function before calling this init. */
         mstp_port->InputBuffer = &InputBuffer[0];
@@ -1103,6 +1115,7 @@ void MSTP_Init(
         /* FIXME: these are adjustable, so you must set these in dlmstp */
         mstp_port->Nmax_info_frames = DEFAULT_MAX_INFO_FRAMES;
         mstp_port->Nmax_master = DEFAULT_MAX_MASTER;
+#if 0
         /* FIXME: point to functions */
         mstp_port->SilenceTimer = Timer_Silence;
         mstp_port = >SilenceTimerReset = Timer_Silence_Reset;
@@ -1131,4 +1144,21 @@ void MSTP_Init(
         mstp_port->SourceAddress = 0;
         mstp_port->TokenCount = 0;
     }
+}
+
+uint16_t MSTP_Put_Receive(volatile struct mstp_port_struct_t *mstp_port)
+{
+		//npdu_handler
+	return 0;
+}
+
+void RS485_Send_Frame(volatile struct mstp_port_struct_t *mstp_port, void* Buffer, uint32_t len)
+{
+	DMA1_Stream6_Send(len);
+}
+
+void MSTP_Post_Master(void)
+{
+		OS_ERR err;
+		OSSemPost(&SYNC_MSTP,OS_OPT_POST_1,&err);	
 }

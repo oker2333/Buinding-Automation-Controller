@@ -8,7 +8,7 @@
 #include "rs485.h"
 #include "debug.h"
 
-#define OutputBufferSize 512
+#define OUTPUT_BUFFER_SIZE 512
 
 void Usart_Tx_Config(void);
 void DMA1_Stream6_Send(uint16_t Counter);
@@ -17,8 +17,6 @@ void DMA1_Stream6_Send(uint16_t Counter);
 
 #define LogBufferSize 128
 extern uint8_t LogBuffer[LogBufferSize];
-
-extern void log_Q_post(uint8_t* pbuf,uint32_t len);
 
 void Debug_Tx_Config(void);
 void DMA2_Stream7_Send(uint16_t Counter);
