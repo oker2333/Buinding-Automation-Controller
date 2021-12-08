@@ -2024,6 +2024,9 @@ void          OS_StatTaskInit           (OS_ERR                *p_err);
 void          OS_TickTask               (void                  *p_arg);
 void          OS_TickTaskInit           (OS_ERR                *p_err);
 
+CPU_TS SilenceTimer(void *pArg);
+
+void SilenceTimerReset(void *pArg);
 
 /*
 ************************************************************************************************************************

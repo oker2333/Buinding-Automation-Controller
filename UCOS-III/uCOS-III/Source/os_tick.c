@@ -47,6 +47,17 @@ const  CPU_CHAR  *os_tick__c = "$Id: $";
 
 static  CPU_TS  OS_TickListUpdateDly     (void);
 static  CPU_TS  OS_TickListUpdateTimeout (void);
+static volatile CPU_TS Millisecond_Counter;
+
+CPU_TS SilenceTimer(void *pArg)
+{
+	return Millisecond_Counter;
+}
+
+void SilenceTimerReset(void *pArg)
+{
+	Millisecond_Counter = 0;
+}
 
 /*
 ************************************************************************************************************************
@@ -80,6 +91,7 @@ void  OS_TickTask (void  *p_arg)
                             (OS_ERR  *)&err);                   /* Wait for signal from tick interrupt                  */
         if (err == OS_ERR_NONE) {
             OS_CRITICAL_ENTER();
+						Millisecond_Counter++;
             OSTickCtr++;                                        /* Keep track of the number of ticks                    */
 #if (defined(TRACE_CFG_EN) && (TRACE_CFG_EN > 0u))
             TRACE_OS_TICK_INCREMENT(OSTickCtr);                 /* Record the event.                                    */

@@ -58,8 +58,18 @@ void RS485_Init(uint32_t BaudRate)
 
 void USART2_IRQHandler(void)
 {
+	if(USART_GetITStatus(USART2, USART_IT_FE) != RESET)
+	{
+		mstp_port->DataAvailable = false;
+		mstp_port->ReceiveError = true;
+		mstp_port->DataRegister = USART_ReceiveData(USART2);
+		MSTP_Receive_Frame_FSM(mstp_port);		
+	}
+	
 	if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
 	{
+		mstp_port->DataAvailable = true;
+		mstp_port->ReceiveError = false;
 		mstp_port->DataRegister = USART_ReceiveData(USART2);
 		MSTP_Receive_Frame_FSM(mstp_port);
 	}

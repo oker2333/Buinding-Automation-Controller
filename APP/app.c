@@ -240,7 +240,6 @@ void BACnet_MSTP_Task (void *p_arg)
 		
 		while (DEF_TRUE) {
 			OSSemPend(&SYNC_MSTP,0,OS_OPT_PEND_BLOCKING,0,&err);
-			
 			MSTP_Master_Node_FSM(mstp_port);
     }
 }

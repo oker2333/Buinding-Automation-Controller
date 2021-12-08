@@ -51,7 +51,8 @@
 #include "mstp.h"
 #include "crc.h"
 #include "mstptext.h"
-
+#include "os.h"
+#include "debug.h"
 /* MS/TP Frame Format */
 /* All frames are of the following format: */
 /* */
@@ -1115,12 +1116,11 @@ void MSTP_Init(void)
         /* FIXME: these are adjustable, so you must set these in dlmstp */
         mstp_port->Nmax_info_frames = DEFAULT_MAX_INFO_FRAMES;
         mstp_port->Nmax_master = DEFAULT_MAX_MASTER;
-#if 0
         /* FIXME: point to functions */
-        mstp_port->SilenceTimer = Timer_Silence;
-        mstp_port = >SilenceTimerReset = Timer_Silence_Reset;
-#endif
-        mstp_port->receive_state = MSTP_RECEIVE_STATE_IDLE;
+        mstp_port->SilenceTimer = SilenceTimer;
+        mstp_port->SilenceTimerReset = SilenceTimerReset;
+
+				mstp_port->receive_state = MSTP_RECEIVE_STATE_IDLE;
         mstp_port->master_state = MSTP_MASTER_STATE_INITIALIZE;
         mstp_port->ReceiveError = false;
         mstp_port->DataAvailable = false;
@@ -1148,7 +1148,7 @@ void MSTP_Init(void)
 
 uint16_t MSTP_Put_Receive(volatile struct mstp_port_struct_t *mstp_port)
 {
-		//npdu_handler
+	//npdu_handler
 	return 0;
 }
 
