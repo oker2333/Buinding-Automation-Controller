@@ -259,8 +259,11 @@ void  BSP_Init (void)
 	LED_Init();
 	RS485_Init(9600);
 	Usart_Tx_Config();
+
+#if ETHERNET_ENABLE
 	ETH_PHY_Init();
 	ETH_MAC_Init();
+#endif
 
 #if (LOG_LEVEL >= TRACE)
 	debug_init(115200);
