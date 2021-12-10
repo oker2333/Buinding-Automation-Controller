@@ -613,7 +613,7 @@ bool MSTP_Master_Node_FSM(
             /* more data frames. These may be BACnet Data frames or */
             /* proprietary frames. */
             /* FIXME: We could wait for up to Tusage_delay */
-            /*length = (unsigned) MSTP_Get_Send(mstp_port, 0);*/
+            length = (unsigned) MSTP_Get_Send(mstp_port, 0);
             if (length < 1) {
                 /* NothingToSend */
                 mstp_port->FrameCount = mstp_port->Nmax_info_frames;
@@ -1154,6 +1154,15 @@ uint16_t MSTP_Put_Receive(volatile struct mstp_port_struct_t *mstp_port)
 {
 	//npdu_handler
 	return 0;
+}
+
+/* for the MS/TP state machine to use for getting data to send */
+/* Return: amount of PDU data */
+uint16_t MSTP_Get_Send(
+    volatile struct mstp_port_struct_t * mstp_port,
+    unsigned timeout)
+{       /* milliseconds to wait for a packet */
+    return 0;
 }
 
 void RS485_Send_Frame(volatile struct mstp_port_struct_t *mstp_port, void* Buffer, uint32_t len)
