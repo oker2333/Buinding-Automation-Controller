@@ -360,7 +360,9 @@ void MSTP_Receive_Frame_FSM(
                                 || (mstp_port->DestinationAddress ==
                                     MSTP_BROADCAST_ADDRESS)) {
                                 /* ForUs */
+																OSIntEnter();
 																MSTP_Post_Master();
+																OSIntExit();
                                 /* indicate that a frame with no data has been received */
                                 mstp_port->ReceivedValidFrame = true;
                             } else {
@@ -459,7 +461,9 @@ void MSTP_Receive_Frame_FSM(
                         if (mstp_port->receive_state ==
                             MSTP_RECEIVE_STATE_DATA) {
                             /* ForUs */
+														OSIntEnter();
 														MSTP_Post_Master();
+														OSIntExit();
                             mstp_port->ReceivedValidFrame = true;
                         } else {
                             /* NotForUs */
