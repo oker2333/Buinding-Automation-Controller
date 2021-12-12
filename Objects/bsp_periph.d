@@ -49,7 +49,15 @@
 .\objects\bsp_periph.o: .\FWLIB\inc\stm32f4xx_fsmc.h
 .\objects\bsp_periph.o: .\HARDWARE\include\led.h
 .\objects\bsp_periph.o: .\HARDWARE\include\rs485.h
+.\objects\bsp_periph.o: .\BACnet\include\mstp.h
+.\objects\bsp_periph.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\bsp_periph.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\bsp_periph.o: .\BACnet\include\mstpdef.h
+.\objects\bsp_periph.o: .\BACnet\include\bacdef.h
+.\objects\bsp_periph.o: .\BACnet\include\bacenum.h
+.\objects\bsp_periph.o: .\BACnet\include\config.h
 .\objects\bsp_periph.o: .\HARDWARE\include\dma.h
+.\objects\bsp_periph.o: .\HARDWARE\include\rs485.h
 .\objects\bsp_periph.o: .\HARDWARE\include\debug.h
 .\objects\bsp_periph.o: .\HARDWARE\include\dma.h
 .\objects\bsp_periph.o: .\UCOS-III\uCOS-III\Source\os.h

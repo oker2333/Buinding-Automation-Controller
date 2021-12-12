@@ -60,7 +60,15 @@
 .\objects\app.o: .\FWLIB\inc\stm32f4xx_fsmc.h
 .\objects\app.o: .\HARDWARE\include\led.h
 .\objects\app.o: .\HARDWARE\include\rs485.h
+.\objects\app.o: .\BACnet\include\mstp.h
+.\objects\app.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\app.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\app.o: .\BACnet\include\mstpdef.h
+.\objects\app.o: .\BACnet\include\bacdef.h
+.\objects\app.o: .\BACnet\include\bacenum.h
+.\objects\app.o: .\BACnet\include\config.h
 .\objects\app.o: .\HARDWARE\include\dma.h
+.\objects\app.o: .\HARDWARE\include\rs485.h
 .\objects\app.o: .\HARDWARE\include\debug.h
 .\objects\app.o: .\HARDWARE\include\dma.h
 .\objects\app.o: .\HARDWARE\include\at24cxx.h

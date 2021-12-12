@@ -51,7 +51,15 @@
 .\objects\stm32f4xx_it.o: .\UCOS-III\uC-LIB\lib_ascii.h
 .\objects\stm32f4xx_it.o: .\HARDWARE\include\led.h
 .\objects\stm32f4xx_it.o: .\HARDWARE\include\rs485.h
+.\objects\stm32f4xx_it.o: .\BACnet\include\mstp.h
+.\objects\stm32f4xx_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\stm32f4xx_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\stm32f4xx_it.o: .\BACnet\include\mstpdef.h
+.\objects\stm32f4xx_it.o: .\BACnet\include\bacdef.h
+.\objects\stm32f4xx_it.o: .\BACnet\include\bacenum.h
+.\objects\stm32f4xx_it.o: .\BACnet\include\config.h
 .\objects\stm32f4xx_it.o: .\HARDWARE\include\dma.h
+.\objects\stm32f4xx_it.o: .\HARDWARE\include\rs485.h
 .\objects\stm32f4xx_it.o: .\HARDWARE\include\debug.h
 .\objects\stm32f4xx_it.o: .\HARDWARE\include\dma.h
 .\objects\stm32f4xx_it.o: .\UCOS-III\uCOS-III\Source\os.h

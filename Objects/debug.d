@@ -37,7 +37,15 @@
 .\objects\debug.o: .\FWLIB\inc\stm32f4xx_fsmc.h
 .\objects\debug.o: .\HARDWARE\include\dma.h
 .\objects\debug.o: .\HARDWARE\include\rs485.h
-.\objects\debug.o: .\HARDWARE\include\debug.h
+.\objects\debug.o: .\BACnet\include\mstp.h
+.\objects\debug.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\debug.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\debug.o: .\BACnet\include\mstpdef.h
+.\objects\debug.o: .\BACnet\include\bacdef.h
+.\objects\debug.o: .\BACnet\include\bacenum.h
+.\objects\debug.o: .\BACnet\include\config.h
+.\objects\debug.o: .\HARDWARE\include\dma.h
+.\objects\debug.o: .\HARDWARE\include\rs485.h
 .\objects\debug.o: .\UCOS-III\uCOS-III\Source\os.h
 .\objects\debug.o: .\APP\os_cfg.h
 .\objects\debug.o: .\UCOS-III\uC-CPU\cpu_core.h
@@ -52,4 +60,5 @@
 .\objects\debug.o: .\UCOS-III\uC-LIB\lib_ascii.h
 .\objects\debug.o: .\UCOS-III\uCOS-III\Source\os_type.h
 .\objects\debug.o: .\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu.h
+.\objects\debug.o: .\HARDWARE\include\debug.h
 .\objects\debug.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
