@@ -54,3 +54,4 @@
 .\objects\dma.o: .\UCOS-III\uCOS-III\Source\os_type.h
 .\objects\dma.o: .\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu.h
 .\objects\dma.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\dma.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

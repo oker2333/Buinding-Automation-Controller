@@ -231,7 +231,9 @@ void  App_TaskEq0Fp (void  *p_arg)
 {
 		OS_ERR err;
     while (DEF_TRUE) {
-			
+			DMA1_Stream6_Send(11);
+			OSTimeDlyHMSM(0u, 0u, 1u, 0u, 0u, &err);
+			DMA1_Stream6_Send(5);
 			OSTimeDlyHMSM(0u, 0u, 1u, 0u, 0u, &err);
     }
 }

@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER  STM32F40_41xxx</Define>
               <Undefine></Undefine>
-              <IncludePath>.\USER;.\CMSIS;.\FWLIB\inc;.\CMSIS\Include;.\HARDWARE\include;.\APP;.\UCOS-III\BSP;.\UCOS-III\uC-CPU;.\UCOS-III\uC-CPU\ARM-Cortex-M4\RealView;.\UCOS-III\uC-LIB;.\UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView;.\UCOS-III\uCOS-III;.\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView;.\UCOS-III\uCOS-III\Source</IncludePath>
+              <IncludePath>.\USER;.\CMSIS;.\FWLIB\inc;.\CMSIS\Include;.\HARDWARE\include;.\APP;.\UCOS-III\BSP;.\UCOS-III\uC-CPU;.\UCOS-III\uC-CPU\ARM-Cortex-M4\RealView;.\UCOS-III\uC-LIB;.\UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView;.\UCOS-III\uCOS-III;.\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView;.\UCOS-III\uCOS-III\Source;.\UART_RTOS\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -781,6 +781,16 @@
               <FileName>os_cpu_c.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu_c.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>UART_RTOS</GroupName>
+          <Files>
+            <File>
+              <FileName>datalink.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UART_RTOS\source\datalink.c</FilePath>
             </File>
           </Files>
         </Group>
