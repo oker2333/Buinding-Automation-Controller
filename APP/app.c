@@ -229,67 +229,10 @@ static  void  AppTaskCreate (void)
 
 void  App_TaskEq0Fp (void  *p_arg)
 {
-    CPU_FP32    a;
-    CPU_FP32    b;
-    CPU_FP32    c;
-    CPU_FP32    eps;
-    CPU_FP32    f_a;
-    CPU_FP32    f_c;
-    CPU_FP32    delta;
-    CPU_INT08U  iteration;
-    RAND_NBR    wait_cycles;
-        
-    
+		OS_ERR err;
     while (DEF_TRUE) {
-        eps       = 0.00001f;
-        a         = 3.0f; 
-        b         = 4.0f;
-        delta     = a - b;
-        iteration = 0u;
-        if (delta < 0) {
-            delta = delta * -1.0f;
-        }
-        
-        while (((2.00f * eps) < delta) || 
-               (iteration    > 20u  )) {
-            c   = (a + b) / 2.00f;
-            f_a = (exp((-1.0f) * a) * (3.2f * sin(a) - 0.5f * cos(a)));
-            f_c = (exp((-1.0f) * c) * (3.2f * sin(c) - 0.5f * cos(c)));
-            
-            if (((f_a > 0.0f) && (f_c < 0.0f)) || 
-                ((f_a < 0.0f) && (f_c > 0.0f))) {
-                b = c;
-            } else if (((f_a > 0.0f) && (f_c > 0.0f)) || 
-                       ((f_a < 0.0f) && (f_c < 0.0f))) {
-                a = c;           
-            } else {
-                break;
-            }
-                
-            delta = a - b;
-            if (delta < 0) {
-               delta = delta * -1.0f;
-            }
-            iteration++;
-
-            wait_cycles = Math_Rand();
-            wait_cycles = wait_cycles % 1000;
-
-            while (wait_cycles > 0u) {
-                wait_cycles--;
-            }
-
-            if (iteration > APP_TASK_EQ_0_ITERATION_NBR) {
-                APP_TRACE_INFO(("App_TaskEq0Fp() max # iteration reached\n"));
-                break;
-            }            
-        }
-
-        APP_TRACE_INFO(("Eq0 Task Running ....\n"));
-        
-        if (iteration == APP_TASK_EQ_0_ITERATION_NBR) {
-            APP_TRACE_INFO(("Root = %f; f(c) = %f; #iterations : %d\n", c, f_c, iteration));
-        }
+			
+			OSTimeDlyHMSM(0u, 0u, 1u, 0u, 0u, &err);
     }
 }
 

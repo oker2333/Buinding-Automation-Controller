@@ -70,7 +70,7 @@ ALL		| ���У�������־���𣬰������Ƽ��
 #define Log_Fatal(format,...)	do{	\
 																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\
 																if(StringBuffer == NULL)break;\
-																uint8_t StringSize = sprintf(StringBuffer,"%s%s%s[FATAL]FileName:%s; Line:%d; Function:%s."\
+																uint8_t StringSize = sprintf((char*)StringBuffer,"%s%s%s[FATAL]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_RED,S_BLINK,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																log_Q_post(StringBuffer,StringSize);	\
 														}while(0)
@@ -82,7 +82,7 @@ ALL		| ���У�������־���𣬰������Ƽ��
 #define Log_Error(format,...)	do{	\
 																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\
 																if(StringBuffer == NULL)break;\
-																uint8_t StringSize = sprintf(StringBuffer,"%s%s%s[ERROR]FileName:%s; Line:%d; Function:%s."\
+																uint8_t StringSize = sprintf((char*)StringBuffer,"%s%s%s[ERROR]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_BLUE,S_BOLD,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																log_Q_post(StringBuffer,StringSize);	\
 															}while(0)
@@ -94,7 +94,7 @@ ALL		| ���У�������־���𣬰������Ƽ��
 #define Log_Warn(format,...)	do{	\
 																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\
 																if(StringBuffer == NULL)break;\
-																uint8_t StringSize = sprintf(StringBuffer,"%s%s%s[WARN]FileName:%s; Line:%d; Function:%s."\
+																uint8_t StringSize = sprintf((char*)StringBuffer,"%s%s%s[WARN]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_YELLOW,S_BOLD,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																log_Q_post(StringBuffer,StringSize);	\
 															}while(0)
@@ -106,7 +106,7 @@ ALL		| ���У�������־���𣬰������Ƽ��
 #define Log_Info(format,...)	do{	\
 																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\
 																if(StringBuffer == NULL)break;\
-																uint8_t StringSize = sprintf(StringBuffer,"%s%s%s[INFO]FileName:%s; Line:%d; Function:%s."\
+																uint8_t StringSize = sprintf((char*)StringBuffer,"%s%s%s[INFO]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_WHITE,S_NORMAL,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																log_Q_post(StringBuffer,StringSize);	\
 															}while(0)
@@ -118,7 +118,7 @@ ALL		| ���У�������־���𣬰������Ƽ��
 #define Log_Debug(format,...)	do{	\
 																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\
 																if(StringBuffer == NULL)break;\
-																uint8_t StringSize = sprintf(StringBuffer,"%s%s%s[DEBUG]FileName:%s; Line:%d; Function:%s."\
+																uint8_t StringSize = sprintf((char*)StringBuffer,"%s%s%s[DEBUG]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_WHITE,S_NORMAL,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																log_Q_post(StringBuffer,StringSize);	\
 															}while(0)
@@ -130,7 +130,7 @@ ALL		| ���У�������־���𣬰������Ƽ��
 #define Log_Trace(format,...)	do{	\
 																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\
 																if(StringBuffer == NULL)break;\
-																uint8_t StringSize = sprintf(StringBuffer,"%s%s%s[TRACE]FileName:%s; Line:%d; Function:%s."\
+																uint8_t StringSize = sprintf((char*)StringBuffer,"%s%s%s[TRACE]FileName:%s; Line:%d; Function:%s."\
 																format"%s\r\n",CSI_START,F_WHITE,S_NORMAL,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																log_Q_post(StringBuffer,StringSize);	\
 														}while(0)

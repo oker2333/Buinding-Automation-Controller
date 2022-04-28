@@ -55,8 +55,8 @@
 */
 
 #define  APP_CFG_TASK_START_PRIO                           2u
-#define  APP_CFG_TASK_EQ_PRIO                              3u
-#define  APP_CFG_TASK_LOG_PRIO                             4u
+#define  APP_CFG_TASK_LOG_PRIO                             3u
+#define  APP_CFG_TASK_EQ_PRIO                              4u
 
 /*
 *********************************************************************************************************
