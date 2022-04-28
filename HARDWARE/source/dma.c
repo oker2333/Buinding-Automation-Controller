@@ -94,21 +94,7 @@ void Usart_Rx_Config(void)		//DMA·¢ËÍ
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;
 	NVIC_Init(&NVIC_InitStructure);
 	
-	DMA_ITConfig(DMA1_Stream5,DMA_IT_TC,ENABLE);
 	DMA_Cmd(DMA1_Stream5, ENABLE);
-}
-
-void DMA1_Stream5_IRQHandler(void)
-{
-	if(DMA_GetITStatus(DMA1_Stream5,DMA_IT_TCIF5) != RESET){
-		DMA_ClearITPendingBit(DMA1_Stream5, DMA_IT_TCIF5);
-		
-		DMA_Cmd(DMA1_Stream5, DISABLE);
-		uint16_t data_len = InputBufferSize - DMA_GetCurrDataCounter(DMA1_Stream5);
-		Log_Info("data_len = %d",data_len);
-		DMA_SetCurrDataCounter(DMA1_Stream5, InputBufferSize);
-		DMA_Cmd(DMA1_Stream5, ENABLE);
-	}
 }
 
 /**********************************************************************/

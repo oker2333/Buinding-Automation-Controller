@@ -63,6 +63,9 @@ static  CPU_STK      App_TaskEq0FpStk[APP_CFG_TASK_EQ_STK_SIZE];
 static  OS_TCB       App_TaskLogTCB;
 static  CPU_STK      App_TaskLogStk[APP_CFG_TASK_LOG_STK_SIZE];
 
+static  OS_TCB       App_TaskRecvTCB;
+static  CPU_STK      App_TaskRecvStk[APP_CFG_TASK_RECV_STK_SIZE];
+
 /*
 *********************************************************************************************************
 *                                         FUNCTION PROTOTYPES
@@ -74,6 +77,7 @@ static  void  AppTaskCreate         (void);
 
 static  void  App_TaskEq0Fp         (void  *p_arg);             /* Floating Point Equation 0 task.                      */
 static  void  App_TaskLogPrint      (void  *p_arg);
+static  void  App_TaskUartRecv      (void  *p_arg);
 /*
 *********************************************************************************************************
 *                                                main()
@@ -194,7 +198,7 @@ static  void  AppTaskCreate (void)
                  (OS_MSG_QTY   ) 0u,
                  (OS_TICK      ) 0u,
                  (void        *) 0,
-                 (OS_OPT       )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR | OS_OPT_TASK_SAVE_FP),
+                 (OS_OPT       )OS_OPT_TASK_NONE,
                  (OS_ERR      *)&os_err);
 
     OSTaskCreate((OS_TCB      *) &App_TaskLogTCB,
@@ -209,7 +213,21 @@ static  void  AppTaskCreate (void)
                  (OS_TICK      ) 0u,
                  (void        *) 0,
                  (OS_OPT       ) OS_OPT_TASK_NONE,
-                 (OS_ERR      *) &os_err);								 
+                 (OS_ERR      *) &os_err);
+								 
+    OSTaskCreate((OS_TCB      *) &App_TaskRecvTCB,
+                 (CPU_CHAR    *) "Uart Recv",
+                 (OS_TASK_PTR  ) App_TaskUartRecv, 
+                 (void        *) 0,
+                 (OS_PRIO      ) APP_CFG_TASK_RECV_PRIO,
+                 (CPU_STK     *) &App_TaskRecvStk[0],
+                 (CPU_STK_SIZE ) App_TaskRecvStk[APP_CFG_TASK_RECV_STK_SIZE / 10u],
+                 (CPU_STK_SIZE ) APP_CFG_TASK_RECV_STK_SIZE,
+                 (OS_MSG_QTY   ) 0u,
+                 (OS_TICK      ) 0u,
+                 (void        *) 0,
+                 (OS_OPT       ) OS_OPT_TASK_NONE,
+                 (OS_ERR      *) &os_err);
 }
 
 /*
@@ -226,6 +244,19 @@ static  void  AppTaskCreate (void)
 * Note(s)     : none.
 *********************************************************************************************************
 */
+
+//UART_RTOS接收任务
+
+void App_TaskUartRecv(void  *p_arg)
+{
+		OS_ERR err;
+    while (DEF_TRUE) {
+			
+			OSTimeDlyHMSM(0u, 0u, 1u, 0u, 0u, &err);
+    }
+}
+
+//UART_RTOS发送任务
 
 void  App_TaskEq0Fp (void  *p_arg)
 {

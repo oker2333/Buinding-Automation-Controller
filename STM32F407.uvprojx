@@ -792,6 +792,16 @@
               <FileType>1</FileType>
               <FilePath>.\UART_RTOS\source\datalink.c</FilePath>
             </File>
+            <File>
+              <FileName>fifo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UART_RTOS\source\fifo.c</FilePath>
+            </File>
+            <File>
+              <FileName>crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UART_RTOS\source\crc.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
