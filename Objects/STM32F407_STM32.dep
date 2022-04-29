@@ -1,6 +1,6 @@
 Dependencies for Project 'STM32F407', Target 'STM32': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
-F (.\APP\app.c)(0x626BF7BC)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include -I .\APP -I .\UCOS-III\BSP -I .\UCOS-III\uC-CPU -I .\UCOS-III\uC-CPU\ARM-Cortex-M4\RealView -I .\UCOS-III\uC-LIB -I .\UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView -I .\UCOS-III\uCOS-III -I .\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView -I .\UCOS-III\uCOS-III\Source -I .\UART_RTOS\include-I.\RTE\_STM32-IC:\Users\Joker\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\app.o --omf_browse .\objects\app.crf --depend .\objects\app.d)
+F (.\APP\app.c)(0x626C061D)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include -I .\APP -I .\UCOS-III\BSP -I .\UCOS-III\uC-CPU -I .\UCOS-III\uC-CPU\ARM-Cortex-M4\RealView -I .\UCOS-III\uC-LIB -I .\UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView -I .\UCOS-III\uCOS-III -I .\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView -I .\UCOS-III\uCOS-III\Source -I .\UART_RTOS\include-I.\RTE\_STM32-IC:\Users\Joker\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\app.o --omf_browse .\objects\app.crf --depend .\objects\app.d)
 I (.\APP\includes.h)(0x626A023D)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9AD218)
@@ -1381,3 +1381,72 @@ I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
 I (.\UART_RTOS\include\crc.h)(0x4F8EE8BF)
+F (.\UART_RTOS\source\object.c)(0x626C1451)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include -I .\APP -I .\UCOS-III\BSP -I .\UCOS-III\uC-CPU -I .\UCOS-III\uC-CPU\ARM-Cortex-M4\RealView -I .\UCOS-III\uC-LIB -I .\UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView -I .\UCOS-III\uCOS-III -I .\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView -I .\UCOS-III\uCOS-III\Source -I .\UART_RTOS\include-I.\RTE\_STM32-IC:\Users\Joker\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\object.o --omf_browse .\objects\object.crf --depend .\objects\object.d)
+I (.\UART_RTOS\include\object.h)(0x626C13EA)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9AD21A)
+I (.\UART_RTOS\include\datalink.h)(0x626BF615)
+I (.\UART_RTOS\include\fifo.h)(0x5140FAE9)
+I (.\UART_RTOS\include\crc.h)(0x4F8EE8BF)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
+I (.\HARDWARE\include\dma.h)(0x626BABA1)
+I (.\FWLIB\inc\stm32f4xx_dma.h)(0x626A023D)
+I (.\CMSIS\stm32f4xx.h)(0x626A023D)
+I (.\CMSIS\Include\core_cm4.h)(0x626A023D)
+I (.\CMSIS\Include\core_cmInstr.h)(0x626A023D)
+I (.\CMSIS\Include\core_cmFunc.h)(0x626A023D)
+I (.\CMSIS\Include\core_cmSimd.h)(0x626A023D)
+I (.\APP\system_stm32f4xx.h)(0x626A023D)
+I (.\APP\stm32f4xx_conf.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_adc.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_crc.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_dbgmcu.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_exti.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_flash.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_gpio.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_i2c.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_iwdg.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_pwr.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_rcc.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_rtc.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_sdio.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_spi.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_syscfg.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_tim.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_usart.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_wwdg.h)(0x626A023D)
+I (.\FWLIB\inc\misc.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_cryp.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_hash.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_rng.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_can.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_dac.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_dcmi.h)(0x626A023D)
+I (.\FWLIB\inc\stm32f4xx_fsmc.h)(0x626A023D)
+I (.\HARDWARE\include\rs485.h)(0x626A3509)
+I (.\HARDWARE\include\debug.h)(0x626BB39C)
+I (.\UCOS-III\uCOS-III\Source\os.h)(0x626A0B5E)
+I (.\APP\os_cfg.h)(0x626A023D)
+I (.\UCOS-III\uC-CPU\cpu_core.h)(0x626A023D)
+I (.\UCOS-III\uC-CPU\ARM-Cortex-M4\RealView\cpu.h)(0x626A023D)
+I (.\UCOS-III\uC-CPU\cpu_def.h)(0x626A023D)
+I (.\APP\cpu_cfg.h)(0x626A023D)
+I (.\UCOS-III\uC-LIB\lib_def.h)(0x626A023D)
+I (.\UCOS-III\uC-LIB\lib_mem.h)(0x626A023D)
+I (.\APP\lib_cfg.h)(0x626A023D)
+I (.\UCOS-III\uC-LIB\lib_str.h)(0x626A023D)
+I (.\UCOS-III\uC-LIB\lib_ascii.h)(0x626A023D)
+I (.\UCOS-III\uCOS-III\Source\os_type.h)(0x626A023D)
+I (.\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu.h)(0x626A023D)
+I (.\UART_RTOS\include\apdu.h)(0x626C142A)
+F (.\UART_RTOS\source\apdu.c)(0x626C13F3)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\USER -I .\CMSIS -I .\FWLIB\inc -I .\CMSIS\Include -I .\HARDWARE\include -I .\APP -I .\UCOS-III\BSP -I .\UCOS-III\uC-CPU -I .\UCOS-III\uC-CPU\ARM-Cortex-M4\RealView -I .\UCOS-III\uC-LIB -I .\UCOS-III\uC-LIB\Ports\ARM-Cortex-M4\RealView -I .\UCOS-III\uCOS-III -I .\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView -I .\UCOS-III\uCOS-III\Source -I .\UART_RTOS\include-I.\RTE\_STM32-IC:\Users\Joker\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o .\objects\apdu.o --omf_browse .\objects\apdu.crf --depend .\objects\apdu.d)
+I (.\UART_RTOS\include\apdu.h)(0x626C142A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9AD21A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (.\UART_RTOS\include\object.h)(0x626C13EA)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9AD218)

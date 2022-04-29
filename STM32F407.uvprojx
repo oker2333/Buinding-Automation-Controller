@@ -802,6 +802,16 @@
               <FileType>1</FileType>
               <FilePath>.\UART_RTOS\source\crc.c</FilePath>
             </File>
+            <File>
+              <FileName>object.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UART_RTOS\source\object.c</FilePath>
+            </File>
+            <File>
+              <FileName>apdu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UART_RTOS\source\apdu.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

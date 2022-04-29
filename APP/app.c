@@ -277,7 +277,7 @@ void  App_TaskUartProcess (void  *p_arg)
 		OS_ERR err;
 		int32_t data_len = 0;
 
-		while (DEF_TRUE) {			
+		while (DEF_TRUE) {
 			data_len = FIFO_Count(datalink_port->FIFOBuffer);
 			if(data_len)
 			{
