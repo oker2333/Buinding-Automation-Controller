@@ -103,7 +103,8 @@ int main(void)
     CPU_Init();                                                 /* Initialize the uC/CPU Services                       */
     Mem_Init();                                                 /* Initialize Memory Management Module                  */
     Math_Init();                                                /* Initialize Mathematical Module                       */
-
+		Datalink_Init();
+	
     OSInit(&err);                                               /* Init uC/OS-III.                                      */
 
     OSTaskCreate((OS_TCB       *)&AppTaskStartTCB,              /* Create the start task                                */
@@ -272,8 +273,11 @@ void App_TaskUartRecv(void  *p_arg)
 void  App_TaskUartSend (void  *p_arg)
 {
 		OS_ERR err;
+		uint8_t buffer[] = {"hello world\n"};
     while (DEF_TRUE) {
-			DMA1_Stream6_Send(13);
+			DMA1_Stream6_Send(buffer,13);
+			OSTimeDlyHMSM(0u, 0u, 0u, 100u, 0u, &err);
+			DMA1_Stream6_Send(buffer,5);
 			OSTimeDlyHMSM(0u, 0u, 0u, 100u, 0u, &err);
     }
 }

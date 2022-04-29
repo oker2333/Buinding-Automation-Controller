@@ -13,7 +13,7 @@
 #define Input_Buffer_Size 512
 
 void Usart_Tx_Config(void);
-void DMA1_Stream6_Send(uint16_t Counter);
+void DMA1_Stream6_Send(uint8_t* buffer, uint16_t Counter);
 
 #if (LOG_LEVEL >= TRACE)
 

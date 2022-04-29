@@ -1,7 +1,7 @@
 #include "dma.h"
 #include <stdio.h>
 
-uint8_t OutputBuffer[Output_Buffer_Size] = {"hello world\n"};
+uint8_t OutputBuffer[Output_Buffer_Size];
 
 void Usart_Tx_Config(void)		//DMA·¢ËÍ
 {
@@ -41,7 +41,7 @@ void Usart_Tx_Config(void)		//DMA·¢ËÍ
 
 extern OS_SEM	SYNC_Uart_Send;
 
-void DMA1_Stream6_Send(uint16_t Counter)
+void DMA1_Stream6_Send(uint8_t* buffer, uint16_t Counter)
 {
 	OS_ERR err;
 	OSSemPend(&SYNC_Uart_Send,0,OS_OPT_PEND_BLOCKING,0,&err);
@@ -49,6 +49,7 @@ void DMA1_Stream6_Send(uint16_t Counter)
 	DMA_Cmd(DMA1_Stream6, DISABLE); 
 	while (DMA_GetCmdStatus(DMA1_Stream6) != DISABLE);
 	
+	Mem_Copy(OutputBuffer,buffer,Counter);
 	DMA_SetCurrDataCounter(DMA1_Stream6,Counter);
 	
 	DMA_Cmd(DMA1_Stream6, ENABLE); 
@@ -109,7 +110,7 @@ void DMA1_Stream5_Recv(FIFO_BUFFER *b)
 		uint32_t data_len = Input_Buffer_Size - DMA_GetCurrDataCounter(DMA1_Stream5);
 		FIFO_Add(b,InputBuffer,data_len);
 	
-		Log_Info("data_len = %d",data_len);
+		Log_Info("DMA1_Stream5_Recv:data_len = %d",data_len);
 	
 		while (DMA_GetCmdStatus(DMA1_Stream5) != DISABLE){}	
 		DMA_SetCurrDataCounter(DMA1_Stream5, Input_Buffer_Size);

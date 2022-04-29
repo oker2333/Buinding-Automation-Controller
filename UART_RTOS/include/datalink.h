@@ -7,7 +7,7 @@
 
 #include "fifo.h"
 
-static struct datalink_port_struct_t* datalink_port = NULL;
+extern struct datalink_port_struct_t* datalink_port;
 
 /* The initial CRC16 checksum value */
 #define CRC16_INITIAL_VALUE 0xFFFF

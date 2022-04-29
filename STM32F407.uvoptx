@@ -120,7 +120,6 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>`?w</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -159,8 +158,8 @@
       <MemoryWindow1>
         <Mm>
           <WinNumber>1</WinNumber>
-          <SubType>0</SubType>
-          <ItemText>FrameBuffer</ItemText>
+          <SubType>8</SubType>
+          <ItemText>fifo_buffer</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>
