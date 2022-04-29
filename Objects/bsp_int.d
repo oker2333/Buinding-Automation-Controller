@@ -63,5 +63,7 @@
 .\objects\bsp_int.o: .\HARDWARE\include\dma.h
 .\objects\bsp_int.o: .\HARDWARE\include\debug.h
 .\objects\bsp_int.o: .\HARDWARE\include\dma.h
+.\objects\bsp_int.o: .\UART_RTOS\include\fifo.h
+.\objects\bsp_int.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\bsp_int.o: .\HARDWARE\include\at24cxx.h
 .\objects\bsp_int.o: .\HARDWARE\include\lan8720.h

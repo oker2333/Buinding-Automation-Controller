@@ -54,4 +54,6 @@
 .\objects\rs485.o: .\UCOS-III\uCOS-III\Source\os_type.h
 .\objects\rs485.o: .\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu.h
 .\objects\rs485.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\rs485.o: .\UART_RTOS\include\fifo.h
+.\objects\rs485.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\rs485.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

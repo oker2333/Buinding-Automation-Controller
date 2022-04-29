@@ -38,6 +38,8 @@
 .\objects\debug.o: .\HARDWARE\include\dma.h
 .\objects\debug.o: .\HARDWARE\include\rs485.h
 .\objects\debug.o: .\HARDWARE\include\debug.h
+.\objects\debug.o: .\UART_RTOS\include\fifo.h
+.\objects\debug.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\debug.o: .\UCOS-III\uCOS-III\Source\os.h
 .\objects\debug.o: .\APP\os_cfg.h
 .\objects\debug.o: .\UCOS-III\uC-CPU\cpu_core.h

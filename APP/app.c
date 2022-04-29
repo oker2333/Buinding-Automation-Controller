@@ -34,7 +34,7 @@
 *********************************************************************************************************
 */
 
-#include  <includes.h>
+#include <includes.h>
 #include "main.h"
 
 /*
@@ -43,7 +43,6 @@
 *********************************************************************************************************
 */
 
-#define  APP_TASK_EQ_0_ITERATION_NBR              16u
 #define DEBUG_LOG_MSG_MAX                         7u
 
 
@@ -53,12 +52,14 @@
 *********************************************************************************************************
 */
 
+OS_SEM	SYNC_Uart_Recv;
+OS_SEM	SYNC_Uart_Send;
                                                                 /* ----------------- APPLICATION GLOBALS -------------- */
 static  OS_TCB   AppTaskStartTCB;
 static  CPU_STK  AppTaskStartStk[APP_CFG_TASK_START_STK_SIZE];
                                                                 /* ------------ FLOATING POINT TEST TASK -------------- */
-static  OS_TCB       App_TaskEq0FpTCB;
-static  CPU_STK      App_TaskEq0FpStk[APP_CFG_TASK_EQ_STK_SIZE];
+static  OS_TCB       App_TaskSendTCB;
+static  CPU_STK      App_TaskSendStk[APP_CFG_TASK_SEND_STK_SIZE];
 
 static  OS_TCB       App_TaskLogTCB;
 static  CPU_STK      App_TaskLogStk[APP_CFG_TASK_LOG_STK_SIZE];
@@ -75,7 +76,7 @@ static  CPU_STK      App_TaskRecvStk[APP_CFG_TASK_RECV_STK_SIZE];
 static  void  AppTaskStart          (void     *p_arg);
 static  void  AppTaskCreate         (void);
 
-static  void  App_TaskEq0Fp         (void  *p_arg);             /* Floating Point Equation 0 task.                      */
+static  void  App_TaskUartSend         (void  *p_arg);             /* Floating Point Equation 0 task.                      */
 static  void  App_TaskLogPrint      (void  *p_arg);
 static  void  App_TaskUartRecv      (void  *p_arg);
 /*
@@ -185,16 +186,26 @@ static  void  AppTaskStart (void *p_arg)
 static  void  AppTaskCreate (void)
 {
     OS_ERR  os_err;
-    
+
+		OSSemCreate((OS_SEM				*) &SYNC_Uart_Recv,
+                 (CPU_CHAR		*) "SYNC_Uart_Recv",
+                 (OS_SEM_CTR   ) 0,		
+                 (OS_ERR			*) &os_err);
+
+		OSSemCreate((OS_SEM				*) &SYNC_Uart_Send,
+                 (CPU_CHAR		*) "SYNC_Uart_Send",
+                 (OS_SEM_CTR   ) 1,		
+                 (OS_ERR			*) &os_err);
+
                                                                 /* ------------- CREATE FLOATING POINT TASK ----------- */
-    OSTaskCreate((OS_TCB      *)&App_TaskEq0FpTCB,
-                 (CPU_CHAR    *)"FP Equation",
-                 (OS_TASK_PTR  ) App_TaskEq0Fp, 
+    OSTaskCreate((OS_TCB      *)&App_TaskSendTCB,
+                 (CPU_CHAR    *)"Uart Send",
+                 (OS_TASK_PTR  ) App_TaskUartSend, 
                  (void        *) 0,
-                 (OS_PRIO      ) APP_CFG_TASK_EQ_PRIO,
-                 (CPU_STK     *)&App_TaskEq0FpStk[0],
-                 (CPU_STK_SIZE ) App_TaskEq0FpStk[APP_CFG_TASK_EQ_STK_SIZE / 10u],
-                 (CPU_STK_SIZE ) APP_CFG_TASK_EQ_STK_SIZE,
+                 (OS_PRIO      ) APP_CFG_TASK_SEND_PRIO,
+                 (CPU_STK     *)&App_TaskSendStk[0],
+                 (CPU_STK_SIZE ) App_TaskSendStk[APP_CFG_TASK_SEND_STK_SIZE / 10u],
+                 (CPU_STK_SIZE ) APP_CFG_TASK_SEND_STK_SIZE,
                  (OS_MSG_QTY   ) 0u,
                  (OS_TICK      ) 0u,
                  (void        *) 0,
@@ -232,12 +243,12 @@ static  void  AppTaskCreate (void)
 
 /*
 *********************************************************************************************************
-*                                             App_TaskEq0Fp()
+*                                             App_TaskUartSend()
 *
 * Description : This task finds the root of the following equation.
 *               f(x) =  e^-x(3.2 sin(x) - 0.5 cos(x)) using the bisection mehtod
 *
-* Argument(s) : p_arg   is the argument passed to 'App_TaskEq0Fp' by 'OSTaskCreate()'.
+* Argument(s) : p_arg   is the argument passed to 'App_TaskUartSend' by 'OSTaskCreate()'.
 *
 * Return(s)   : none.
 *
@@ -251,21 +262,19 @@ void App_TaskUartRecv(void  *p_arg)
 {
 		OS_ERR err;
     while (DEF_TRUE) {
-			
-			OSTimeDlyHMSM(0u, 0u, 1u, 0u, 0u, &err);
+			OSSemPend(&SYNC_Uart_Recv,0,OS_OPT_PEND_BLOCKING,0,&err);
+			DMA1_Stream5_Recv(datalink_port->FIFOBuffer);
     }
 }
 
 //UART_RTOS∑¢ÀÕ»ŒŒÒ
 
-void  App_TaskEq0Fp (void  *p_arg)
+void  App_TaskUartSend (void  *p_arg)
 {
 		OS_ERR err;
     while (DEF_TRUE) {
-			DMA1_Stream6_Send(11);
-			OSTimeDlyHMSM(0u, 0u, 1u, 0u, 0u, &err);
-			DMA1_Stream6_Send(5);
-			OSTimeDlyHMSM(0u, 0u, 1u, 0u, 0u, &err);
+			DMA1_Stream6_Send(13);
+			OSTimeDlyHMSM(0u, 0u, 0u, 100u, 0u, &err);
     }
 }
 

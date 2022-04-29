@@ -47,22 +47,24 @@ void RS485_Init(uint32_t BaudRate)
 	USART_Cmd(USART2, ENABLE);	//USART´®¿ÚÊ¹ÄÜ
 }
 
+
+extern OS_SEM	SYNC_Uart_Recv;
+extern OS_SEM	SYNC_Uart_Send;
+
+
 void USART2_IRQHandler(void)
 {
+	OSIntEnter();
+	
+	OS_ERR err;
 	uint32_t temp;
 	if(USART_GetITStatus(USART2, USART_IT_IDLE) != RESET)
 	{
-		DMA_Cmd(DMA1_Stream5, DISABLE);
-		uint16_t data_len = InputBufferSize - DMA_GetCurrDataCounter(DMA1_Stream5);
-		Log_Info("data_len = %d",data_len);
-		while (DMA_GetCmdStatus(DMA1_Stream5) != DISABLE){}	
-		DMA_SetCurrDataCounter(DMA1_Stream5, InputBufferSize);
-		
+		OSSemPost(&SYNC_Uart_Recv,OS_OPT_POST_1,&err);	
 		temp = USART2->SR;
 		temp = USART2->DR;
 		(void)temp;
-		DMA_ClearITPendingBit(DMA1_Stream5, DMA_IT_TCIF5);
-		DMA_Cmd(DMA1_Stream5, ENABLE);
+
 	}
 	
 	if(USART_GetITStatus(USART2, USART_IT_TC) != RESET)
@@ -71,5 +73,8 @@ void USART2_IRQHandler(void)
 		Log_Info("transmit complete");
 		USART_ITConfig(USART2, USART_IT_TC, DISABLE);
 		USART_ClearFlag(USART2, USART_FLAG_TC);
+		
+		OSSemPost(&SYNC_Uart_Send,OS_OPT_POST_1,&err);	
 	}
+	OSIntExit();
 }

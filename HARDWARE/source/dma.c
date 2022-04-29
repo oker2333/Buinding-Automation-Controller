@@ -1,7 +1,7 @@
 #include "dma.h"
 #include <stdio.h>
 
-uint8_t OutputBuffer[OutputBufferSize] = {"hello world\n"};
+uint8_t OutputBuffer[Output_Buffer_Size] = {"hello world\n"};
 
 void Usart_Tx_Config(void)		//DMA发送
 {
@@ -17,7 +17,7 @@ void Usart_Tx_Config(void)		//DMA发送
 	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&USART2->DR;
 	DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)&OutputBuffer[0];
 	DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToPeripheral;
-	DMA_InitStructure.DMA_BufferSize = OutputBufferSize;
+	DMA_InitStructure.DMA_BufferSize = Output_Buffer_Size;
 	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
 	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
@@ -39,8 +39,13 @@ void Usart_Tx_Config(void)		//DMA发送
 	DMA_ITConfig(DMA1_Stream6,DMA_IT_TC,ENABLE);
 }
 
+extern OS_SEM	SYNC_Uart_Send;
+
 void DMA1_Stream6_Send(uint16_t Counter)
 {
+	OS_ERR err;
+	OSSemPend(&SYNC_Uart_Send,0,OS_OPT_PEND_BLOCKING,0,&err);
+	
 	DMA_Cmd(DMA1_Stream6, DISABLE); 
 	while (DMA_GetCmdStatus(DMA1_Stream6) != DISABLE);
 	
@@ -59,7 +64,7 @@ void DMA1_Stream6_IRQHandler(void)
 	}
 }
 
-uint8_t InputBuffer[InputBufferSize];
+uint8_t InputBuffer[Input_Buffer_Size];
 
 void Usart_Rx_Config(void)		//DMA发送
 {
@@ -75,7 +80,7 @@ void Usart_Rx_Config(void)		//DMA发送
 	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&USART2->DR;
 	DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)&InputBuffer[0];
 	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
-	DMA_InitStructure.DMA_BufferSize = InputBufferSize;
+	DMA_InitStructure.DMA_BufferSize = Input_Buffer_Size;
 	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
 	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
@@ -96,6 +101,23 @@ void Usart_Rx_Config(void)		//DMA发送
 	
 	DMA_Cmd(DMA1_Stream5, ENABLE);
 }
+
+void DMA1_Stream5_Recv(FIFO_BUFFER *b)
+{
+		DMA_Cmd(DMA1_Stream5, DISABLE);
+	
+		uint32_t data_len = Input_Buffer_Size - DMA_GetCurrDataCounter(DMA1_Stream5);
+		FIFO_Add(b,InputBuffer,data_len);
+	
+		Log_Info("data_len = %d",data_len);
+	
+		while (DMA_GetCmdStatus(DMA1_Stream5) != DISABLE){}	
+		DMA_SetCurrDataCounter(DMA1_Stream5, Input_Buffer_Size);
+			
+		DMA_ClearITPendingBit(DMA1_Stream5, DMA_IT_TCIF5);
+		DMA_Cmd(DMA1_Stream5, ENABLE);
+}
+
 
 /**********************************************************************/
 

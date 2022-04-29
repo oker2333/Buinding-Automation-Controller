@@ -7,9 +7,10 @@
 #include "misc.h"
 #include "rs485.h"
 #include "debug.h"
+#include "fifo.h"
 
-#define OutputBufferSize 512
-#define InputBufferSize 512
+#define Output_Buffer_Size 512
+#define Input_Buffer_Size 512
 
 void Usart_Tx_Config(void);
 void DMA1_Stream6_Send(uint16_t Counter);
@@ -25,6 +26,7 @@ void Debug_Tx_Config(void);
 void Usart_Rx_Config(void);
 
 void DMA2_Stream7_Send(uint16_t Counter);
+void DMA1_Stream5_Recv(FIFO_BUFFER *b);
 
 #endif
 

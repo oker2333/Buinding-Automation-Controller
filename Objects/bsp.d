@@ -57,5 +57,7 @@
 .\objects\bsp.o: .\UCOS-III\uCOS-III\Source\os_type.h
 .\objects\bsp.o: .\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu.h
 .\objects\bsp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\bsp.o: .\UART_RTOS\include\fifo.h
+.\objects\bsp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\bsp.o: .\HARDWARE\include\at24cxx.h
 .\objects\bsp.o: .\HARDWARE\include\lan8720.h
