@@ -76,7 +76,7 @@ static  CPU_STK      App_TaskRecvStk[APP_CFG_TASK_RECV_STK_SIZE];
 static  void  AppTaskStart          (void     *p_arg);
 static  void  AppTaskCreate         (void);
 
-static  void  App_TaskUartSend         (void  *p_arg);             /* Floating Point Equation 0 task.                      */
+static  void  App_TaskUartProcess         (void  *p_arg);             /* Floating Point Equation 0 task.                      */
 static  void  App_TaskLogPrint      (void  *p_arg);
 static  void  App_TaskUartRecv      (void  *p_arg);
 /*
@@ -201,7 +201,7 @@ static  void  AppTaskCreate (void)
                                                                 /* ------------- CREATE FLOATING POINT TASK ----------- */
     OSTaskCreate((OS_TCB      *)&App_TaskSendTCB,
                  (CPU_CHAR    *)"Uart Send",
-                 (OS_TASK_PTR  ) App_TaskUartSend, 
+                 (OS_TASK_PTR  ) App_TaskUartProcess, 
                  (void        *) 0,
                  (OS_PRIO      ) APP_CFG_TASK_SEND_PRIO,
                  (CPU_STK     *)&App_TaskSendStk[0],
@@ -244,12 +244,12 @@ static  void  AppTaskCreate (void)
 
 /*
 *********************************************************************************************************
-*                                             App_TaskUartSend()
+*                                             App_TaskUartProcess()
 *
 * Description : This task finds the root of the following equation.
 *               f(x) =  e^-x(3.2 sin(x) - 0.5 cos(x)) using the bisection mehtod
 *
-* Argument(s) : p_arg   is the argument passed to 'App_TaskUartSend' by 'OSTaskCreate()'.
+* Argument(s) : p_arg   is the argument passed to 'App_TaskUartProcess' by 'OSTaskCreate()'.
 *
 * Return(s)   : none.
 *
@@ -270,7 +270,7 @@ void App_TaskUartRecv(void  *p_arg)
 
 //UART_RTOS∑¢ÀÕ»ŒŒÒ
 
-void  App_TaskUartSend (void  *p_arg)
+void  App_TaskUartProcess (void  *p_arg)
 {
 		OS_ERR err;
 		uint8_t buffer[] = {"hello world\n"};

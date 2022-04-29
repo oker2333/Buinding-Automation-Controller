@@ -66,6 +66,14 @@ ALL		| ���У�������־���𣬰������Ƽ��
 
 #define LOG_BYTES_MAX LogBufferSize			//�����ڴ���Ƭ�����յ����ڴ治��
 
+#define Log_Print(format,...)	do{	\
+																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\
+																if(StringBuffer == NULL)break;\
+																	uint8_t StringSize = sprintf((char*)StringBuffer,"%s%s%s%s:"format"%s\r\n", \
+																	CSI_START,F_WHITE,S_NORMAL,__func__,##__VA_ARGS__,CSI_END);	\
+																log_Q_post(StringBuffer,StringSize);	\
+															}while(0)
+
 #if (LOG_LEVEL >= FATAL)
 #define Log_Fatal(format,...)	do{	\
 																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\

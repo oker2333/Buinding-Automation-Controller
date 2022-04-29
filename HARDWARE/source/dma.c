@@ -110,7 +110,7 @@ void DMA1_Stream5_Recv(FIFO_BUFFER *b)
 		uint32_t data_len = Input_Buffer_Size - DMA_GetCurrDataCounter(DMA1_Stream5);
 		FIFO_Add(b,InputBuffer,data_len);
 	
-		Log_Info("DMA1_Stream5_Recv:data_len = %d",data_len);
+		Log_Print("data_len = %d",data_len);
 	
 		while (DMA_GetCmdStatus(DMA1_Stream5) != DISABLE){}	
 		DMA_SetCurrDataCounter(DMA1_Stream5, Input_Buffer_Size);

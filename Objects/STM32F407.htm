@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\Objects\STM32F407.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\STM32F407.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Apr 29 17:26:06 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Apr 29 17:50:03 2022
 <BR><P>
-<H3>Maximum Stack Usage =        240 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        232 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 App_TaskUartRecv &rArr; DMA1_Stream5_Recv &rArr; FIFO_Add &rArr; OSSemPost &rArr; OS_SemPost &rArr; OS_Post &rArr; OS_PendListRemove &rArr; OS_PendListRemove1
 <P>
@@ -42,8 +42,8 @@ Function Pointers
  <LI><a href="#[1c]">ADC_IRQHandler</a> from startup_stm32f40_41xxx.o(.text) referenced from startup_stm32f40_41xxx.o(RESET)
  <LI><a href="#[68]">AppTaskStart</a> from app.o(i.AppTaskStart) referenced from app.o(i.main)
  <LI><a href="#[60]">App_TaskLogPrint</a> from app.o(i.App_TaskLogPrint) referenced from app.o(i.AppTaskCreate)
+ <LI><a href="#[5f]">App_TaskUartProcess</a> from app.o(i.App_TaskUartProcess) referenced from app.o(i.AppTaskCreate)
  <LI><a href="#[61]">App_TaskUartRecv</a> from app.o(i.App_TaskUartRecv) referenced from app.o(i.AppTaskCreate)
- <LI><a href="#[5f]">App_TaskUartSend</a> from app.o(i.App_TaskUartSend) referenced from app.o(i.AppTaskCreate)
  <LI><a href="#[4]">BusFault_Handler</a> from stm32f4xx_it.o(i.BusFault_Handler) referenced from startup_stm32f40_41xxx.o(RESET)
  <LI><a href="#[1e]">CAN1_RX0_IRQHandler</a> from startup_stm32f40_41xxx.o(.text) referenced from startup_stm32f40_41xxx.o(RESET)
  <LI><a href="#[1f]">CAN1_RX1_IRQHandler</a> from startup_stm32f40_41xxx.o(.text) referenced from startup_stm32f40_41xxx.o(RESET)
@@ -421,7 +421,7 @@ Global Symbols
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskQPend
 <LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSStatTaskCPUUsageInit
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemPend
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemPend
 <LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemCreate
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntExit
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mem_SegCreate
@@ -457,7 +457,7 @@ Global Symbols
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskQPend
 <LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSStatTaskCPUUsageInit
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemPend
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemPend
 <LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemCreate
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntExit
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mem_SegCreate
@@ -501,7 +501,7 @@ Global Symbols
 <P><STRONG><a name="[138]"></a>CPU_RevBits</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, cpu_a.o(.text), UNUSED)
 
 <P><STRONG><a name="[74]"></a>Mem_Copy</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, lib_mem_a.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream6_Send
+<BR><BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream6_Send
 <LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;App_TaskLogPrint
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ETH_Frame_Received
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ETH_Get_Received_Frame_interrupt
@@ -651,8 +651,8 @@ Global Symbols
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TickListUpdateDly
 </UL>
 
-<P><STRONG><a name="[78]"></a>DMA1_Stream5_Recv</STRONG> (Thumb, 138 bytes, Stack size 48 bytes, dma.o(i.DMA1_Stream5_Recv))
-<BR><BR>[Stack]<UL><LI>Max Depth = 224 + Unknown Stack Size
+<P><STRONG><a name="[79]"></a>DMA1_Stream5_Recv</STRONG> (Thumb, 130 bytes, Stack size 40 bytes, dma.o(i.DMA1_Stream5_Recv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 216 + Unknown Stack Size
 <LI>Call Chain = DMA1_Stream5_Recv &rArr; FIFO_Add &rArr; OSSemPost &rArr; OS_SemPost &rArr; OS_Post &rArr; OS_PendListRemove &rArr; OS_PendListRemove1
 </UL>
 <BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;log_Q_post
@@ -678,17 +678,17 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f40_41xxx.o(RESET)
 </UL>
-<P><STRONG><a name="[79]"></a>DMA1_Stream6_Send</STRONG> (Thumb, 70 bytes, Stack size 24 bytes, dma.o(i.DMA1_Stream6_Send))
+<P><STRONG><a name="[77]"></a>DMA1_Stream6_Send</STRONG> (Thumb, 70 bytes, Stack size 24 bytes, dma.o(i.DMA1_Stream6_Send))
 <BR><BR>[Stack]<UL><LI>Max Depth = 164 + Unknown Stack Size
 <LI>Call Chain = DMA1_Stream6_Send &rArr; OSSemPend &rArr; OS_Pend &rArr; OS_TaskBlock &rArr; OS_RdyListRemove &rArr; OS_PrioRemove
 </UL>
-<BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemPend
+<BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemPend
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mem_Copy
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_SetCurrDataCounter
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_GetCmdStatus
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;App_TaskUartSend
+<BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;App_TaskUartProcess
 </UL>
 
 <P><STRONG><a name="[50]"></a>DMA2_Stream7_IRQHandler</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, dma.o(i.DMA2_Stream7_IRQHandler))
@@ -712,15 +712,15 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[9a]"></a>DMA_ClearITPendingBit</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_ClearITPendingBit))
-<BR><BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
+<BR><BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA2_Stream7_IRQHandler
 <LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream6_IRQHandler
 </UL>
 
 <P><STRONG><a name="[92]"></a>DMA_Cmd</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_Cmd))
 <BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA2_Stream7_Send
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream6_Send
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream6_Send
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Rx_Config
 </UL>
 
@@ -732,15 +732,15 @@ Global Symbols
 
 <P><STRONG><a name="[98]"></a>DMA_GetCmdStatus</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_GetCmdStatus))
 <BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA2_Stream7_Send
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream6_Send
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream6_Send
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Tx_Config
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Rx_Config
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Debug_Tx_Config
 </UL>
 
 <P><STRONG><a name="[93]"></a>DMA_GetCurrDataCounter</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_GetCurrDataCounter))
-<BR><BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
+<BR><BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
 </UL>
 
 <P><STRONG><a name="[9b]"></a>DMA_GetITStatus</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, stm32f4xx_dma.o(i.DMA_GetITStatus))
@@ -767,8 +767,8 @@ Global Symbols
 
 <P><STRONG><a name="[99]"></a>DMA_SetCurrDataCounter</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_SetCurrDataCounter))
 <BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA2_Stream7_Send
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream6_Send
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream6_Send
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
 </UL>
 
 <P><STRONG><a name="[9e]"></a>Datalink_Init</STRONG> (Thumb, 144 bytes, Stack size 8 bytes, datalink.o(i.Datalink_Init))
@@ -839,11 +839,11 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
 <LI>Call Chain = FIFO_Add &rArr; OSSemPost &rArr; OS_SemPost &rArr; OS_Post &rArr; OS_PendListRemove &rArr; OS_PendListRemove1
 </UL>
-<BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemPend
+<BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemPend
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemPost
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FIFO_Available
 </UL>
-<BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
+<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
 </UL>
 
 <P><STRONG><a name="[a9]"></a>FIFO_Available</STRONG> (Thumb, 34 bytes, Stack size 12 bytes, fifo.o(i.FIFO_Available))
@@ -1155,7 +1155,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDlyHMSM
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskQPend
 <LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemPend
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemPend
 <LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskSuspend
 <LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskSemPost
 <LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskResume
@@ -1205,7 +1205,7 @@ Global Symbols
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FIFO_Init
 </UL>
 
-<P><STRONG><a name="[77]"></a>OSSemPend</STRONG> (Thumb, 388 bytes, Stack size 64 bytes, os_sem.o(i.OSSemPend))
+<P><STRONG><a name="[78]"></a>OSSemPend</STRONG> (Thumb, 388 bytes, Stack size 64 bytes, os_sem.o(i.OSSemPend))
 <BR><BR>[Stack]<UL><LI>Max Depth = 140 + Unknown Stack Size
 <LI>Call Chain = OSSemPend &rArr; OS_Pend &rArr; OS_TaskBlock &rArr; OS_RdyListRemove &rArr; OS_PrioRemove
 </UL>
@@ -1214,7 +1214,7 @@ Global Symbols
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Pend
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSched
 </UL>
-<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream6_Send
+<BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream6_Send
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;App_TaskUartRecv
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FIFO_Add
 </UL>
@@ -1453,7 +1453,7 @@ Global Symbols
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSched
 <LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TickListInsertDly
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;App_TaskUartSend
+<BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;App_TaskUartProcess
 <LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;App_TaskLogPrint
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppTaskStart
 </UL>
@@ -1597,7 +1597,7 @@ Global Symbols
 <LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_PendDataInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskQPend
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemPend
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemPend
 <LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskSemPend
 <LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSMutexPend
 </UL>
@@ -2168,7 +2168,7 @@ Global Symbols
 <P><STRONG><a name="[96]"></a>__2sprintf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf6.o(i.__0sprintf$6))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2sprintf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
+<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
 <LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART2_IRQHandler
 </UL>
 
@@ -2207,7 +2207,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskQPost
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
 </UL>
-<BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
+<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
 <LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART2_IRQHandler
 </UL>
 
@@ -2231,7 +2231,7 @@ Global Symbols
 <P><STRONG><a name="[95]"></a>malloc</STRONG> (Thumb, 92 bytes, Stack size 20 bytes, malloc.o(i.malloc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = malloc
 </UL>
-<BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
+<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ETH_Frame_Received
 <LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART2_IRQHandler
 </UL>
@@ -2272,21 +2272,21 @@ Local Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> app.o(i.AppTaskCreate)
 </UL>
-<P><STRONG><a name="[61]"></a>App_TaskUartRecv</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, app.o(i.App_TaskUartRecv))
-<BR><BR>[Stack]<UL><LI>Max Depth = 240 + Unknown Stack Size
-<LI>Call Chain = App_TaskUartRecv &rArr; DMA1_Stream5_Recv &rArr; FIFO_Add &rArr; OSSemPost &rArr; OS_SemPost &rArr; OS_Post &rArr; OS_PendListRemove &rArr; OS_PendListRemove1
+<P><STRONG><a name="[5f]"></a>App_TaskUartProcess</STRONG> (Thumb, 70 bytes, Stack size 32 bytes, app.o(i.App_TaskUartProcess))
+<BR><BR>[Stack]<UL><LI>Max Depth = 196 + Unknown Stack Size
+<LI>Call Chain = App_TaskUartProcess &rArr; DMA1_Stream6_Send &rArr; OSSemPend &rArr; OS_Pend &rArr; OS_TaskBlock &rArr; OS_RdyListRemove &rArr; OS_PrioRemove
 </UL>
-<BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemPend
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
+<BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDlyHMSM
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream6_Send
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> app.o(i.AppTaskCreate)
 </UL>
-<P><STRONG><a name="[5f]"></a>App_TaskUartSend</STRONG> (Thumb, 70 bytes, Stack size 32 bytes, app.o(i.App_TaskUartSend))
-<BR><BR>[Stack]<UL><LI>Max Depth = 196 + Unknown Stack Size
-<LI>Call Chain = App_TaskUartSend &rArr; DMA1_Stream6_Send &rArr; OSSemPend &rArr; OS_Pend &rArr; OS_TaskBlock &rArr; OS_RdyListRemove &rArr; OS_PrioRemove
+<P><STRONG><a name="[61]"></a>App_TaskUartRecv</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, app.o(i.App_TaskUartRecv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 232 + Unknown Stack Size
+<LI>Call Chain = App_TaskUartRecv &rArr; DMA1_Stream5_Recv &rArr; FIFO_Add &rArr; OSSemPost &rArr; OS_SemPost &rArr; OS_Post &rArr; OS_PendListRemove &rArr; OS_PendListRemove1
 </UL>
-<BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDlyHMSM
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream6_Send
+<BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSemPend
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Stream5_Recv
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> app.o(i.AppTaskCreate)
 </UL>
