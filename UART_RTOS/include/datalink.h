@@ -6,6 +6,8 @@
 #include <stdio.h>
 
 #include "fifo.h"
+#include "crc.h"
+#include "dma.h"
 
 extern struct datalink_port_struct_t* datalink_port;
 
@@ -58,13 +60,16 @@ uint16_t Datalink_Create_Frame(
     uint8_t *data,       /* any data to be sent - may be null */
     uint16_t data_len);
 
-bool Datalink_Create_And_Send_Frame(
+void Datalink_Create_And_Send_Frame(
     uint8_t frame_type,
     uint8_t *data,
     uint16_t data_len);
 
 void Datalink_Receive_Frame_FSM(
     volatile struct datalink_port_struct_t *datalink_port);
+
+void datalink_frame_handler(
+		FIFO_BUFFER *b, uint32_t data_len);
 
 void Datalink_Send_Frame_FSM(
     volatile struct datalink_port_struct_t *datalink_port);

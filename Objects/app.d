@@ -69,3 +69,5 @@
 .\objects\app.o: .\HARDWARE\include\lan8720.h
 .\objects\app.o: APP\main.h
 .\objects\app.o: .\UART_RTOS\include\datalink.h
+.\objects\app.o: .\UART_RTOS\include\crc.h
+.\objects\app.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h

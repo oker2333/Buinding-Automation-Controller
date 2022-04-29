@@ -157,13 +157,13 @@ static  void  AppTaskStart (void *p_arg)
 #endif
 
     AppTaskCreate();                                            /* Create Application tasks                             */
-		uint8_t buffer[] = {"hello world"};
+		uint8_t buffer[] = {0x55,0xFF,0x01,0x4F,0x28,0xD4};
     while (DEF_TRUE) {                                          /* Task body, always written as an infinite loop.       */
 				LED_Invert(GPIO_Pin_9);
-				DMA1_Stream6_Send(buffer,5);
+				DMA1_Stream6_Send(buffer,6);
         OSTimeDlyHMSM(0u, 0u, 0u, 500u, 0u, &err);
 				LED_Invert(GPIO_Pin_10);
-				DMA1_Stream6_Send(&buffer[6],5);
+				DMA1_Stream6_Send(buffer,6);
 				OSTimeDlyHMSM(0u, 0u, 0u, 500u, 0u, &err);
 
     }
@@ -276,13 +276,12 @@ void  App_TaskUartProcess (void  *p_arg)
 {
 		OS_ERR err;
 		int32_t data_len = 0;
-		uint8_t buffer[100];
-    while (DEF_TRUE) {
-			if((data_len = FIFO_Count(datalink_port->FIFOBuffer)))
+
+		while (DEF_TRUE) {			
+			data_len = FIFO_Count(datalink_port->FIFOBuffer);
+			if(data_len)
 			{
-				memset(buffer,0,data_len);
-				FIFO_Pull(datalink_port->FIFOBuffer, buffer, data_len);
-				Log_Print("data = %s",buffer);
+				datalink_frame_handler(datalink_port->FIFOBuffer,data_len);
 			}
 			OSTimeDlyHMSM(0u, 0u, 0u, 100u, 0u, &err);
     }

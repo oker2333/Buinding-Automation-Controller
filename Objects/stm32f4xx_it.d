@@ -64,3 +64,5 @@
 .\objects\stm32f4xx_it.o: .\HARDWARE\include\at24cxx.h
 .\objects\stm32f4xx_it.o: .\HARDWARE\include\lan8720.h
 .\objects\stm32f4xx_it.o: .\UART_RTOS\include\datalink.h
+.\objects\stm32f4xx_it.o: .\UART_RTOS\include\crc.h
+.\objects\stm32f4xx_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h

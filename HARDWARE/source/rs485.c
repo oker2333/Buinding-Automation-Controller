@@ -70,7 +70,7 @@ void USART2_IRQHandler(void)
 	if(USART_GetITStatus(USART2, USART_IT_TC) != RESET)
 	{
 		//·¢ËÍÍê³É
-		Log_Info("transmit complete");
+		Log_Print("transmit complete");
 		USART_ITConfig(USART2, USART_IT_TC, DISABLE);
 		USART_ClearFlag(USART2, USART_FLAG_TC);
 		
