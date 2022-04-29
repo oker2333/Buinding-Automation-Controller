@@ -93,6 +93,9 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include "fifo.h"
+#include "os.h"
+
+OS_SEM  FIFO_Lock;
 
 /**
 * Returns the number of bytes in the FIFO
@@ -195,9 +198,12 @@ uint8_t FIFO_Get(
     unsigned index;
 
     if (!FIFO_Empty(b)) {
+				OS_ERR  err;
+				OSSemPend(&FIFO_Lock,0,OS_OPT_PEND_BLOCKING,0,&err);
         index = b->tail % b->buffer_len;
         data_byte = b->buffer[index];
         b->tail++;
+				OSSemPost(&FIFO_Lock,OS_OPT_POST_1,&err);
     }
     return data_byte;
 }
@@ -232,6 +238,8 @@ unsigned FIFO_Pull(
         length = count;
     }
     while (count) {
+				OS_ERR  err;
+				OSSemPend(&FIFO_Lock,0,OS_OPT_PEND_BLOCKING,0,&err);
         index = b->tail % b->buffer_len;
         data_byte = b->buffer[index];
         b->tail++;
@@ -240,6 +248,7 @@ unsigned FIFO_Pull(
             buffer++;
         }
         count--;
+				OSSemPost(&FIFO_Lock,OS_OPT_POST_1,&err);
     }
 
     return length;
@@ -263,10 +272,13 @@ bool FIFO_Put(
     if (b) {
         /* limit the buffer to prevent overwriting */
         if (!FIFO_Full(b)) {
+						OS_ERR  err;
+						OSSemPend(&FIFO_Lock,0,OS_OPT_PEND_BLOCKING,0,&err);
             index = b->head % b->buffer_len;
             b->buffer[index] = data_byte;
             b->head++;
             status = true;
+						OSSemPost(&FIFO_Lock,OS_OPT_POST_1,&err);
         }
     }
 
@@ -292,6 +304,8 @@ bool FIFO_Add(
 
     /* limit the buffer to prevent overwriting */
     if (FIFO_Available(b, count) && buffer) {
+				OS_ERR  err;
+				OSSemPend(&FIFO_Lock,0,OS_OPT_PEND_BLOCKING,0,&err);
         while (count) {
             index = b->head % b->buffer_len;
             b->buffer[index] = *buffer;
@@ -300,6 +314,7 @@ bool FIFO_Add(
             count--;
         }
         status = true;
+				OSSemPost(&FIFO_Lock,OS_OPT_POST_1,&err);
     }
 
     return status;
@@ -338,165 +353,18 @@ void FIFO_Init(
     unsigned buffer_len)
 {
     if (b && buffer && buffer_len) {
+				OS_ERR  os_err;
         b->head = 0;
         b->tail = 0;
         b->buffer = buffer;
         b->buffer_len = buffer_len;
+			
+				OSSemCreate((OS_SEM				*) &FIFO_Lock,
+										 (CPU_CHAR		*) "FIFO_Lock",
+										 (OS_SEM_CTR   ) 1u,		
+										 (OS_ERR			*) &os_err);
     }
 
     return;
 }
 
-#ifdef TEST
-#include <assert.h>
-#include <string.h>
-#include <stdio.h>
-#include "ctest.h"
-
-/**
-* Unit Test for the FIFO buffer
-*
-* @param pTest - test tracking pointer
-*/
-void testFIFOBuffer(
-    Test * pTest)
-{
-    /* FIFO data structure */
-    FIFO_BUFFER test_buffer = { 0 };
-    /* FIFO data store. Note:  size must be a power of two! */
-    volatile uint8_t data_store[64] = { 0 };
-    uint8_t add_data[40] = { "RoseSteveLouPatRachelJessicaDaniAmyHerb" };
-    uint8_t test_add_data[40] = { 0 };
-    uint8_t test_data = 0;
-    unsigned index = 0;
-    unsigned count = 0;
-    bool status = 0;
-
-    FIFO_Init(&test_buffer, data_store, sizeof(data_store));
-    ct_test(pTest, FIFO_Empty(&test_buffer));
-
-    /* load the buffer */
-    for (test_data = 0; test_data < sizeof(data_store); test_data++) {
-        ct_test(pTest, !FIFO_Full(&test_buffer));
-        ct_test(pTest, FIFO_Available(&test_buffer, 1));
-        status = FIFO_Put(&test_buffer, test_data);
-        ct_test(pTest, status == true);
-        ct_test(pTest, !FIFO_Empty(&test_buffer));
-    }
-    /* not able to put any more */
-    ct_test(pTest, FIFO_Full(&test_buffer));
-    ct_test(pTest, !FIFO_Available(&test_buffer, 1));
-    status = FIFO_Put(&test_buffer, 42);
-    ct_test(pTest, status == false);
-    /* unload the buffer */
-    for (index = 0; index < sizeof(data_store); index++) {
-        ct_test(pTest, !FIFO_Empty(&test_buffer));
-        test_data = FIFO_Peek(&test_buffer);
-        ct_test(pTest, test_data == index);
-        test_data = FIFO_Get(&test_buffer);
-        ct_test(pTest, test_data == index);
-        ct_test(pTest, FIFO_Available(&test_buffer, 1));
-        ct_test(pTest, !FIFO_Full(&test_buffer));
-    }
-    ct_test(pTest, FIFO_Empty(&test_buffer));
-    test_data = FIFO_Get(&test_buffer);
-    ct_test(pTest, test_data == 0);
-    test_data = FIFO_Peek(&test_buffer);
-    ct_test(pTest, test_data == 0);
-    ct_test(pTest, FIFO_Empty(&test_buffer));
-    /* test the ring around the buffer */
-    for (index = 0; index < sizeof(data_store); index++) {
-        ct_test(pTest, FIFO_Empty(&test_buffer));
-        ct_test(pTest, FIFO_Available(&test_buffer, 4));
-        for (count = 1; count < 4; count++) {
-            test_data = count;
-            status = FIFO_Put(&test_buffer, test_data);
-            ct_test(pTest, status == true);
-            ct_test(pTest, !FIFO_Empty(&test_buffer));
-        }
-        for (count = 1; count < 4; count++) {
-            ct_test(pTest, !FIFO_Empty(&test_buffer));
-            test_data = FIFO_Peek(&test_buffer);
-            ct_test(pTest, test_data == count);
-            test_data = FIFO_Get(&test_buffer);
-            ct_test(pTest, test_data == count);
-        }
-    }
-    ct_test(pTest, FIFO_Empty(&test_buffer));
-    /* test Add */
-    ct_test(pTest, FIFO_Available(&test_buffer, sizeof(add_data)));
-    status = FIFO_Add(&test_buffer, add_data, sizeof(add_data));
-    ct_test(pTest, status == true);
-    count = FIFO_Count(&test_buffer);
-    ct_test(pTest, count == sizeof(add_data));
-    ct_test(pTest, !FIFO_Empty(&test_buffer));
-    for (index = 0; index < sizeof(add_data); index++) {
-        /* unload the buffer */
-        ct_test(pTest, !FIFO_Empty(&test_buffer));
-        test_data = FIFO_Peek(&test_buffer);
-        ct_test(pTest, test_data == add_data[index]);
-        test_data = FIFO_Get(&test_buffer);
-        ct_test(pTest, test_data == add_data[index]);
-    }
-    ct_test(pTest, FIFO_Empty(&test_buffer));
-    /* test Pull */
-    ct_test(pTest, FIFO_Available(&test_buffer, sizeof(add_data)));
-    status = FIFO_Add(&test_buffer, add_data, sizeof(add_data));
-    ct_test(pTest, status == true);
-    count = FIFO_Count(&test_buffer);
-    ct_test(pTest, count == sizeof(add_data));
-    ct_test(pTest, !FIFO_Empty(&test_buffer));
-    count = FIFO_Pull(&test_buffer, &test_add_data[0], sizeof(test_add_data));
-    ct_test(pTest, FIFO_Empty(&test_buffer));
-    ct_test(pTest, count == sizeof(test_add_data));
-    for (index = 0; index < sizeof(add_data); index++) {
-        ct_test(pTest, test_add_data[index] == add_data[index]);
-    }
-    ct_test(pTest, FIFO_Available(&test_buffer, sizeof(add_data)));
-    status = FIFO_Add(&test_buffer, test_add_data, sizeof(add_data));
-    ct_test(pTest, status == true);
-    ct_test(pTest, !FIFO_Empty(&test_buffer));
-    for (index = 0; index < sizeof(add_data); index++) {
-        count = FIFO_Pull(&test_buffer, &test_add_data[0], 1);
-        ct_test(pTest, count == 1);
-        ct_test(pTest, test_add_data[0] == add_data[index]);
-    }
-    ct_test(pTest, FIFO_Empty(&test_buffer));
-    /* test flush */
-    status = FIFO_Add(&test_buffer, test_add_data, sizeof(test_add_data));
-    ct_test(pTest, status == true);
-    ct_test(pTest, !FIFO_Empty(&test_buffer));
-    FIFO_Flush(&test_buffer);
-    ct_test(pTest, FIFO_Empty(&test_buffer));
-
-    return;
-}
-
-#ifdef TEST_FIFO_BUFFER
-/**
-* Main program entry for Unit Test
-*
-* @return  returns 0 on success, and non-zero on fail.
-*/
-int main(
-    void)
-{
-    Test *pTest;
-    bool rc;
-
-    pTest = ct_create("FIFO Buffer", NULL);
-
-    /* individual tests */
-    rc = ct_addTestFunction(pTest, testFIFOBuffer);
-    assert(rc);
-
-    ct_setStream(pTest, stdout);
-    ct_run(pTest);
-    (void) ct_report(pTest);
-
-    ct_destroy(pTest);
-
-    return 0;
-}
-#endif
-#endif
