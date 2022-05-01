@@ -66,10 +66,7 @@ uint8_t sequence_allocate(void)
 		return sequence++;
 }
 
-const Object_Property_List properties_set[PERPHERAL_NUM] =
-{
-    0
-};
+const Object_Property_List properties_set[PERPHERAL_NUM];
 
 void device_peripheral_init(void)
 {

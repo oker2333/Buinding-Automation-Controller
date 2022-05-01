@@ -270,7 +270,7 @@ void App_TaskUartRecv(void  *p_arg)
     }
 }
 
-//UART_RTOS发送任务
+//UART_RTOS处理任务
 
 void  App_TaskUartProcess (void  *p_arg)
 {

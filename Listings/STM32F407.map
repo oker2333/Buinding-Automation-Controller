@@ -1026,7 +1026,7 @@ Section Cross References
     object.o(i.WriteSingleValueHandler) refers to object.o(.bss) for peripherals
     object.o(i.apdu_struct_analysis) refers to object.o(i.setResponse) for setResponse
     object.o(i.device_peripheral_init) refers to malloc.o(i.malloc) for malloc
-    object.o(i.device_peripheral_init) refers to object.o(.constdata) for properties_set
+    object.o(i.device_peripheral_init) refers to object.o(.data) for properties_set
     object.o(i.device_peripheral_init) refers to object.o(.bss) for peripherals
     object.o(i.freeResponse) refers to malloc.o(i.free) for free
     object.o(i.freeResponse) refers to object.o(.bss) for apdu_data
@@ -1921,8 +1921,8 @@ Removing Unused input sections from the image.
     Removing object.o(i.setResponse), (76 bytes).
     Removing object.o(i.wait_timeout_retransmission), (220 bytes).
     Removing object.o(.bss), (144 bytes).
-    Removing object.o(.constdata), (67 bytes).
-    Removing object.o(.data), (1 bytes).
+    Removing object.o(.constdata), (61 bytes).
+    Removing object.o(.data), (7 bytes).
     Removing apdu.o(i.apdu_handler), (116 bytes).
     Removing dadd.o(.text), (334 bytes).
     Removing dmul.o(.text), (228 bytes).
