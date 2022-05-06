@@ -12,10 +12,10 @@
 
 #define MAX_PDU 64u
 
-#define MAX_RECEIVE_APDU 10u
+#define MAX_RECEIVE_APDU 3u
 
 #define DATA_TRANSMIT_RETRIES 3u
-#define DATA_TRANSMIT_TIMEOUT 100u
+#define DATA_TRANSMIT_TIMEOUT 200u
 
 typedef enum {
     MOTOR,
@@ -78,8 +78,11 @@ typedef struct
     uint8_t occupied;
     uint8_t *buffer;
     uint16_t buffer_len;
-    uint8_t sequence;
+    int32_t sequence;
 } Apdu_Data;
+
+void apdu_dispatch(uint8_t FrameType, uint8_t *apdu, uint16_t apdu_len);
+void device_peripheral_init(void);
 
 bool ReadSingleValueHandler(uint8_t *apdu_data, uint16_t apdu_data_len);
 bool ReadSingleValueAckHandler(void *value, uint8_t *apdu_data, uint16_t apdu_data_len);

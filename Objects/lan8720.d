@@ -47,5 +47,16 @@
 .\objects\lan8720.o: .\UCOS-III\uC-LIB\lib_str.h
 .\objects\lan8720.o: .\UCOS-III\uC-LIB\lib_ascii.h
 .\objects\lan8720.o: .\APP\lib_cfg.h
+.\objects\lan8720.o: .\HARDWARE\include\debug.h
+.\objects\lan8720.o: .\HARDWARE\include\dma.h
+.\objects\lan8720.o: .\HARDWARE\include\rs485.h
+.\objects\lan8720.o: .\HARDWARE\include\debug.h
+.\objects\lan8720.o: .\UART_RTOS\include\fifo.h
+.\objects\lan8720.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\lan8720.o: .\UCOS-III\uCOS-III\Source\os.h
+.\objects\lan8720.o: .\APP\os_cfg.h
+.\objects\lan8720.o: .\UCOS-III\uCOS-III\Source\os_type.h
+.\objects\lan8720.o: .\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu.h
 .\objects\lan8720.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\lan8720.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\lan8720.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

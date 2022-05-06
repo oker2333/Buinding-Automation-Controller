@@ -32,7 +32,6 @@ typedef enum
 struct datalink_port_struct_t
 {
     DATALINK_RECEIVE_STATE receive_state;
-    bool ReceivedValidFrame;
     uint8_t DataRegister;
     uint16_t DataCRC;
     uint16_t DataLength;
@@ -48,9 +47,6 @@ struct datalink_port_struct_t
     uint16_t OutputBufferSize;
 
     FIFO_BUFFER *FIFOBuffer;
-
-    /*Platform-specific port data */
-    void *UserData;
 };
 
 uint16_t Datalink_Create_Frame(

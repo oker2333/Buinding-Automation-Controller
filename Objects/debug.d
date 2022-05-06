@@ -1,10 +1,10 @@
 .\objects\debug.o: HARDWARE\source\debug.c
 .\objects\debug.o: .\HARDWARE\include\debug.h
-.\objects\debug.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\debug.o: .\APP\stm32f4xx_conf.h
 .\objects\debug.o: .\FWLIB\inc\stm32f4xx_adc.h
 .\objects\debug.o: .\CMSIS\stm32f4xx.h
 .\objects\debug.o: .\CMSIS\Include\core_cm4.h
+.\objects\debug.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\debug.o: .\CMSIS\Include\core_cmInstr.h
 .\objects\debug.o: .\CMSIS\Include\core_cmFunc.h
 .\objects\debug.o: .\CMSIS\Include\core_cmSimd.h
@@ -55,3 +55,4 @@
 .\objects\debug.o: .\UCOS-III\uCOS-III\Source\os_type.h
 .\objects\debug.o: .\UCOS-III\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu.h
 .\objects\debug.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\debug.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

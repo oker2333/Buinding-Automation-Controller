@@ -66,3 +66,7 @@
 .\objects\stm32f4xx_it.o: .\UART_RTOS\include\datalink.h
 .\objects\stm32f4xx_it.o: .\UART_RTOS\include\crc.h
 .\objects\stm32f4xx_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\stm32f4xx_it.o: .\UART_RTOS\include\uart_rtos.h
+.\objects\stm32f4xx_it.o: .\UART_RTOS\include\apdu.h
+.\objects\stm32f4xx_it.o: .\UART_RTOS\include\object.h
+.\objects\stm32f4xx_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

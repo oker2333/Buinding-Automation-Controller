@@ -1,11 +1,12 @@
 #ifndef DEBUG_H_
 #define DEBUG_H_
 
-#include <stdint.h>
 #include "stm32f4xx_conf.h"
 #include "dma.h"
 #include "os.h"
 #include <stdlib.h>
+#include <stdio.h>
+#include <stdint.h>
 
 #define ALL 	7
 #define FATAL 6
@@ -52,26 +53,17 @@
 #define S_BLINK                        "5m"
 #define S_NORMAL                       "22m"
 
-/*********************
-��־���� 	| ���� 		---|--- 
-OFF		| �رգ���߼��𣬲���ӡ��־��
-FATAL	| ������ָ���ǳ����صĿ��ܻᵼ��Ӧ����ִֹ�д����¼��� 
-ERROR | ����ָ�������¼�����Ӧ�ÿ��ܻ��ܼ������С� 
-WARN	| ���棺ָ������Ǳ�ڵ�Σ��״���� 
-INFO	| ��Ϣ��ָ��������Ϣ���Ӵ�������������Ӧ�����й��̡� 
-DEBUG	| ���ԣ�ָ��ϸ�µ��¼���Ϣ���Ե���Ӧ�������á� 
-TRACE	| ���٣�ָ���������й켣����DEBUG��������ȸ�ϸ��
-ALL		| ���У�������־���𣬰������Ƽ���
-**********************/
+#define LOG_BYTES_MAX LogBufferSize
 
-#define LOG_BYTES_MAX LogBufferSize			//�����ڴ���Ƭ�����յ����ڴ治��
+static char StringBuffer[100];
 
 #define Log_Print(format,...)	do{	\
-																uint8_t* StringBuffer = malloc(LOG_BYTES_MAX);\
-																if(StringBuffer == NULL)break;\
-																	uint8_t StringSize = sprintf((char*)StringBuffer,"%s%s%s%s:"format"%s\r\n", \
-																	CSI_START,F_WHITE,S_NORMAL,__func__,##__VA_ARGS__,CSI_END);	\
-																log_Q_post(StringBuffer,StringSize);	\
+																uint8_t StringSize = sprintf((char*)StringBuffer,"%s%s%s[%s]"format"%s\r\n", \
+																		CSI_START,F_WHITE,S_NORMAL,__func__,##__VA_ARGS__,CSI_END);	\
+																uint8_t* String = malloc(StringSize);\
+																if(String == NULL)break;\
+																Mem_Copy(String,StringBuffer,StringSize);\
+																log_Q_post(String,StringSize);	\
 															}while(0)
 
 #if (LOG_LEVEL >= FATAL)
@@ -81,7 +73,7 @@ ALL		| ���У�������־���𣬰������Ƽ��
 																uint8_t StringSize = sprintf((char*)StringBuffer,"%s%s%s[INFO]%s:%d:%s: "\
 																format"%s\r\n",CSI_START,F_RED,S_BLINK,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																log_Q_post(StringBuffer,StringSize);	\
-														}while(0)
+															}while(0)
 #else
 #define Log_Fatal(format,...)
 #endif	//FATAL
@@ -141,7 +133,7 @@ ALL		| ���У�������־���𣬰������Ƽ��
 																uint8_t StringSize = sprintf((char*)StringBuffer,"%s%s%s[INFO]%s:%d:%s: "\
 																format"%s\r\n",CSI_START,F_WHITE,S_NORMAL,__FILE__,__LINE__,__func__,##__VA_ARGS__,CSI_END);	\
 																log_Q_post(StringBuffer,StringSize);	\
-														}while(0)
+															}while(0)
 #else
 #define Log_Trace(format,...)
 #endif	//TRACE

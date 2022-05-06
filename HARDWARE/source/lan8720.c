@@ -2,6 +2,7 @@
 #include "stm32f4xx_conf.h"
 #include "stm32f4x7_eth.h"
 #include  "lib_mem.h"
+#include "debug.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -103,7 +104,10 @@ uint8_t* ETH_Frame_Received(void)
 
 	ptr = malloc(frame.length * sizeof(uint8_t));
 	if(ptr == NULL)
+	{
+		Log_Print("Allocating Memory for ETH_Frame_Received Buffer Failed\n");
 		return NULL;
+	}
 
 	Mem_Copy(ptr,(uint8_t*)frame.buffer,frame.length);
 	

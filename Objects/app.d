@@ -71,3 +71,6 @@
 .\objects\app.o: .\UART_RTOS\include\datalink.h
 .\objects\app.o: .\UART_RTOS\include\crc.h
 .\objects\app.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\app.o: .\UART_RTOS\include\uart_rtos.h
+.\objects\app.o: .\UART_RTOS\include\apdu.h
+.\objects\app.o: .\UART_RTOS\include\object.h

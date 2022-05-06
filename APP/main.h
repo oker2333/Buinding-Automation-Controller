@@ -34,6 +34,7 @@
 #include "stm32f4xx_conf.h"
 #include "bsp.h"
 #include "datalink.h"
+#include "uart_rtos.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

@@ -43,7 +43,7 @@
 *********************************************************************************************************
 */
 
-#define DEBUG_LOG_MSG_MAX                         7u
+#define DEBUG_LOG_MSG_MAX                         100u
 
 
 /*
@@ -155,17 +155,19 @@ static  void  AppTaskStart (void *p_arg)
 #ifdef CPU_CFG_INT_DIS_MEAS_EN
     CPU_IntDisMeasMaxCurReset();
 #endif
+		extern void printf_sataus(void);
 
     AppTaskCreate();                                            /* Create Application tasks                             */
-		uint8_t buffer[] = {0x55,0xFF,0x01,0x4F,0x28,0xD4};
+		uint8_t value;
     while (DEF_TRUE) {                                          /* Task body, always written as an infinite loop.       */
+				
 				LED_Invert(GPIO_Pin_9);
-				DMA1_Stream6_Send(buffer,6);
-        OSTimeDlyHMSM(0u, 0u, 0u, 500u, 0u, &err);
+				OSTimeDlyHMSM(0u, 0u, 1u, 0u, 0u, &err);
 				LED_Invert(GPIO_Pin_10);
-				DMA1_Stream6_Send(buffer,6);
-				OSTimeDlyHMSM(0u, 0u, 0u, 500u, 0u, &err);
-
+				printf_sataus();
+				OSTimeDlyHMSM(0u, 0u, 1u, 0u, 0u, &err);
+				ReadSingleValue(MOTOR, 0, &value);
+				
     }
 }
 

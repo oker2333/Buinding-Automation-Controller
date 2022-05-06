@@ -1,4 +1,5 @@
 #include "datalink.h"
+#include "object.h"
 
 #define FIFO_BUFFER_LEN 1024
 
@@ -23,7 +24,6 @@ void Datalink_Init(void)
         datalink_port->FrameCount = 0;
         datalink_port->HeaderCRC = 0;
         datalink_port->Index = 0;
-        datalink_port->ReceivedValidFrame = false;
 
         datalink_port->InputBuffer = fifo_buffer;
         datalink_port->InputBufferSize = FIFO_BUFFER_LEN;
@@ -33,6 +33,7 @@ void Datalink_Init(void)
         datalink_port->FIFOBuffer = &ring;
 
         FIFO_Init(datalink_port->FIFOBuffer, datalink_port->InputBuffer, datalink_port->InputBufferSize);
+				device_peripheral_init();
     }
 }
 
@@ -174,7 +175,6 @@ void Datalink_Receive_Frame_FSM(
                 {
                     if (datalink_port->DataLength == 0)
                     {
-                        datalink_port->ReceivedValidFrame = true;
                         datalink_port->receive_state = DATALINK_RECEIVE_STATE_IDLE;
                     }
                     else
@@ -238,7 +238,7 @@ void Datalink_Receive_Frame_FSM(
                     if (datalink_port->receive_state ==
                         DATALINK_RECEIVE_STATE_DATA)
                     {
-                        datalink_port->ReceivedValidFrame = true;
+												apdu_dispatch(datalink_port->FrameType, datalink_port->InputBuffer,datalink_port->DataLength);
                     }
                 }
                 datalink_port->receive_state = DATALINK_RECEIVE_STATE_IDLE;
@@ -257,6 +257,7 @@ void Datalink_Receive_Frame_FSM(
 
 void datalink_frame_handler(FIFO_BUFFER *b, uint32_t data_len)
 {
+		Log_Print("datalink receive FSM handle %d bytes",data_len);
 		uint32_t i = 0;
 		while(i < data_len)
 		{

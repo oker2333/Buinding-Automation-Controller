@@ -73,12 +73,6 @@ extern "C" {
         volatile uint8_t * buffer,
         unsigned buffer_len);
 
-#ifdef TEST
-#include "ctest.h"
-    void testFIFOBuffer(
-        Test * pTest);
-#endif
-
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

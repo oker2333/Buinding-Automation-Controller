@@ -28,7 +28,7 @@ bool apdu_handler(
         case WRITE_SINGLE_ACK:
             ret = WriteSingleValueAckHandler(&apdu[0], apdu_len);
         break;
-
+#if 0
         case READ_MULTIPLE: 
         break;
 
@@ -46,6 +46,7 @@ bool apdu_handler(
 
         case COV_NOTIFY:
         break;
+#endif
     }
     return ret;
 }

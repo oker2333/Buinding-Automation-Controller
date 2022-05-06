@@ -6,7 +6,6 @@
 
 static Object_Property peripherals[PERPHERAL_NUM];
 
-
 static Apdu_Data apdu_data[MAX_RECEIVE_APDU] = {0};
 
 bool parseResponse(uint8_t sequence, uint8_t** result, uint16_t* result_len)
@@ -28,45 +27,84 @@ bool parseResponse(uint8_t sequence, uint8_t** result, uint16_t* result_len)
 void freeResponse(uint8_t sequence)
 {
     int i = 0;
-    while (i++ < MAX_RECEIVE_APDU)
+    while (i < MAX_RECEIVE_APDU)
     {
         if (apdu_data[i].sequence == sequence)
         {
-            free(apdu_data[i].buffer);
+						Log_Print("free sequence %d buffer",sequence);
+						if(apdu_data[i].buffer)
+						{
+								free(apdu_data[i].buffer);
+								apdu_data[i].buffer = NULL;
+						}
             apdu_data[i].occupied = 0;
+						apdu_data[i].sequence = -1;
         }
+				i++;
     }
 }
 
 void setResponse(uint8_t sequence, uint8_t *result, uint16_t result_len)
 {
     int i = 0;
-    while (i++ < MAX_RECEIVE_APDU)
+    while (i < MAX_RECEIVE_APDU)
     {
         if (!apdu_data[i].occupied)
         {
+						Log_Print("allocate sequence %d buffer",sequence);
             apdu_data[i].sequence = sequence;
             apdu_data[i].buffer = result;
             apdu_data[i].buffer_len = result_len;
             apdu_data[i].occupied = 1;
+						break;
         }
+				i++;
     }
 }
 
-void apdu_struct_analysis(uint8_t *apdu, uint16_t apdu_len)
+void printf_sataus(void)
 {
-    uint8_t sequence = apdu[0];
-    setResponse(sequence, &apdu[0], apdu_len);
+	int i = 0;
+	while(i < MAX_RECEIVE_APDU)
+	{
+			int occupied = apdu_data[i].occupied;
+			Log_Print("i %d",occupied);
+			i++;
+	}
 }
 
-static uint8_t sequence = 0;
+void apdu_dispatch(uint8_t FrameType, uint8_t *apdu, uint16_t apdu_len)
+{
+		uint8_t sequence = apdu[0];
+		if(datalink_port->FrameType == FRAME_TYPE_DATA_RESPONSE)
+		{
+				apdu_handler(datalink_port->InputBuffer, datalink_port->DataLength, NULL);
+				freeResponse(sequence);
+		}
+		else if(datalink_port->FrameType == FRAME_TYPE_DATA_REQUEST)
+		{
+				setResponse(sequence, &apdu[0], apdu_len);
+		}
+}
+
+
+static uint8_t sequence = 1;
 
 uint8_t sequence_allocate(void)
 {
 		return sequence++;
 }
 
-const Object_Property_List properties_set[PERPHERAL_NUM];
+const Object_Property_List properties_set[PERPHERAL_NUM] = 
+{
+		[MOTOR].obj_type = ANALOG_OUTPUT,
+		[MOTOR].data_type = UINT8_T,
+		[MOTOR].array_num = 10,
+		[RADAR].obj_type = ANALOG_OUTPUT,
+		[RADAR].data_type = UINT8_T,
+		[RADAR].array_num = 10
+		
+};
 
 void device_peripheral_init(void)
 {
@@ -132,11 +170,16 @@ void device_peripheral_init(void)
             peripherals[index].value_array = malloc(sizeof(double) * peripherals[index].array_num);
             break;
         }
+				
+				if(peripherals[index].value_array == NULL)
+				{
+						Log_Print("peripherals[%d].value_array memory allocate failed",index);
+				}
     }
 }
 
 //超时重传机制
-uint32_t wait_timeout_retransmission(Function_Code function_code, uint8_t sequence, uint8_t *buffer, uint16_t buffer_len, uint8_t **result, uint16_t *result_len)
+uint32_t wait_timeout_retransmission(uint8_t sequence, uint8_t *buffer, uint16_t buffer_len, uint8_t **result, uint16_t *result_len)
 {
 		OS_ERR err;
     int i = 0;
@@ -144,17 +187,18 @@ uint32_t wait_timeout_retransmission(Function_Code function_code, uint8_t sequen
 
     while(i++ < DATA_TRANSMIT_RETRIES)
     {
-        Datalink_Create_And_Send_Frame(function_code, buffer, buffer_len);
+        Datalink_Create_And_Send_Frame(FRAME_TYPE_DATA_REQUEST, buffer, buffer_len);
         
         OSTimeDlyHMSM(0u, 0u, 0u, DATA_TRANSMIT_TIMEOUT, 0u, &err);  //延时，等待响应帧
 				
 				ret = parseResponse(sequence, result, result_len);
         if(ret)
 				{
+					Log_Print("Receive ACK Succees");
 					break;
 				}
-
-        Log_Print("Wait Ack Timeout and Retry %d Now\n", i);
+				
+        Log_Print("Wait Ack Timeout and Retry %d Now", i);
     }
     return ret;
 }
@@ -164,14 +208,16 @@ bool ReadSingleValue(Object_Identifier obj_id, uint8_t array_index, void *value)
 {
     if(obj_id >= PERPHERAL_NUM)
     {
-        Log_Print("ReadSingleValue obj_id %d is not correct\n",obj_id);
+        Log_Print("ReadSingleValue obj_id %d is not correct",obj_id);
         return false;
     }
+		
     if(array_index >= peripherals[obj_id].array_num)
     {
-        Log_Print("ReadSingleValue array_index %d is not correct\n",array_index);
+        Log_Print("ReadSingleValue array_index %d is not correct",array_index);
         return false;
     }
+		
     uint32_t ret = 0;
     uint16_t data_len = 0;
     uint8_t sequence = sequence_allocate();
@@ -190,9 +236,9 @@ bool ReadSingleValue(Object_Identifier obj_id, uint8_t array_index, void *value)
     Request_Transmit_Buffer[data_len] = array_index;
     data_len++;
 
-    Log_Print("Read Single Value obj_id = %d,array_index = %d\n",obj_id, array_index);
+    Log_Print("Read Single Value obj_id = %d,array_index = %d",obj_id, array_index);
 
-    ret = wait_timeout_retransmission(READ_SINGLE, sequence, Request_Transmit_Buffer, data_len, &input_buffer, &input_buffer_len);
+    ret = wait_timeout_retransmission(sequence, Request_Transmit_Buffer, data_len, &input_buffer, &input_buffer_len);
     if (ret)
         ret = apdu_handler(input_buffer, input_buffer_len, value);
 
@@ -204,12 +250,12 @@ bool WriteSingleValue(Object_Identifier obj_id, uint8_t array_index, void *value
 {
     if(obj_id >= PERPHERAL_NUM)
     {
-        Log_Print("WriteSingleValue obj_id %d is not correct\n",obj_id);
+        Log_Print("WriteSingleValue obj_id %d is not correct",obj_id);
         return false;
     }
     if(array_index >= peripherals[obj_id].array_num)
     {
-        Log_Print("WriteSingleValue array_index %d is not correct\n",array_index);
+        Log_Print("WriteSingleValue array_index %d is not correct",array_index);
         return false;
     }
 
@@ -234,9 +280,9 @@ bool WriteSingleValue(Object_Identifier obj_id, uint8_t array_index, void *value
     memcpy(&Request_Transmit_Buffer[data_len], value, data_size);
     data_len += data_size;
 
-    Log_Print("Write Single Value obj_id = %d,array_index = %d\n",obj_id, array_index);
+    Log_Print("Write Single Value obj_id = %d,array_index = %d",obj_id, array_index);
 
-    ret = wait_timeout_retransmission(WRITE_SINGLE, sequence, Request_Transmit_Buffer, data_len, &input_buffer, &input_buffer_len);
+    ret = wait_timeout_retransmission(sequence, Request_Transmit_Buffer, data_len, &input_buffer, &input_buffer_len);
     if (ret)
         ret = apdu_handler(input_buffer, input_buffer_len, NULL);
 
@@ -247,7 +293,6 @@ bool WriteSingleValue(Object_Identifier obj_id, uint8_t array_index, void *value
 //处理服务
 bool ReadSingleValueHandler(uint8_t *apdu_data, uint16_t apdu_data_len)
 {
-    int ret = 0;
     uint8_t sequence = apdu_data[0];
     Function_Code function_code = apdu_data[1];
     Object_Identifier obj_id = apdu_data[2];
@@ -264,24 +309,25 @@ bool ReadSingleValueHandler(uint8_t *apdu_data, uint16_t apdu_data_len)
     apdu_buffer[len++] = obj_id;
     apdu_buffer[len++] = index;
 
-    memcpy(&apdu_buffer[len], &ptr[index * data_size], data_size);
+    Mem_Copy(&apdu_buffer[len], &ptr[index * data_size], data_size);
     len += data_size;
 
     Datalink_Create_And_Send_Frame(READ_SINGLE_ACK, apdu_buffer, len);
-////////////////////////////
-    return false;
+
+		return false;
 }
 
 bool WriteSingleValueHandler(uint8_t *apdu_data, uint16_t apdu_data_len)
 {
-    int ret = 0;
-    uint8_t sequence = apdu_data[0];
-    Function_Code function_code = apdu_data[1];
-    Object_Identifier obj_id = apdu_data[2];
-    uint8_t index = apdu_data[3];
+		uint16_t length = 0;
+    uint8_t sequence = apdu_data[length++];
+    Function_Code function_code = apdu_data[length++];
+    Object_Identifier obj_id = apdu_data[length++];
+    uint8_t index = apdu_data[length++];
 
     uint8_t data_size = peripherals[obj_id].data_size;
     uint8_t *ptr = (uint8_t *)peripherals[obj_id].value_array;
+		Mem_Copy(&ptr[index * data_size], &apdu_data[length], data_size);
 
     uint8_t apdu_buffer[MAX_PDU];
     uint16_t len = 0;

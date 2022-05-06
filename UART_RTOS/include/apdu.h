@@ -11,6 +11,4 @@ bool apdu_handler(
     uint16_t apdu_len,
     void* value);
 
-
-
 #endif

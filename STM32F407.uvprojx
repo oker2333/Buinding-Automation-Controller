@@ -812,6 +812,11 @@
               <FileType>1</FileType>
               <FilePath>.\UART_RTOS\source\apdu.c</FilePath>
             </File>
+            <File>
+              <FileName>uart_rtos.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\UART_RTOS\include\uart_rtos.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
